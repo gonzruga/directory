@@ -1,0 +1,31 @@
+.richieStyle{
+    padding-left: 42px !important;
+    padding-right: 42px !important;
+}
+.text-red{
+    color: red;
+}
+.stretched-link{
+    font-size: 12px !important;
+}
+.santoRich{
+    font-size: 12px !important;
+}
+.smallRichie{
+    font-size: 10px;
+}
+.checked {
+    color: orange;
+}
+.animated {
+    -webkit-transition: height 0.2s;
+    -moz-transition: height 0.2s;
+    transition: height 0.2s;
+}
+
+.stars
+{
+    margin: 20px 0;
+    font-size: 24px;
+    color: #d17581;
+}

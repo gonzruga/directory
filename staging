@@ -1,0 +1,10 @@
+echo "Building package..."
+sleep 1
+#./mvnw clean package -Dmaven.test.skip=true
+sleep 1
+echo "Pushing to staging server ..."
+sleep 1
+rsync -avz --progress --inplace --rsh='ssh -p32007' ./target/Directory-0.0.1-SNAPSHOT.jar "root@192.168.66.21:/home/directory/staging"
+# rsync -avz --progress --inplace --rsh='ssh -p32007' ./target/demo-0.0.1-SNAPSHOT.jar "root@192.168.66.21:/home/directory/staging"
+sleep 1
+echo "Bye!"

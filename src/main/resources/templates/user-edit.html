@@ -1,0 +1,61 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+<div class="container">
+
+<div class="row g-4">
+
+        <div th:replace="~{Fragments/NavLeft}"></div>
+
+<!--        Main Content Start-->
+    <div class="col-md-8 col-lg-6 vstack gap-4">
+
+        <div class="card">
+
+            <div class="card-header border-0 pb-0">
+                <h1 class="h4 card-title mb-0">EDIT PROFILE DETAILS</h1>
+                <p th:text="'Edit your details below:'" />
+            </div>
+
+            <div class="card-body">
+
+                <p th:text="'ID:' + ${user.getId}" style="display:none" />  <!-- Hidden -->
+
+                <p th:text="'ID(To be hidden):' + ${user.getId}"/>  <!-- TODO Hide ID -->
+
+                <form th:action="@{/userUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
+
+                    <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+                    <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+                    <p>Mobile: <input type="text" th:field="*{mobile}" /></p>
+
+                    <p>Email: <input type="email" th:field="*{userEmail}" /></p>
+
+                    <br><br>
+
+                    <button type="submit"> Submit </button>
+                <!--    <input type="submit" value="Cancel" style="color:red"/>-->
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+<!--        Main Content End-->
+
+    <div th:replace="~{Fragments/NavRight}"></div>
+
+</div>
+
+</div>
+
+</main>
+</body>>
+
+<div th:replace="~{Fragments/footer}"></div>

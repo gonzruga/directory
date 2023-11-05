@@ -1,0 +1,18 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<div>
+<h3>SUBMITED REVIEW</h3>
+<p th:text="'Welcome! Below are the review details you submited.'" />
+
+<p th:text="${theReview.reviewContent}" />
+<p th:text="'Submited by: ' + ${theReview.reviewWriterName}" />
+
+
+<form th:action="@{/businessList}" >
+    <input type="submit" value="OK" />
+</form>
+
+
+</div>
+
+<div th:replace="~{Fragments/footer}"></div>

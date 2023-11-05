@@ -1,0 +1,63 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+<div class="container">
+
+<div class="row g-4">
+
+        <div th:replace="~{Fragments/NavLeft}"></div>
+
+<!--        Main Content Start-->
+    <div class="col-md-8 col-lg-6 vstack gap-4">
+
+        <div class="card">
+
+            <!-- Title START -->
+            <div class="card-header border-0 pb-0">
+                <h1 class="h4 card-title mb-0">CONFIRM BUSINESS PROFILE</h1>
+                <p th:text="'Below are the details you submited.'" />
+            </div>
+                <!-- Title END -->
+
+            <div class="card-body">
+
+                <!--    <img th:src="${theBusiness.getLogoUrl()}" width="50" height="50" alt="">-->
+
+                <p th:text="'Business Name: ' + ${theBusiness.businessName}" />
+                <p th:text="'Email: ' + ${theBusiness.email}" />
+                <p th:text="'Mobile: ' + ${theBusiness.mobile}" />
+                <p th:text="'Address: ' + ${theBusiness.physicalAddress}" />
+                <p th:text="'Location: ' + ${theBusiness.location}" />
+                <p th:text="'Category: ' + ${theBusiness.category}" />
+                <p th:text="'Tin Number: ' + ${theBusiness.tinNumber}" />
+                <p th:text="'Link: ' + ${theBusiness.link}" />
+
+                <form th:action="@{/businessList}">
+                <div class="col-12 text-end">
+                    <button type="submit" class="btn btn-primary mb-0">OK</button>
+                </div>
+                </form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+<!--        Main Content End-->
+
+    <div th:replace="~{Fragments/NavRight}"></div>
+
+</div>
+
+</div>
+
+</main>
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

@@ -1,0 +1,81 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+    <!-- Container START -->
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <!--Navigation LEFT-->
+            <div th:replace="~{Fragments/NavLeft}"></div>
+
+            <!------- Main content START : vstack ----------------------------->
+
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+
+                <div class="card">
+
+                    <div class="card-header border-0 pb-0">
+                        <h1 class="h4 card-title mb-0">LIST OF USERS</h1>
+                        <p th:text="'Below are the users on this platform.'" />
+                        <p th:text="'If you do not have an account:'" /> <a href="/userCreateForm">REGISTER!</a> <br>
+                    </div>
+
+                    <div class="card-body">
+
+                        <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-4">
+
+                            <dl th:each="user : ${user}" class="card position-relative">
+
+                                <dd>
+                                    <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">
+                                </dd>
+                                <dd> <span th:text="${user.getId}"></span> </dd>
+                                <dd> <b th:text="${user.getFirstName}+' '+${user.getLastName}"> </b> </dd>
+                                <dd> <h3> <a class="stretched-link" th:href="@{/userPage/{id}(id=${user.id})}"><span th:text="${user.getFirstName}+' '+${user.getLastName}"></span></a> </h3></dd>
+
+                                <dd> <span th:text="${user.getUserEmail}"></span> </dd>
+                                <dd> <span th:text="${user.getMobile}"></span> </dd>
+
+                            </dl>
+
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <!-------- Main content END ---------------------------------------->
+
+            <!--Navigation RIGHT-->
+            <div th:replace="~{Fragments/NavRight}"></div>
+
+        </div>
+        <!-- Row END -->
+
+    </div>
+    <!-- Container END -->
+
+
+</main>
+
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>
+
+<!--        <dd>-->
+<!--            <form action="#" th:action="@{/editUser/{id}(id=${user.id})}" th:object="${user}" method="GET">-->
+<!--                <input type="submit" value="Edit" />-->
+<!--            </form>-->
+
+<!--            <form action="#" th:action="@{/delete/{id}(id=${user.id})}" method="get">-->
+<!--                <input type="submit" value="Delete" style="color:red" />-->
+<!--            </form>-->
+<!--        </dd>-->
