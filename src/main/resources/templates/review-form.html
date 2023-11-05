@@ -15,11 +15,11 @@
 
 <form th:action="@{/reviewSubmit}" th:object="${review}" method="POST">
 
-    <input type="number" th:value="${businessId}" name="id" style="display: none"/>
+    <input type="number" th:value="${businessId}" name="id" style="display: none" label="businessId" />
     <p th:text="'Business ID  + ${businessId}">
 
-    <p> <input type="text" th:field="*{reviewContent}" placeholder="Insert your review here" /></p>
-    <p> <input type="text" th:field="*{reviewWriterName}" placeholder="Insert your name" /></p>
+    <p> <input type="text" th:field="*{reviewContent}" placeholder="Insert your review here" label="reviewContent" /></p>
+    <p> <input type="text" th:field="*{reviewWriterName}" placeholder="Insert your name" label="writerName" /></p>
 
     <br>
     <input type="submit" value="Submit" />

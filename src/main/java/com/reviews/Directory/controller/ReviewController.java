@@ -2,14 +2,12 @@ package com.reviews.Directory.controller;
 
 import com.reviews.Directory.dto.ReviewDto;
 import com.reviews.Directory.entity_model.Review;
-import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.service.BusinessService;
 import com.reviews.Directory.service.ReviewService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
