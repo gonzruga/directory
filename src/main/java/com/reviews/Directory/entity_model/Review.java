@@ -17,7 +17,7 @@ import java.util.Objects;
 //@ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "Review")
+@Table(name = "review")
 public class Review {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

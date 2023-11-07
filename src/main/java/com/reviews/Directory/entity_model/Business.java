@@ -17,7 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 @EqualsAndHashCode
 @Entity
-@Table(name = "Business")
+@Table(name = "business")
 public class Business {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

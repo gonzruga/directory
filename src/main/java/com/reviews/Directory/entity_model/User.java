@@ -12,7 +12,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Entity
-@Table(name = "User")
+@Table(name = "user")
 @RequiredArgsConstructor
 public class User {
      @Id
@@ -28,7 +28,7 @@ public class User {
      private String userEmail;
      private String password;
 
-     private String profilePicUrl;
+//     private String profilePicUrl;
 
      @CreationTimestamp
      private Date createdAt  = new Date();
