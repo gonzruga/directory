@@ -34,7 +34,7 @@
                             <dl th:each="user : ${user}" class="card position-relative">
 
                                 <dd>
-<!--                                    <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">-->
+                                    <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">
                                 </dd>
                                 <dd> <span th:text="${user.getId}"></span> </dd>
                                 <dd> <b th:text="${user.getFirstName}+' '+${user.getLastName}"> </b> </dd>

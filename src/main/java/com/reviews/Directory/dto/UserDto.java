@@ -24,7 +24,7 @@ public class UserDto {
     private String userEmail;
     private String password;
 
-//    private MultipartFile profilePic;
+    private MultipartFile profilePic;
 
     private Date createdAt  = new Date();
     private Date updatedAt = null;
@@ -41,9 +41,9 @@ public class UserDto {
         user.setUserEmail(userEmail);
         user.setPassword(password);
 
-//        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePic);
-//
-//        optionalUrl.ifPresent(user::setProfilePicUrl);
+        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePic);
+
+        optionalUrl.ifPresent(user::setProfilePicUrl);
 
         return user;
 

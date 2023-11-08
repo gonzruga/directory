@@ -40,7 +40,7 @@ public class UserController {
     public String userSubmit(@ModelAttribute UserDto user, Model model) {
         model.addAttribute("user", user);
         service.saveUser(user);
-        return "redirect:/user-list";
+        return "user-create-submit";
     }
 
 
