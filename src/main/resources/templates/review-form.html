@@ -14,9 +14,10 @@
 <p th:text="'* What were your first impressions and how was the service?'" />
 
 <form th:action="@{/reviewSubmit}" th:object="${review}" method="POST">
-
+    <!--Hidden-->
     <input type="number" th:value="${businessId}" name="id" style="display: none" label="businessId" />
-    <p th:text="'Business ID  + ${businessId}">
+<!--    Displayed-->
+    <p th:text="'Business ID' + ${businessId}" />
 
     <p> <input type="text" th:field="*{reviewContent}" placeholder="Insert your review here" label="reviewContent" /></p>
     <p> <input type="text" th:field="*{reviewWriterName}" placeholder="Insert your name" label="writerName" /></p>

@@ -14,8 +14,6 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
-import static java.util.Objects.nonNull;
-
 @Slf4j
 public class CdnUtils {
     private static Optional<File> convertFile(MultipartFile multipartFile) {
@@ -72,7 +70,9 @@ public class CdnUtils {
             String string = response.body().string();
             CDNResponse cdnResponse = new ObjectMapper().readValue(string, CDNResponse.class);
             log.info("{}",cdnResponse);
-            return Optional.of(cdnResponse.data.get(0));
+//            return Optional.of(cdnResponse.data.get(0));
+            return Optional.of(cdnResponse.data.get(cdnResponse.data.size() - 1));
+
 
         } catch (Exception e) {
             log.error("{} found while uploading file : ", e.getClass().getSimpleName(), e);
