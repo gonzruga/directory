@@ -30,7 +30,7 @@
 
                 <p th:text="'ID (To be hidden):' + ${user.getId}"/>  <!-- TODO Hide ID -->
 
-                <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">
+                <img th:src="${user.getProfilePicUrl()}" width="150" height="100" alt="">
 
                 <form th:action="@{/userUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
 
