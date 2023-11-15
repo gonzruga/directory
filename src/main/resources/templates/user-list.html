@@ -37,11 +37,11 @@
                                     <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">
                                 </dd>
                                 <dd> <span th:text="${user.getId}"></span> </dd>
-                                <dd> <b th:text="${user.getFirstName}+' '+${user.getLastName}"> </b> </dd>
+<!--                                <dd> <b th:text="${user.getFirstName}+' '+${user.getLastName}"> </b> </dd>-->
                                 <dd> <h3> <a class="stretched-link" th:href="@{/userPage/{id}(id=${user.id})}"><span th:text="${user.getFirstName}+' '+${user.getLastName}"></span></a> </h3></dd>
 
-                                <dd> <span th:text="${user.getUserEmail}"></span> </dd>
-                                <dd> <span th:text="${user.getMobile}"></span> </dd>
+<!--                                <dd> <span th:text="${user.getUserEmail}"></span> </dd>-->
+<!--                                <dd> <span th:text="${user.getMobile}"></span> </dd>-->
 
                             </dl>
 

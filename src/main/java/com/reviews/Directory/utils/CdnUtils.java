@@ -52,7 +52,7 @@ public class CdnUtils {
             Request request = new Request.Builder()
                     .addHeader("user", "richard.robert@fasthub.co.tz")
                     .addHeader("pass", "2WIHR3Q9")
-                    .addHeader("account", "fasthub_cms")
+                    .addHeader("account", "directory")
                     .post(body)
                     .url("http://cdn.fasthub.co.tz/api/user/files")
 //                    .url("http://192.168.66.12:9696/api/user/files")
