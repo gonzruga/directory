@@ -14,13 +14,15 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import static java.util.Objects.nonNull;
+
 @Slf4j
 public class CdnUtils {
     private static Optional<File> convertFile(MultipartFile multipartFile) {
         try {
-            File file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
+//            File file = new File(Objects.requireNonNull(multipartFile.getOriginalFilename()));
 
-//            File file = new File(String.valueOf(nonNull(multipartFile.getOriginalFilename())));
+            File file = new File(String.valueOf(nonNull(multipartFile.getOriginalFilename())));
             FileOutputStream outputStream = new FileOutputStream(file);
             outputStream.write(multipartFile.getBytes());
             outputStream.close();
@@ -52,8 +54,8 @@ public class CdnUtils {
             Request request = new Request.Builder()
                     .addHeader("user", "richard.robert@fasthub.co.tz")
                     .addHeader("pass", "2WIHR3Q9")
-//                    .addHeader("account", "directory")
-                    .addHeader("account", "fasthub_cms")
+                    .addHeader("account", "directory")
+//                    .addHeader("account", "fasthub_cms")
                     .post(body)
                     .url("http://cdn.fasthub.co.tz/api/user/files")
 //                    .url("http://192.168.66.12:9696/api/user/files")
@@ -71,8 +73,8 @@ public class CdnUtils {
             String string = response.body().string();
             CDNResponse cdnResponse = new ObjectMapper().readValue(string, CDNResponse.class);
             log.info("{}",cdnResponse);
-//            return Optional.of(cdnResponse.data.get(0));
-            return Optional.of(cdnResponse.data.get(cdnResponse.data.size() - 1));
+            return Optional.of(cdnResponse.data.get(0));
+//            return Optional.of(cdnResponse.data.get(cdnResponse.data.size() - 1));
 
 
         } catch (Exception e) {

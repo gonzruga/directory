@@ -23,7 +23,7 @@
 
                     <div class="card-header border-0 pb-0">
                         <h1 class="h4 card-title mb-0">LIST OF USERS</h1>
-                        <p th:text="'Below are the users on this platform.'" />
+                        <p th:text="'Below are the users on this platform. [ID, Email & Phone will be restricted to user]'" />
                         <p th:text="'If you do not have an account:'" /> <a href="/userCreateForm">REGISTER!</a> <br>
                     </div>
 
@@ -34,14 +34,16 @@
                             <dl th:each="user : ${user}" class="card position-relative">
 
                                 <dd>
-                                    <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">
+<!--                                    <img th:src="${user.getProfilePicUrl()}" width="50" height="50" alt="">-->
+
+                                    <img th:src="@{'/images/users/'+${user.getId}+'/'+${user.getProfilePicName}}" width="50" height="50" alt="">
                                 </dd>
-                                <dd> <span th:text="${user.getId}"></span> </dd>
-<!--                                <dd> <b th:text="${user.getFirstName}+' '+${user.getLastName}"> </b> </dd>-->
+                                <dd> <span th:text="'ID: '+${user.getId}"></span> </dd>
+                                <dd> <b th:text="${user.getFirstName}+' '+${user.getLastName}"> </b> </dd>
                                 <dd> <h3> <a class="stretched-link" th:href="@{/userPage/{id}(id=${user.id})}"><span th:text="${user.getFirstName}+' '+${user.getLastName}"></span></a> </h3></dd>
 
-<!--                                <dd> <span th:text="${user.getUserEmail}"></span> </dd>-->
-<!--                                <dd> <span th:text="${user.getMobile}"></span> </dd>-->
+                                <dd> <span th:text="${user.getUserEmail}"></span> </dd>
+                                <dd> <span th:text="${user.getMobile}"></span> </dd>
 
                             </dl>
 

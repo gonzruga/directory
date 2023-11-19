@@ -1,5 +1,6 @@
 package com.reviews.Directory.dto;
 
+import com.reviews.Directory.entity_model.ImageModel;
 import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.utils.CdnUtils;
 import lombok.Getter;
@@ -9,6 +10,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.Optional;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,7 +26,11 @@ public class UserDto {
     private String userEmail;
     private String password;
 
-    private MultipartFile profilePic;
+    private String profilePicUrl;
+    private MultipartFile profilePicFile;
+    private Set<ImageModel> userImage;
+
+    private String profilePicName;
 
     private Date createdAt  = new Date();
     private Date updatedAt = null;
@@ -41,9 +47,12 @@ public class UserDto {
         user.setUserEmail(userEmail);
         user.setPassword(password);
 
-        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePic);
+        user.setProfilePicName(profilePicName);
 
-        optionalUrl.ifPresent(user::setProfilePicUrl);
+
+//        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
+//
+//        optionalUrl.ifPresent(user::setProfilePicUrl);
 
         return user;
 

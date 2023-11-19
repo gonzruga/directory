@@ -21,7 +21,9 @@ public class UserService {
     private UserRepository repository;
 
     //CREATE - POST
-     public User saveUser(UserDto user) {return repository.save(user.dtoToUser());}
+     public User saveUserDto(UserDto user) {return repository.save(user.dtoToUser());}
+
+    public User saveUser(User user) {return repository.save(user);}
 
 
     //READ - GET

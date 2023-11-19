@@ -20,20 +20,22 @@
 
                 <div class="card-header border-0 pb-0">
                     <h1 class="h4 card-title mb-0">USER PROFILE</h1>
+                    <br>
+                    <p th:text="'[Editing and the ID, Phone & Email will be restricted to user]'" />
                 </div>
 
                 <div class="card-body">
 
-
                     <h5> <p th:text="'ID: ' + ${user.getId}" /> </h5>
 
-                        <img th:src="${user.getProfilePicUrl()}" width="150" height="100" alt="">
+                    <img th:src="@{'/images/users/'+${user.getId}+'/'+${user.getProfilePicName}}" width="150" height="100" alt="">
 
                     <p th:text="'First Name: ' + ${user.firstName}" />
                     <p th:text="'Last Name: ' + ${user.lastName}" />
 
                     <p th:text="'Mobile: ' + ${user.mobile}" />
 
+                    <p th:text="'Mobile: ' + ${user.userEmail}" />
 
                     <form th:action="@{/userEdit/{id}(id=${user.id})}" th:object="${user}" method="GET">
                         <input type="submit" value="Edit" />

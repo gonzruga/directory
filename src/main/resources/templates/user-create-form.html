@@ -23,26 +23,26 @@
 
                     <!-- Create a page form START -->
                     <div class="card-body">
-                            <form th:action="@{/userSubmit}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
+                            <form th:action="@{/saveUser}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
 
                             <!-- Display name -->
                             <div class="col-sm-6 col-lg-4">
-                                <label class="form-label">First name</label>
-                                <input type="text" class="form-control" th:field="*{firstName}" placeholder="First Name" id="firstName">
+                                <label for="firstName" class="form-label">First name</label>
+                                <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="">
                             </div>
                             <div class="col-sm-6 col-lg-4">
-                                <label class="form-label">Last name</label>
-                                <input type="text" class="form-control" th:field="*{lastName}" placeholder="Last Name" id="lastName">
+                                <label for="lastName" class="form-label">Last name</label>
+                                <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="">
                             </div>
                             <!-- Email -->
                             <div class="col-sm-6 col-lg-4">
-                                <label class="form-label">Email</label>
-                                <input type="text" class="form-control" th:field="*{userEmail}" >
+                                <label for="email" class="form-label">Email</label>
+                                <input type="text" class="form-control" id="email" th:field="*{userEmail}" >
                             </div>
 
                             <div class="col-lg-6">
-                                <label class="form-label">Phone number</label>
-                                <input type="text" class="form-control" th:field="*{mobile}">
+                                <label for="mobile" class="form-label">Phone number</label>
+                                <input type="text" class="form-control" id="mobile" th:field="*{mobile}">
                             </div>
 
 <!--                                ToDo: Phone 2-->
@@ -54,13 +54,20 @@
 
 
                             <div class="col-lg-6">
-                                <label class="form-label">Password</label>
-                                <input type="password" class="form-control" th:field="*{password}">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" class="form-control" id="password" th:field="*{password}">
                             </div>
 
                             <div>
-                                <label class="form-label">Profile Picture</label>
-                                <input type="file" multiple="false" name="profilePic" th:field="*{profilePic}">
+                                <input type="hidden" th:field="*{profilePicName}" />
+                                <label for="fileImage" class="form-label">Profile Picture:</label>
+                                <input type="file" multiple="true" id="fileImage" name="image" accept="image/png" >
+<!--                                TODO: Accept jpg, jpeg-->
+
+<!--                                <input type="file" multiple="true" name="profilePic" th:field="*{getProfilePicFile}">-->
+
+                                <!--                                <input type="file" multiple value ="select" #SelectFile (change)="onFileSelect($event)">-->
+
                             </div>
 
 <!--                                ToDo: Confirm password-->

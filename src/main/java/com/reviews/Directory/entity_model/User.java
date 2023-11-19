@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -24,15 +25,31 @@ public class User {
      private String lastName;
      private String mobile;
 
-     @Column(unique = true)
+//     TODO: Make emails unique. Was giving error maybe because of multiple saving events during image upload
+//     @Column(unique = true)
      private String userEmail;
      private String password;
 
      private String profilePicUrl;
+//     private MultipartFile profilePic;
+
+     @Column(length = 64)
+     private String profilePicName;
 
      @CreationTimestamp
      private Date createdAt  = new Date();
      @UpdateTimestamp
      private Date updatedAt = null;
+
+     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //FetchType.Lazy | CascadeType.Merge, Detach, Remove ++
+     @JoinTable(name = "user_images",
+          joinColumns = {
+             @JoinColumn(name = "id")
+          },
+             inverseJoinColumns = {
+             @JoinColumn(name = "imageId")
+             }
+     )
+     private Set<ImageModel> userImage;
 
 }

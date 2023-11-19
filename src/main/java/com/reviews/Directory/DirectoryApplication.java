@@ -9,7 +9,7 @@ public class DirectoryApplication {
 	public static void main(String[] args) {
 
 		SpringApplication.run(DirectoryApplication.class, args);
-		System.out.println("Application is running, Gonza2");
+		System.out.println("Application is running, Gonza");
 
 	}
 
