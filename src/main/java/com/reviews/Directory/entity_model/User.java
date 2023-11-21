@@ -33,6 +33,8 @@ public class User {
      private String profilePicUrl;
 //     private MultipartFile profilePic;
 
+//     private String profilePic;
+
      @Column(length = 64)
      private String profilePicName;
 

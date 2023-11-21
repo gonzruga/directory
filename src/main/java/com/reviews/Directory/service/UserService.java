@@ -5,6 +5,7 @@ import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -18,6 +19,7 @@ import java.util.Optional;
 @AllArgsConstructor
 public class UserService {
 
+    @Autowired
     private UserRepository repository;
 
     //CREATE - POST
