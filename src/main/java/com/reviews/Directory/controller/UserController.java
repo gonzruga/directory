@@ -184,7 +184,9 @@ public class UserController {
 
     @GetMapping("/userPage/{id}")
     public String userPage(@PathVariable long id, Model model) {
-        model.addAttribute("user", service.getUserById(id));
+        User userById = service.getUserById(id);
+        model.addAttribute("user", userById);
+        log.info("User : {}", userById.getProfilePicUrl());
         return "user-page";
     }
 
