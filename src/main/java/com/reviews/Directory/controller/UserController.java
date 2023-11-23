@@ -37,15 +37,17 @@ public class UserController {
     @GetMapping("/userCreateDto")
     public String userFormDto(Model model) {
         UserDto user = new UserDto();
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user-create-form";
     }
 
 
     // Form to display User details after User creation
     @PostMapping("/userSubmit")
-    public String userSubmit(@ModelAttribute UserDto user, Model model) {
+    public String userSubmit(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile profilePicFile) {
         model.addAttribute("user", user);
+
+        user.setProfilePicFile(profilePicFile);
         service.saveUserDto(user);
         return "user-create-submit";
     }
@@ -53,30 +55,32 @@ public class UserController {
     @GetMapping("/userLogin")
     public String userLoginForm(Model model) {
         UserDto user = new UserDto();
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user-login";
     }
 
 //CREATE - POST
 
     @PostMapping("/addUser")
-    public User addUser(@RequestBody UserDto user) {return service.saveUserDto(user);}
+    public User addUser(@RequestBody UserDto user) {
+        return service.saveUserDto(user);
+    }
 
 //    With Image upload
 
     @PostMapping("/saveUserDto")
-    public String saveUser(UserDto user, @RequestParam("image")MultipartFile multipartFile) throws IOException {
-        if(!multipartFile.isEmpty()){
+    public String saveUser(UserDto user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.isEmpty()) {
 //            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());  // Error: required ObjectNonNull
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
             user.setProfilePicName(fileName);
             User savedUser = service.saveUserDto(user);
             String upload = "src/main/resources/static/images/users/" + savedUser.getId() + "/";
 
-            FileUploadUtil.saveFile(upload,fileName,multipartFile); // Exception added upon safeFile
+            FileUploadUtil.saveFile(upload, fileName, multipartFile); // Exception added upon safeFile
 
-        }else{
-            if(user.getProfilePicName().isEmpty()){
+        } else {
+            if (user.getProfilePicName().isEmpty()) {
                 user.setProfilePicName(null);
                 service.saveUserDto(user);
             }
@@ -89,22 +93,23 @@ public class UserController {
     @GetMapping("/userCreateForm")
     public String userForm(Model model) {
         User user = new User();
-        model.addAttribute("user",user);
+        model.addAttribute("user", user);
         return "user-create-form";
     }
+
     @PostMapping("/saveUser")
-    public String saveUser(User user, @RequestParam("image")MultipartFile multipartFile) throws IOException {
-        if(!multipartFile.isEmpty()){
+    public String saveUser(User user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
+        if (!multipartFile.isEmpty()) {
 //            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());  // Error: required ObjectNonNull
             String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
             user.setProfilePicName(fileName);
             User savedUser = service.saveUser(user);
             String upload = "src/main/resources/static/images/users/" + savedUser.getId() + "/";
 
-            FileUploadUtil.saveFile(upload,fileName,multipartFile); // Exception added upon safeFile
+            FileUploadUtil.saveFile(upload, fileName, multipartFile); // Exception added upon safeFile
 
-        }else{
-            if(user.getProfilePicName().isEmpty()){
+        } else {
+            if (user.getProfilePicName().isEmpty()) {
                 user.setProfilePicName(null);
                 service.saveUser(user);
             }
@@ -113,17 +118,17 @@ public class UserController {
 
         return "redirect:/userList";
     }
+
     //    Learn Yourself https://www.youtube.com/watch?v=deYVx0qF5EY
     @PostMapping(value = {"/saveUser2Dto"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public User saveUser2(@RequestPart("user") UserDto user,
-                        @RequestPart("imageFile") MultipartFile[] file) {
+                          @RequestPart("imageFile") MultipartFile[] file) {
         try {
             Set<ImageModel> images = uploadImage(file);
             user.setUserImage(images);
             // Save to Database
             return service.saveUserDto(user);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -132,14 +137,13 @@ public class UserController {
     //    Learn Yourself https://www.youtube.com/watch?v=deYVx0qF5EY   RequestPart("user")
     @PostMapping(value = {"/saveUser2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public String saveUser2(User user,
-                          @RequestPart("image") MultipartFile[] file) {
+                            @RequestPart("image") MultipartFile[] file) {
         try {
             Set<ImageModel> images = uploadImage(file);
             user.setUserImage(images);
             // Save to Database
             service.saveUser(user);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
@@ -151,7 +155,7 @@ public class UserController {
     public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
         Set<ImageModel> imageModels = new HashSet<>();
 
-        for (MultipartFile file: multipartFiles) {
+        for (MultipartFile file : multipartFiles) {
             // Create object of imageModel with parameterized constructor. Can also use without i.e. new ImageModel()
             ImageModel imageModel = new ImageModel(
                     file.getOriginalFilename(),
@@ -168,13 +172,15 @@ public class UserController {
 //READ - GET
 
     @GetMapping("/userList")
-    public String findAllUsers(Model model){
+    public String findAllUsers(Model model) {
         model.addAttribute("user", service.getUsers());
         return "user-list";
     }
 
     @GetMapping("/user/{id}")
-public User findUserById(@PathVariable long id) { return service.getUserById(id); }
+    public User findUserById(@PathVariable long id) {
+        return service.getUserById(id);
+    }
 
     @GetMapping("/userPage/{id}")
     public String userPage(@PathVariable long id, Model model) {
@@ -185,7 +191,7 @@ public User findUserById(@PathVariable long id) { return service.getUserById(id)
 // UPDATE - PUT
 
     @GetMapping("/userEdit/{id}")
-    public String editUser(@PathVariable long id, Model model){
+    public String editUser(@PathVariable long id, Model model) {
         User user = new User();
         user = service.getUserById(id);
         model.addAttribute("user", user);
@@ -201,7 +207,7 @@ public User findUserById(@PathVariable long id) { return service.getUserById(id)
 // DELETE
 
     @GetMapping("/userDelete/{id}")
-    public String deleteUser(@PathVariable long id){
+    public String deleteUser(@PathVariable long id) {
         service.deleteUser(id);
         return "redirect:/userList";
     }
