@@ -50,9 +50,9 @@ public class UserDto {
         user.setProfilePicName(profilePicName);
 
 
-//        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
-//
-//        optionalUrl.ifPresent(user::setProfilePicUrl);
+        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
+
+        optionalUrl.ifPresent(user::setProfilePicUrl);
 
         return user;
 

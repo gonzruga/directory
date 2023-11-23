@@ -23,7 +23,7 @@
 
                     <!-- Create a page form START -->
                     <div class="card-body">
-                            <form th:action="@{/saveUser}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
+                            <form th:action="@{/userSubmit}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
 
                             <!-- Display name -->
                             <div class="col-sm-6 col-lg-4">
@@ -58,14 +58,14 @@
                             </div>
 
                             <div>
-                                <input type="hidden" th:field="*{profilePicName}" />
-                                <label for="fileImage" class="form-label">Profile Picture:</label>
-                                <input type="file" multiple="true" id="fileImage" name="image" accept="image/png" >
+<!--                                <input type="hidden" th:field="*{profilePicName}" />-->
+<!--                                <label for="fileImage" class="form-label">Profile Picture:</label>-->
+<!--                                <input type="file" multiple="true" id="fileImage" name="image" accept="image/png" >-->
 <!--                                TODO: Accept jpg, jpeg-->
 
-<!--                                <input type="file" multiple="true" name="profilePic" th:field="*{getProfilePicFile}">-->
+                                <label class="form-label">Profile Picture:</label>
 
-                                <!--                                <input type="file" multiple value ="select" #SelectFile (change)="onFileSelect($event)">-->
+                                <input type="file" multiple="true" name="profilePicFile" th:field="*{profilePicFile}">
 
                             </div>
 

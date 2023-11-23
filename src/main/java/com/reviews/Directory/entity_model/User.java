@@ -30,6 +30,7 @@ public class User {
      private String userEmail;
      private String password;
 
+
      private String profilePicUrl;
 //     private MultipartFile profilePic;
 
@@ -52,6 +53,7 @@ public class User {
              @JoinColumn(name = "imageId")
              }
      )
+
      private Set<ImageModel> userImage;
 
 }

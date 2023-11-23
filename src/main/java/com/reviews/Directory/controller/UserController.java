@@ -32,12 +32,6 @@ public class UserController {
 
 //FORMS
 
-    @GetMapping("/userLogin")
-    public String userLoginForm(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user",user);
-        return "user-login";
-    }
 
     // Form to Create User
     @GetMapping("/userCreateDto")
@@ -47,12 +41,6 @@ public class UserController {
         return "user-create-form";
     }
 
-    @GetMapping("/userCreateForm")
-    public String userForm(Model model) {
-        User user = new User();
-        model.addAttribute("user",user);
-        return "user-create-form";
-    }
 
     // Form to display User details after User creation
     @PostMapping("/userSubmit")
@@ -62,6 +50,12 @@ public class UserController {
         return "user-create-submit";
     }
 
+    @GetMapping("/userLogin")
+    public String userLoginForm(Model model) {
+        UserDto user = new UserDto();
+        model.addAttribute("user",user);
+        return "user-login";
+    }
 
 //CREATE - POST
 
@@ -92,7 +86,12 @@ public class UserController {
         return "redirect:/userList";
     }
 
-
+    @GetMapping("/userCreateForm")
+    public String userForm(Model model) {
+        User user = new User();
+        model.addAttribute("user",user);
+        return "user-create-form";
+    }
     @PostMapping("/saveUser")
     public String saveUser(User user, @RequestParam("image")MultipartFile multipartFile) throws IOException {
         if(!multipartFile.isEmpty()){
@@ -114,9 +113,9 @@ public class UserController {
 
         return "redirect:/userList";
     }
-
-    @PostMapping(value = {"/addUser2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public User addUser(@RequestPart("user") UserDto user,
+    //    Learn Yourself https://www.youtube.com/watch?v=deYVx0qF5EY
+    @PostMapping(value = {"/saveUser2Dto"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public User saveUser2(@RequestPart("user") UserDto user,
                         @RequestPart("imageFile") MultipartFile[] file) {
         try {
             Set<ImageModel> images = uploadImage(file);
@@ -130,6 +129,24 @@ public class UserController {
         }
     }
 
+    //    Learn Yourself https://www.youtube.com/watch?v=deYVx0qF5EY   RequestPart("user")
+    @PostMapping(value = {"/saveUser2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
+    public String saveUser2(User user,
+                          @RequestPart("image") MultipartFile[] file) {
+        try {
+            Set<ImageModel> images = uploadImage(file);
+            user.setUserImage(images);
+            // Save to Database
+            service.saveUser(user);
+        }
+        catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+        return "redirect:/userList";
+    }
+
     //Method to process image file then back to addUser to call it and save image and add to database
     public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
         Set<ImageModel> imageModels = new HashSet<>();
@@ -139,7 +156,7 @@ public class UserController {
             ImageModel imageModel = new ImageModel(
                     file.getOriginalFilename(),
                     file.getContentType(),
-                    file.getBytes()   //Could be chance of IOExcetion
+                    file.getBytes()   //Could be chance of IOExcetion but will be handled in saveUser so here use 'throws'
             );
             // Add imageModel to set of ImageModels
             imageModels.add(imageModel);
