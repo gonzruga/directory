@@ -5,6 +5,7 @@ import com.reviews.Directory.dto.UserDto;
 import com.reviews.Directory.entity_model.ImageModel;
 import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.service.UserService;
+import com.reviews.Directory.utils.CdnUtils;
 import com.reviews.Directory.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.util.HashSet;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.Set;
 
 
@@ -34,22 +36,47 @@ public class UserController {
 
 
     // Form to Create User
-    @GetMapping("/userCreateDto")
-    public String userFormDto(Model model) {
-        UserDto user = new UserDto();
+
+
+    @GetMapping("/userCreateForm")
+    public String userForm(Model model) {
+        User user = new User();
         model.addAttribute("user", user);
         return "user-create-form";
     }
 
-
     // Form to display User details after User creation
     @PostMapping("/userSubmit")
-    public String userSubmit(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile profilePicFile) {
+    public String userSubmit(@ModelAttribute User user, Model model, @RequestPart MultipartFile profilePicFile) {
         model.addAttribute("user", user);
+
+        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
+
+//        user.setProfilePicUrl(String.valueOf(optionalUrl));
+
+        optionalUrl.ifPresent(user::setProfilePicUrl);
+
+        CdnUtils.uploadFile(profilePicFile);
+
+        service.saveUser(user);
+        return "user-create-submit";
+    }
+
+    @GetMapping("/userCreateDto")
+    public String userFormDto(Model model) {
+        UserDto user = new UserDto();
+        model.addAttribute("user", user);
+        return "user-create-dto";
+    }
+
+    @PostMapping("/userSubmitDto")
+    public String userSubmitDto(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile profilePicFile) {
+        model.addAttribute("user", user);
+        CdnUtils.uploadFile(profilePicFile);
 
         user.setProfilePicFile(profilePicFile);
         service.saveUserDto(user);
-        return "user-create-submit";
+        return "user-create-submit-dto";
     }
 
     @GetMapping("/userLogin")
@@ -90,12 +117,7 @@ public class UserController {
         return "redirect:/userList";
     }
 
-    @GetMapping("/userCreateForm")
-    public String userForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "user-create-form";
-    }
+
 
     @PostMapping("/saveUser")
     public String saveUser(User user, @RequestParam("image") MultipartFile multipartFile) throws IOException {

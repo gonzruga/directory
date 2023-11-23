@@ -17,13 +17,13 @@
                 <div class="card">
                     <!-- Title START -->
                     <div class="card-header border-0 pb-0">
-                        <h1 class="h4 card-title mb-0">Account Register | Signup</h1>
+                        <h1 class="h4 card-title mb-0">Account Register DTO</h1>
                     </div>
                     <!-- Title END -->
 
                     <!-- Create a page form START -->
                     <div class="card-body">
-                            <form th:action="@{/userSubmit}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
+                            <form th:action="@{/userSubmitDto}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
 
                             <!-- Display name -->
                             <div class="col-sm-6 col-lg-4">
