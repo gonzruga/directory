@@ -36,12 +36,8 @@ public class UserService {
         try {
             p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new RuntimeException();
         }
-
-//        catch (IOException e) {
-//            throw new RuntimeException(e);
-//        }
 
         p.setFirstName(firstName);
 

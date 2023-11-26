@@ -34,12 +34,14 @@
                             <dl th:each="user : ${user}" class="card position-relative">
 
                                 <dd>
-                                    <img th:src="${'data:image/png;base64,'+{user.getImage}}" width="50" height="50" alt="">
-
+                                    <img th:src="@{'data:image/png;base64, '+${user.image}}" width="50" height="50" alt="">
                                 </dd>
-                                <dd> <span th:text="'ID: '+${user.getId}"></span> </dd>
-
-                                <dd> <a class="stretched-link" th:href="@{/userPage/{id}(id=${user.id})}"><span th:text="${user.firstName}+' '+${user.getLastName}"></span></a> </dd>
+                                <dd>
+                                    <span th:text="'ID: '+${user.getId}"></span>
+                                </dd>
+                                <dd>
+                                    <a class="stretched-link" th:href="@{/userPage/{id}(id=${user.id})}"><span th:text="${user.firstName}+' '+${user.lastName}"></span></a>
+                                </dd>
 
 <!--                                <dd> <span th:text="${user.getUserEmail}"></span> </dd>-->
 <!--                                <dd> <span th:text="${user.getMobile}"></span> </dd>-->
@@ -71,12 +73,3 @@
 
 <div th:replace="~{Fragments/footer}"></div>
 
-<!--        <dd>-->
-<!--            <form action="#" th:action="@{/editUser/{id}(id=${user.id})}" th:object="${user}" method="GET">-->
-<!--                <input type="submit" value="Edit" />-->
-<!--            </form>-->
-
-<!--            <form action="#" th:action="@{/delete/{id}(id=${user.id})}" method="get">-->
-<!--                <input type="submit" value="Delete" style="color:red" />-->
-<!--            </form>-->
-<!--        </dd>-->
