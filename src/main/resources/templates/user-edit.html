@@ -21,16 +21,17 @@
 
             <div class="card-header border-0 pb-0">
                 <h1 class="h4 card-title mb-0">EDIT PROFILE DETAILS</h1>
-                <p th:text="'Edit your details below:'" />
+                <p th:text="'Edit your details below:'"/>
             </div>
 
             <div class="card-body">
 
-                <p th:text="'ID:' + ${user.getId}" style="display:none" />  <!-- Hidden -->
+                <p th:text="'ID:' + ${user.getId}" style="display:none"/>  <!-- Hidden -->
 
-                <p th:text="'ID (To be hidden):' + ${user.getId}"/>  <!-- TODO Hide ID -->
+                <p th:text="'ID (To be hidden):' + ${user.getId}"/>  <!-- TODO: Hide ID -->
 
-                <img th:src="${user.getProfilePicUrl()}" width="150" height="100" alt="">
+                <!--TODO: Update image-->
+                <img th:src="@{'data:image.png;base64,' + ${user.image}}" width="150" height="100" alt="">
 
                 <form th:action="@{/userUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
 
@@ -46,7 +47,15 @@
                     <br><br>
 
                     <button type="submit"> Submit </button>
-                <!--    <input type="submit" value="Cancel" style="color:red"/>-->
+
+<!--                    <button type="button" onclick="/userList">Cancel</button>-->
+
+                    <button type="button" style="color:red">
+                    <a th:href="@{/userPage/{id}(id=${user.id})}">Cancel</a>
+                    </button>
+
+                    <!--                    <button type="button" value="Redirect" style="color:red"> Cancel </button>-->
+
 
                 </form>
             </div>

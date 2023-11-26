@@ -2,26 +2,16 @@ package com.reviews.Directory.controller;
 
 
 import com.reviews.Directory.dto.UserDto;
-import com.reviews.Directory.entity_model.ImageModel;
 import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.service.UserService;
 import com.reviews.Directory.utils.CdnUtils;
-import com.reviews.Directory.utils.FileUploadUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Optional;
-import java.util.Set;
 
 
 @Slf4j
@@ -29,54 +19,18 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class UserController {
 
-    @Autowired
-    private UserService service;
-
-    @PostMapping("/addUserImage")
+//    temporary
+    @PostMapping("/userSubmitTemp")
     public String saveUserAndImage(@RequestParam("file") MultipartFile file,
-                              @RequestParam("firstName") String firstName)
+                                   @RequestParam("firstName") String firstName)
     {
         service.saveUserAndImageToDB(file, firstName);
-        return "redirect:/userList";
-    }
-
-
-    // Form to Create User
-    @GetMapping("/userCreateForm")
-    public String userForm(Model model) {
-        User user = new User();
-        model.addAttribute("user", user);
-        return "user-create-form";
-    }
-
-    @PostMapping("/userSubmit")
-    public String userSubmit(@ModelAttribute User user, Model model, @RequestPart MultipartFile profilePicFile) {
-
-        model.addAttribute("user", user);
-//        // The below code needs to be revised to process the 'profilePicFile'
-//        CdnUtils.uploadFile(profilePicFile);
-//        user.setProfilePicFile(profilePicFile);
-
-        service.saveUser(user);
-        return "user-create-submit";
-    }
-
-    @GetMapping("/userCreateDto")
-    public String userFormDto(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "user-create-dto";
-    }
-
-    @PostMapping("/userSubmitDto")
-    public String userSubmitDto(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile profilePicFile) {
-        model.addAttribute("user", user);
-        CdnUtils.uploadFile(profilePicFile);
-        user.setProfilePicFile(profilePicFile);
-        service.saveUserDto(user);
         return "user-create-submit-dto";
     }
 
+
+    @Autowired
+    private UserService service;
     @GetMapping("/userLogin")
     public String userLoginForm(Model model) {
         UserDto user = new UserDto();
@@ -84,11 +38,30 @@ public class UserController {
         return "user-login";
     }
 
-//CREATE - POST
+    @GetMapping("/userCreateForm")
+    public String userForm(Model model) {
+        UserDto user = new UserDto();
+        model.addAttribute("user", user);
+        return "user-create-form";
+    }
 
-    @PostMapping("/addUser")
-    public User addUser(@RequestBody UserDto user) {
-        return service.saveUserDto(user);
+    @PostMapping("/userSubmit")
+    public String saveUser(@ModelAttribute UserDto user, Model model, @RequestParam("file") MultipartFile file)
+    {
+        model.addAttribute("user", user);
+        service.saveUser(user, file);
+        return "user-create-submit";
+    }
+
+    @PostMapping("/userSubmitCDN")
+    public String saveUserCdn(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile multipartFile) {
+
+        model.addAttribute("user", user);
+        CdnUtils.uploadFile(multipartFile);
+        user.setProfilePicFile(multipartFile);
+
+        service.saveUserCDN(user);
+        return "user-create-submit";
     }
 
 
@@ -223,8 +196,8 @@ public class UserController {
         return "user-edit";
     }
 
-    @PostMapping("/userUpdate/{id}")
-    public String updateUser(@ModelAttribute UserDto user, @PathVariable long id) {
+    @PostMapping("/userUpdate/")
+    public String updateUser(@ModelAttribute UserDto user) {
         service.updateUser(user);
         return "redirect:/userPage/{id}";
     }

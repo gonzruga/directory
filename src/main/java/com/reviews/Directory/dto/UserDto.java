@@ -1,6 +1,5 @@
 package com.reviews.Directory.dto;
 
-import com.reviews.Directory.entity_model.ImageModel;
 import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.utils.CdnUtils;
 import lombok.Getter;
@@ -10,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
 import java.util.Optional;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -46,11 +44,11 @@ public class UserDto {
         user.setUserEmail(userEmail);
         user.setPassword(password);
 
-//        The below code is used with Fasthub CDN.Utils
+        user.setImage(image);
+
+//        The below block of code is used with Fasthub CDN.Utils
         user.setProfilePicUrl(profilePicUrl);
-
         Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
-
         optionalUrl.ifPresent(user::setProfilePicUrl);
 
         return user;

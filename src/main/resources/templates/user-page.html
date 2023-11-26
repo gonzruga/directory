@@ -37,7 +37,7 @@
 
                     <p th:text="'Mobile: ' + ${user.mobile}" />
 
-                    <p th:text="'Mobile: ' + ${user.userEmail}" />
+                    <p th:text="'Email: ' + ${user.userEmail}" />
 
                     <form th:action="@{/userEdit/{id}(id=${user.id})}" th:object="${user}" method="GET">
                         <input type="submit" value="Edit" />
@@ -45,7 +45,11 @@
 
                     <form>
                         <!-- TODO: Implement DELETE function-->
-                        <input type="submit" value="*Delete*" style="color:red" />
+                        <input type="submit" value="Delete [Disabled]" style="color:red" />
+                    </form>
+
+                    <form th:action="@{/userList}">
+                        <input type="submit" value="Back to Users" style="color:blue" />
                     </form>
 
                 </div>

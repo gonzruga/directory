@@ -46,9 +46,27 @@ public class UserService {
     }
 
     //CREATE - POST
-     public User saveUserDto(UserDto user) {return repository.save(user.dtoToUser());}
 
-    public User saveUser(User user) {return repository.save(user);}
+    public void  saveUser(UserDto user, MultipartFile file)
+    {
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(fileName.contains(".."))
+        {
+            System.out.println("not a a valid file");
+        }
+        try {
+            user.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
+        repository.save(user.dtoToUser());
+    }
+
+    // For saving user Fasthub CDN
+    public User saveUserCDN(UserDto user) {return repository.save(user.dtoToUser());}
+
+    public User saveUserWithoutImage(UserDto user) {return repository.save(user.dtoToUser());}
 
 
     //READ - GET
@@ -85,6 +103,7 @@ public class UserService {
 
 //        existingUser.setPassword(user.getPassword());
 //        existingUser.setProfilePicUrl(user.getProfilePic());
+//        existingUser.setImage(user.getImage());
 
         existingUser.setUpdatedAt(new Date());
 
