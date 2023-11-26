@@ -26,9 +26,9 @@
 
                 <div class="card-body">
 
-                    <h5> <p th:text="'ID: ' + ${user.getId}" /> </h5>
+                    <h5> <p th:text="'ID: ' + ${user.id}" /> </h5>
 
-                    <img th:src="${user.getProfilePicUrl()}" width="150" height="100" alt="">
+                    <img th:src="${'data:image/png;base64,'+{user.image}}" width="150" height="100" alt="">
 
 
 <!--                    <img th:src="@{'/images/users/'+${user.getId}+'/'+${user.getProfilePicName}}" width="150" height="100" alt="">-->

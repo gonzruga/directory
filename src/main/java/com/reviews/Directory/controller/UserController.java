@@ -30,14 +30,18 @@ import java.util.Set;
 public class UserController {
 
     @Autowired
-    private final UserService service;
+    private UserService service;
 
-//FORMS
+    @PostMapping("/addUserImage")
+    public String saveUserAndImage(@RequestParam("file") MultipartFile file,
+                              @RequestParam("firstName") String firstName)
+    {
+        service.saveUserAndImageToDB(file, firstName);
+        return "redirect:/userList";
+    }
 
 
     // Form to Create User
-
-
     @GetMapping("/userCreateForm")
     public String userForm(Model model) {
         User user = new User();
@@ -45,18 +49,13 @@ public class UserController {
         return "user-create-form";
     }
 
-    // Form to display User details after User creation
     @PostMapping("/userSubmit")
     public String userSubmit(@ModelAttribute User user, Model model, @RequestPart MultipartFile profilePicFile) {
+
         model.addAttribute("user", user);
-
-        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
-
-//        user.setProfilePicUrl(String.valueOf(optionalUrl));
-
-        optionalUrl.ifPresent(user::setProfilePicUrl);
-
-        CdnUtils.uploadFile(profilePicFile);
+//        // The below code needs to be revised to process the 'profilePicFile'
+//        CdnUtils.uploadFile(profilePicFile);
+//        user.setProfilePicFile(profilePicFile);
 
         service.saveUser(user);
         return "user-create-submit";
@@ -73,7 +72,6 @@ public class UserController {
     public String userSubmitDto(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile profilePicFile) {
         model.addAttribute("user", user);
         CdnUtils.uploadFile(profilePicFile);
-
         user.setProfilePicFile(profilePicFile);
         service.saveUserDto(user);
         return "user-create-submit-dto";
@@ -93,7 +91,8 @@ public class UserController {
         return service.saveUserDto(user);
     }
 
-//    With Image upload
+
+    /*
 
     @PostMapping("/saveUserDto")
     public String saveUser(UserDto user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
@@ -190,6 +189,8 @@ public class UserController {
 
         return imageModels;
     }
+
+     */
 
 //READ - GET
 

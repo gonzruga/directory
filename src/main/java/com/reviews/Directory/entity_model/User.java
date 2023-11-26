@@ -17,6 +17,7 @@ import java.util.Set;
 @Table(name = "user")
 @RequiredArgsConstructor
 public class User {
+
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
      @Column(name = "id", nullable = false)
@@ -31,30 +32,18 @@ public class User {
      private String userEmail;
      private String password;
 
+     @Lob
+     @Column(columnDefinition = "MEDIUMBLOB")
+     private String image;
 
+     // This parameter is used with Fasthub CDN.Utils
      private String profilePicUrl;
-//     private MultipartFile profilePicFile;
-
-//     private String profilePic;
-
-     @Column(length = 64)
-     private String profilePicName;
 
      @CreationTimestamp
      private Date createdAt  = new Date();
      @UpdateTimestamp
      private Date updatedAt = null;
 
-     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL) //FetchType.Lazy | CascadeType.Merge, Detach, Remove ++
-     @JoinTable(name = "user_images",
-          joinColumns = {
-             @JoinColumn(name = "id")
-          },
-             inverseJoinColumns = {
-             @JoinColumn(name = "imageId")
-             }
-     )
 
-     private Set<ImageModel> userImage;
 
 }

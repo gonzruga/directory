@@ -26,11 +26,10 @@ public class UserDto {
     private String userEmail;
     private String password;
 
+    private String image;
+
     private String profilePicUrl;
     private MultipartFile profilePicFile;
-    private Set<ImageModel> userImage;
-
-    private String profilePicName;
 
     private Date createdAt  = new Date();
     private Date updatedAt = null;
@@ -47,8 +46,8 @@ public class UserDto {
         user.setUserEmail(userEmail);
         user.setPassword(password);
 
-        user.setProfilePicName(profilePicName);
-
+//        The below code is used with Fasthub CDN.Utils
+        user.setProfilePicUrl(profilePicUrl);
 
         Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
 

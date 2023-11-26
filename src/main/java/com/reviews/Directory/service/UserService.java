@@ -7,11 +7,11 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.io.IOException;
+import java.util.*;
 
 
 @Slf4j
@@ -21,6 +21,33 @@ public class UserService {
 
     @Autowired
     private UserRepository repository;
+
+//    Zaaim: https://www.youtube.com/watch?v=oTJ89wcz5Ec&t=1138s
+
+    public void  saveUserAndImageToDB(MultipartFile file, String firstName)
+    {
+//        TODO: review if to use 'userDto' instead of 'User'
+        User p = new User();
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(fileName.contains(".."))
+        {
+            System.out.println("not a a valid file");
+        }
+        try {
+            p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+//        catch (IOException e) {
+//            throw new RuntimeException(e);
+//        }
+
+        p.setFirstName(firstName);
+
+
+        repository.save(p);
+    }
 
     //CREATE - POST
      public User saveUserDto(UserDto user) {return repository.save(user.dtoToUser());}
