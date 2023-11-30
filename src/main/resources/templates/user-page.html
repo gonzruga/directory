@@ -26,16 +26,16 @@
 
                 <div class="card-body">
 
-                    <h5> <p th:text="'ID: ' + ${user.id}" /> </h5>
+                    <h5 th:text="'ID: ' + ${user.id}"> </h5>
 
                     <img th:src="@{'data:profilePicture/png;base64,'+${user.getProfilePicture}}" width="150" height="100" alt="">
 
-                    <p th:text="'First Name: ' + ${user.firstName}" />
-                    <p th:text="'Last Name: ' + ${user.lastName}" />
+                    <p th:text="'First Name: ' + ${user.firstName}" >
+                    <p th:text="'Last Name: ' + ${user.lastName}" >
 
-                    <p th:text="'Mobile: ' + ${user.mobile}" />
+                    <p th:text="'Mobile: ' + ${user.mobile}" >
 
-                    <p th:text="'Email: ' + ${user.userEmail}" />
+                    <p th:text="'Email: ' + ${user.userEmail}" >
 
                     <form th:action="@{/userEdit/{id}(id=${user.id})}" th:object="${user}" method="GET">
                         <input type="submit" value="Edit" />

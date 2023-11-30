@@ -1,14 +1,12 @@
 package com.reviews.Directory.dto;
 
 import com.reviews.Directory.entity_model.User;
-import com.reviews.Directory.utils.CdnUtils;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Date;
-import java.util.Optional;
 
 @Getter
 @Setter
@@ -24,9 +22,7 @@ public class UserDto {
     private String userEmail;
     private String password;
 
-    private String profilePictureAWS;
-    private String profilePictureCDN;
-
+    // Storing images to Railway MySql database
     private String profilePictureDB;
 
     private String profilePicUrl;
@@ -50,11 +46,7 @@ public class UserDto {
         // Storing images to Railway MySql database
         user.setProfilePicture(profilePictureDB);
 
-        // The below block of code is used when storing images to Amazon AWS
-
-
-
-        // The below block of code is used when storing images to Fasthub CDN.Utils
+        // When storing images to Fasthub CDN.Utils & Amazon AWS
         user.setProfilePicUrl(profilePicUrl);
 //        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
 //        optionalUrl.ifPresent(user::setProfilePicUrl);
