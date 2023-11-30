@@ -1,0 +1,28 @@
+cloud:
+  aws:
+    credentials:
+# TODO: Alternatives to root user access keys is create an IAM user with an access key and apply least privilege permissions for that user
+# TODO: Create a .env file to store keys.
+      access-key: AKIARNAUGO7BREMGCHMK
+      secret-key: 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
+    region:
+      static: eu-north-1
+    stack:
+      auto: false
+
+application:
+  bucket:
+    name: directorytz
+
+
+#spring:
+#  servlet:
+#    multipart:
+#      enabled: true
+#      file-size-threshold: 2MB
+#      max-file-size: 5MB
+#      max-request-size: 10MB
+
+server:
+  port: 8080
+

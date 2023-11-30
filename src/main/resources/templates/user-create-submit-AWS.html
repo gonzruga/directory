@@ -40,7 +40,7 @@
 
                             <p th:text="'Email: ' + ${user.userEmail}" /> <br>
 
-                            <p th:text="'Password: ' + ${user.password}" />
+                            <p th:text="'Password: [Will be hidden]' + ${user.password}" />
 
                             <form th:action="@{/userList}" >
                                 <input type="submit" value="OK" />

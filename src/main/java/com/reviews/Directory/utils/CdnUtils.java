@@ -75,7 +75,7 @@ public class CdnUtils {
             CDNResponse cdnResponse = new ObjectMapper().readValue(string, CDNResponse.class);
             log.info("{}", cdnResponse);
             return Optional.of(cdnResponse.data.get(cdnResponse.data.size() - 1));
-//            return Optional.of(cdnResponse.data.get(cdnResponse.data.size() - 1));
+//            return Optional.of(cdnResponse.data.get(0));
 
 
         } catch (Exception e) {

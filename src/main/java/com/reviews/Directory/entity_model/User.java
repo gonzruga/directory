@@ -5,11 +5,9 @@ import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -32,11 +30,12 @@ public class User {
      private String userEmail;
      private String password;
 
+     // This variable is used when storing images to Railway MySql database
      @Lob
      @Column(columnDefinition = "MEDIUMBLOB")
-     private String image;
+     private String profilePicture;
 
-     // This parameter is used with Fasthub CDN.Utils
+     // This variable is used when storing images to AWS and Fasthub CDN.Utils
      private String profilePicUrl;
 
      @CreationTimestamp

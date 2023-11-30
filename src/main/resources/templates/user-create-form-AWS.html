@@ -17,13 +17,13 @@
                 <div class="card">
                     <!-- Title START -->
                     <div class="card-header border-0 pb-0">
-                        <h1 class="h4 card-title mb-0">Account Register</h1> <h5>(DTO, Image saved in Fasthub CDN)</h5>
+                        <h1 class="h4 card-title mb-0">Account Register</h1> <h5>[Image saved to Amazon AWS]</h5>
                     </div>
                     <!-- Title END -->
 
                     <!-- Create a page form START -->
                     <div class="card-body">
-                            <form th:action="@{/userSubmitDto}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
+                            <form th:action="@{/userSubmitAWS}" th:object="${user}" method="POST" enctype="multipart/form-data" class="row g-3" >
 
                             <!-- Display name -->
                             <div class="col-sm-6 col-lg-4">
@@ -57,31 +57,26 @@
                                 <input type="password" class="form-control" id="password" th:field="*{password}">
                             </div>
 
-                            <div>
-<!--                                <input type="hidden" th:field="*{profilePicName}" />-->
-<!--                                <label for="fileImage" class="form-label">Profile Picture:</label>-->
-<!--                                <input type="file" multiple="true" id="fileImage" name="image" accept="image/png" >-->
-<!--                                TODO: Accept jpg, jpeg-->
-
-                                <label class="form-label">Profile Picture:</label>
-
-<!--                                <input type="file" multiple="false" name="profilePicFile" th:field="*{profilePicUrl}">-->
-                                <input type="file" name="profilePicFile" >
-
-                            </div>
-
 <!--                                ToDo: Confirm password-->
 <!--                            <div class="col-lg-6">-->
 <!--                                <label class="form-label">Confirm password</label>-->
 <!--                                <input type="password" class="form-control" placeholder="Confirm password">-->
 <!--                            </div>-->
+
+                            <div>
+<!--                                TODO: Accept jpg, jpeg-->
+                                <label class="form-label">Profile Picture:</label><br>
+                                <input type="file" multiple="false" name="imageFile" >
+
+                            </div>
+
                             <!-- Divider -->
                             <hr>
 
-                            <!-- Social Links START -->
                             <div class="col-12">
                                 <p>You will receive a PIN code on your phone to confirm your registration</p>
                             </div>
+
                             <div class="form-check">
                                 <input class="form-check-input" type="checkbox" value="" id="allowChecked" checked="">
                                 <label class="form-check-label" for="allowChecked">

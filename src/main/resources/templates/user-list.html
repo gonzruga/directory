@@ -34,7 +34,11 @@
                             <dl th:each="user : ${user}" class="card position-relative">
 
                                 <dd>
-                                    <img th:src="@{'data:image/png;base64, '+${user.image}}" width="50" height="50" alt="">
+<!--                                    For displaying images from AWS or Fasthub CDN-->
+                                    <img th:src="${user.profilePicUrl}" width="50" height="50" alt="">
+
+<!--                                    For displaying images from MySql database-->
+<!--                                    <img th:src="@{'data:profile_picture/png;base64, '+${user.profilePicture}}" width="50" height="50" alt="">-->
                                 </dd>
                                 <dd>
                                     <span th:text="'ID: '+${user.getId}"></span>

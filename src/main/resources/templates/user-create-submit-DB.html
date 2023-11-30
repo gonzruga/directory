@@ -32,7 +32,9 @@
 
                         <!-- User Info -->
 
-    <!--                    <img th:src="'Profile Pic: ' + ${user.profilePicUrl}" width="50" height="50" alt="">-->
+                            <img th:src="@{'data:profilePicture/png;base64, '+${user.getProfilePicture}}" width="150" height="100" alt="">
+
+<!--                        <img th:src="'Profile Pic: ' + ${user.profilePicUrl}" width="50" height="50" alt="">-->
 
                             <p th:text="'First Name: ' + ${user.firstName}" /> <br>
                             <p th:text="'Last Name: ' + ${user.lastName}" /> <br>
@@ -40,7 +42,7 @@
 
                             <p th:text="'Email: ' + ${user.userEmail}" /> <br>
 
-                            <p th:text="'Password: ' + ${user.password}" />
+                            <p th:text="'Password: [Will be hidden]' + ${user.password}" />
 
                             <form th:action="@{/userList}" >
                                 <input type="submit" value="OK" />

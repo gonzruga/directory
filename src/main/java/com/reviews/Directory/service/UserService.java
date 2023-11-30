@@ -22,32 +22,13 @@ public class UserService {
     @Autowired
     private UserRepository repository;
 
-//    Zaaim: https://www.youtube.com/watch?v=oTJ89wcz5Ec&t=1138s
 
-    public void  saveUserAndImageToDB(MultipartFile file, String firstName)
-    {
-//        TODO: review if to use 'userDto' instead of 'User'
-        User p = new User();
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        if(fileName.contains(".."))
-        {
-            System.out.println("not a a valid file");
-        }
-        try {
-            p.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-        p.setFirstName(firstName);
-
-
-        repository.save(p);
-    }
 
     //CREATE - POST
 
-    public void  saveUser(UserDto user, MultipartFile file)
+    // Zaaim: https://www.youtube.com/watch?v=oTJ89wcz5Ec&t=1138s
+
+    public void  saveUserDB(UserDto user, MultipartFile file)
     {
         String fileName = StringUtils.cleanPath(file.getOriginalFilename());
         if(fileName.contains(".."))
@@ -55,7 +36,7 @@ public class UserService {
             System.out.println("not a a valid file");
         }
         try {
-            user.setImage(Base64.getEncoder().encodeToString(file.getBytes()));
+            user.setProfilePictureDB(Base64.getEncoder().encodeToString(file.getBytes()));
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -66,10 +47,12 @@ public class UserService {
     // For saving user Fasthub CDN
     public User saveUserCDN(UserDto user) {return repository.save(user.dtoToUser());}
 
+    public User saveUserAWS(UserDto user) {return repository.save(user.dtoToUser());}
+
     public User saveUserWithoutImage(UserDto user) {return repository.save(user.dtoToUser());}
 
 
-    //READ - GET
+    // READ - GET
 
     public Optional<User> findByEmail(String email){
          try{
@@ -84,7 +67,7 @@ public class UserService {
 
     public User getUserById(Long id) {return repository.findById(id).orElse(null);}
 
-    //DELETE
+    // DELETE
 
     public String deleteUser(long id){
         repository.deleteAllById(Collections.singleton(id));
@@ -92,7 +75,7 @@ public class UserService {
         return "User removed with ID number: "+ id;
     }
 
-    //UPDATE
+    // UPDATE - PUT
 
     public User updateUser(UserDto user) {
         User existingUser = repository.findById(user.getId()).orElse(null);

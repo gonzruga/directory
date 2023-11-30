@@ -24,7 +24,10 @@ public class UserDto {
     private String userEmail;
     private String password;
 
-    private String image;
+    private String profilePictureAWS;
+    private String profilePictureCDN;
+
+    private String profilePictureDB;
 
     private String profilePicUrl;
     private MultipartFile profilePicFile;
@@ -44,12 +47,17 @@ public class UserDto {
         user.setUserEmail(userEmail);
         user.setPassword(password);
 
-        user.setImage(image);
+        // Storing images to Railway MySql database
+        user.setProfilePicture(profilePictureDB);
 
-//        The below block of code is used with Fasthub CDN.Utils
+        // The below block of code is used when storing images to Amazon AWS
+
+
+
+        // The below block of code is used when storing images to Fasthub CDN.Utils
         user.setProfilePicUrl(profilePicUrl);
-        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
-        optionalUrl.ifPresent(user::setProfilePicUrl);
+//        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
+//        optionalUrl.ifPresent(user::setProfilePicUrl);
 
         return user;
 

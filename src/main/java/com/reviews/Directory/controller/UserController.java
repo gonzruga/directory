@@ -3,6 +3,7 @@ package com.reviews.Directory.controller;
 
 import com.reviews.Directory.dto.UserDto;
 import com.reviews.Directory.entity_model.User;
+import com.reviews.Directory.service.StorageService;
 import com.reviews.Directory.service.UserService;
 import com.reviews.Directory.utils.CdnUtils;
 import lombok.RequiredArgsConstructor;
@@ -13,24 +14,37 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.Optional;
+
 
 @Slf4j
 @Controller
+//@RestController // Use with Postman
 @RequiredArgsConstructor
 public class UserController {
 
-//    temporary
-    @PostMapping("/userSubmitTemp")
-    public String saveUserAndImage(@RequestParam("file") MultipartFile file,
-                                   @RequestParam("firstName") String firstName)
-    {
-        service.saveUserAndImageToDB(file, firstName);
-        return "user-create-submit-dto";
-    }
-
-
     @Autowired
     private UserService service;
+
+    @Autowired
+    private StorageService storageService;
+
+    @GetMapping("/userFormCDN")
+    public String userFormCDN(Model model) {
+        UserDto user = new UserDto();
+        model.addAttribute("user", user);
+        return "user-create-form-CDN";
+    }
+
+    @PostMapping("/userSubmitCDN")
+    public String saveUserCDN(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
+        model.addAttribute("user", user);
+        Optional<String> optionalUrl = CdnUtils.uploadFile(multipartFile);
+        optionalUrl.ifPresent(user::setProfilePicUrl);
+        service.saveUserCDN(user);
+        return "user-create-submit-CDN";
+    }
+
     @GetMapping("/userLogin")
     public String userLoginForm(Model model) {
         UserDto user = new UserDto();
@@ -38,132 +52,35 @@ public class UserController {
         return "user-login";
     }
 
-    @GetMapping("/userCreateForm")
+    @GetMapping("/userFormDB")
     public String userForm(Model model) {
         UserDto user = new UserDto();
         model.addAttribute("user", user);
-        return "user-create-form";
+        return "user-create-form-DB";
     }
 
-    @PostMapping("/userSubmit")
-    public String saveUser(@ModelAttribute UserDto user, Model model, @RequestParam("file") MultipartFile file)
+    @PostMapping("/userSubmitDB")
+    public String saveUser(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile file)
     {
         model.addAttribute("user", user);
-        service.saveUser(user, file);
-        return "user-create-submit";
+        service.saveUserDB(user, file);
+        return "user-create-submit-DB";
     }
 
-    @PostMapping("/userSubmitCDN")
-    public String saveUserCdn(@ModelAttribute UserDto user, Model model, @RequestPart MultipartFile multipartFile) {
-
+    @GetMapping("/userFormAWS")
+    public String userFormAWS(Model model) {
+        UserDto user = new UserDto();
         model.addAttribute("user", user);
-        CdnUtils.uploadFile(multipartFile);
-        user.setProfilePicFile(multipartFile);
-
-        service.saveUserCDN(user);
-        return "user-create-submit";
+        return "user-create-form-AWS";
+    }
+    @PostMapping("/userSubmitAWS")
+    public String saveUserAWS(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
+        model.addAttribute("user", user);
+        user.setProfilePicUrl(storageService.uploadFile(multipartFile));
+        service.saveUserAWS(user);
+        return "user-create-submit-CDN";
     }
 
-
-    /*
-
-    @PostMapping("/saveUserDto")
-    public String saveUser(UserDto user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if (!multipartFile.isEmpty()) {
-//            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());  // Error: required ObjectNonNull
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            user.setProfilePicName(fileName);
-            User savedUser = service.saveUserDto(user);
-            String upload = "src/main/resources/static/images/users/" + savedUser.getId() + "/";
-
-            FileUploadUtil.saveFile(upload, fileName, multipartFile); // Exception added upon safeFile
-
-        } else {
-            if (user.getProfilePicName().isEmpty()) {
-                user.setProfilePicName(null);
-                service.saveUserDto(user);
-            }
-        }
-        service.saveUserDto(user);
-
-        return "redirect:/userList";
-    }
-
-
-
-    @PostMapping("/saveUser")
-    public String saveUser(User user, @RequestParam("image") MultipartFile multipartFile) throws IOException {
-        if (!multipartFile.isEmpty()) {
-//            String fileName = StringUtils.cleanPath(multipartFile.getOriginalFilename());  // Error: required ObjectNonNull
-            String fileName = StringUtils.cleanPath(Objects.requireNonNull(multipartFile.getOriginalFilename()));
-            user.setProfilePicName(fileName);
-            User savedUser = service.saveUser(user);
-            String upload = "src/main/resources/static/images/users/" + savedUser.getId() + "/";
-
-            FileUploadUtil.saveFile(upload, fileName, multipartFile); // Exception added upon safeFile
-
-        } else {
-            if (user.getProfilePicName().isEmpty()) {
-                user.setProfilePicName(null);
-                service.saveUser(user);
-            }
-        }
-        service.saveUser(user);
-
-        return "redirect:/userList";
-    }
-
-    //    Learn Yourself https://www.youtube.com/watch?v=deYVx0qF5EY
-    @PostMapping(value = {"/saveUser2Dto"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public User saveUser2(@RequestPart("user") UserDto user,
-                          @RequestPart("imageFile") MultipartFile[] file) {
-        try {
-            Set<ImageModel> images = uploadImage(file);
-            user.setUserImage(images);
-            // Save to Database
-            return service.saveUserDto(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-    }
-
-    //    Learn Yourself https://www.youtube.com/watch?v=deYVx0qF5EY   RequestPart("user")
-    @PostMapping(value = {"/saveUser2"}, consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
-    public String saveUser2(User user,
-                            @RequestPart("image") MultipartFile[] file) {
-        try {
-            Set<ImageModel> images = uploadImage(file);
-            user.setUserImage(images);
-            // Save to Database
-            service.saveUser(user);
-        } catch (Exception e) {
-            System.out.println(e.getMessage());
-            return null;
-        }
-
-        return "redirect:/userList";
-    }
-
-    //Method to process image file then back to addUser to call it and save image and add to database
-    public Set<ImageModel> uploadImage(MultipartFile[] multipartFiles) throws IOException {
-        Set<ImageModel> imageModels = new HashSet<>();
-
-        for (MultipartFile file : multipartFiles) {
-            // Create object of imageModel with parameterized constructor. Can also use without i.e. new ImageModel()
-            ImageModel imageModel = new ImageModel(
-                    file.getOriginalFilename(),
-                    file.getContentType(),
-                    file.getBytes()   //Could be chance of IOExcetion but will be handled in saveUser so here use 'throws'
-            );
-            // Add imageModel to set of ImageModels
-            imageModels.add(imageModel);
-        }
-
-        return imageModels;
-    }
-
-     */
 
 //READ - GET
 
@@ -209,4 +126,5 @@ public class UserController {
         service.deleteUser(id);
         return "redirect:/userList";
     }
+
 }
