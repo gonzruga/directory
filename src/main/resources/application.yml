@@ -3,8 +3,7 @@ cloud:
     credentials:
 # TODO: Alternatives to root user access keys is create an IAM user with an access key and apply least privilege permissions for that user
 # TODO: Create a .env file to store keys.
-      access-key: AKIARNAUGO7BREMGCHMK
-      secret-key: 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
+    
     region:
       static: eu-north-1
     stack:
