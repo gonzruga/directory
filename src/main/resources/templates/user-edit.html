@@ -21,41 +21,44 @@
 
             <div class="card-header border-0 pb-0">
                 <h1 class="h4 card-title mb-0">EDIT PROFILE DETAILS</h1>
-                <p th:text="'Edit your details below:'"/>
+                <p th:text="'Edit your details below:'">
             </div>
 
             <div class="card-body">
 
-                <p th:text="'ID:' + ${user.getId}" style="display:none"/>  <!-- Hidden -->
+                <p th:text="'ID:' + ${user.getId}" style="display:none" >  <!-- Hidden -->
 
-                <p th:text="'ID (To be hidden):' + ${user.getId}"/>  <!-- TODO: Hide ID -->
+                <p th:text="'ID (To be hidden):' + ${user.getId}" >  <!-- TODO: Hide ID -->
 
                 <!--TODO: Update image-->
-                <img th:src="@{'data:image.png;base64,' + ${user.getProfilePicture}}" width="150" height="100" alt="">
+
+                <img th:src="${user.getProfilePicUrl}" width="150" height="100" alt="" >
+
+                <!--                    For images saved on MySql DB-->
+<!--                <img th:src="@{'data:image.png;base64,' + ${user.getProfilePicture}}" width="150" height="100" alt="">-->
 
                 <form th:action="@{/userUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
 
+
                     <p>First Name: <input type="text" th:field="*{firstName}" /></p>
+
                     <p>Last Name: <input type="text" th:field="*{lastName}" /></p>
+
                     <p>Mobile: <input type="text" th:field="*{mobile}" /></p>
 
 <!--                    TODO: hide email edit-->
                     <p>Email: (To be hidden) <input type="email" th:field="*{userEmail}" /></p>
 
 <!--                    TODO: Password edit with Spring Boot Security-->
+<!--                    <p>Password: <input type="password" th:field="*{password}" /></p>-->
 
                     <br><br>
 
                     <button type="submit"> Submit </button>
 
-<!--                    <button type="button" onclick="/userList">Cancel</button>-->
-
                     <button type="button" style="color:red">
                     <a th:href="@{/userPage/{id}(id=${user.id})}">Cancel</a>
                     </button>
-
-                    <!--                    <button type="button" value="Redirect" style="color:red"> Cancel </button>-->
-
 
                 </form>
             </div>

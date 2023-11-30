@@ -22,7 +22,7 @@
 
                     <div class="card-header border-0 pb-0">
                         <h1 class="mb-md-0">CONFIRM USER PROFILE </h1>
-                        <p th:text="'Below are the details you submited.'" />
+                        <p th:text="'Below are the details you submited.'" >
                     </div>
 
                     <div class="card-body">
@@ -34,13 +34,13 @@
 
     <!--                    <img th:src="'Profile Pic: ' + ${user.profilePicUrl}" width="50" height="50" alt="">-->
 
-                            <p th:text="'First Name: ' + ${user.firstName}" /> <br>
-                            <p th:text="'Last Name: ' + ${user.lastName}" /> <br>
-                            <p th:text="'Mobile: ' + ${user.mobile}" /> <br>
+                            <p th:text="'First Name: ' + ${user.firstName}" > <br>
+                            <p th:text="'Last Name: ' + ${user.lastName}" > <br>
+                            <p th:text="'Mobile: ' + ${user.mobile}" > <br>
 
-                            <p th:text="'Email: ' + ${user.userEmail}" /> <br>
+                            <p th:text="'Email: ' + ${user.userEmail}" > <br>
 
-                            <p th:text="'Password: [Will be hidden]' + ${user.password}" />
+                            <p th:text="'Password: [Will be hidden]' + ${user.password}" >
 
                             <form th:action="@{/userList}" >
                                 <input type="submit" value="OK" />

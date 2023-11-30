@@ -49,8 +49,6 @@ public class UserService {
 
     public User saveUserAWS(UserDto user) {return repository.save(user.dtoToUser());}
 
-    public User saveUserWithoutImage(UserDto user) {return repository.save(user.dtoToUser());}
-
 
     // READ - GET
 
