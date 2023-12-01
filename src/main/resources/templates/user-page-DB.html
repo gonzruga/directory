@@ -20,7 +20,7 @@
 
                 <div class="card-header border-0 pb-0">
                     <h1 class="h4 card-title mb-0">USER PROFILE</h1>
-                    <h5>[Image from AWS & FH CDN]</h5>
+                    <h5>[Image from DB]</h5>
                     <br>
                     <p th:text="'[Editing and the ID, Phone & Email will be restricted to user]'" >
                 </div>
@@ -29,11 +29,11 @@
 
                     <h5 th:text="'ID: ' + ${user.id}"> </h5>
 
-<!--                    For images saved to AWS or Fasthub CDN-->
-                    <img th:src="${user.profilePicUrl}" width="150" height="100" alt="" >
+                    <!--                    For images saved to AWS or Fasthub CDN-->
+<!--                    <img th:src="${user.profilePicUrl}" width="150" height="100" alt="" >-->
 
                     <!--                    For images saved on MySql DB-->
-<!--                    <img th:src="@{'data:profilePicture/png;base64,'+${user.getProfilePicture}}" width="150" height="100" alt="" >-->
+                    <img th:src="@{'data:profilePicture/png;base64,'+${user.profileP    icture}}" width="150" height="100" alt="" >
 
                     <p th:text="'First Name: ' + ${user.firstName}" >
                     <p th:text="'Last Name: ' + ${user.lastName}" >

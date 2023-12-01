@@ -84,10 +84,18 @@ public class UserController {
 
 //READ - GET
 
+//    Get user profile pics from AWS or Fasthub CDN
     @GetMapping("/userList")
     public String findAllUsers(Model model) {
         model.addAttribute("user", service.getUsers());
         return "user-list";
+    }
+
+    //    Get user profile pics from MySql DB
+    @GetMapping("/userListDB")
+    public String findAllUsersDB(Model model) {
+        model.addAttribute("user", service.getUsers());
+        return "user-list-DB";
     }
 
     @GetMapping("/user/{id}")
@@ -95,12 +103,23 @@ public class UserController {
         return service.getUserById(id);
     }
 
+    //    Get user profile pics from AWS or Fasthub CDN
     @GetMapping("/userPage/{id}")
     public String userPage(@PathVariable long id, Model model) {
         User userById = service.getUserById(id);
         model.addAttribute("user", userById);
         log.info("User : {}", userById.getProfilePicUrl());
         return "user-page";
+    }
+
+    //    Get user profile pics from MySql DB
+
+    @GetMapping("/userPageDB/{id}")
+    public String userPageDB(@PathVariable long id, Model model) {
+        User userById = service.getUserById(id);
+        model.addAttribute("user", userById);
+//        log.info("User : {}", userById.getProfilePicUrl());
+        return "user-page-DB";
     }
 
 // UPDATE - PUT

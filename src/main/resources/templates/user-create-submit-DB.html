@@ -32,7 +32,8 @@
 
                         <!-- User Info -->
 
-                            <img th:src="@{'data:profilePicture/png;base64, '+${user.getProfilePicture}}" width="150" height="100" alt="">
+<!--                            TODO: Display profile pic upon submission user create-->
+<!--                            <img th:src="@{'data:profilePicture/png;base64, '+${user.getProfilePicture}}" width="150" height="100" alt="">-->
 
                             <p th:text="'First Name: ' + ${user.firstName}" > <br>
                             <p th:text="'Last Name: ' + ${user.lastName}" > <br>
@@ -42,7 +43,7 @@
 
                             <p th:text="'Password: [Will be hidden]' + ${user.password}" >
 
-                            <form th:action="@{/userList}" >
+                            <form th:action="@{/userListDB}" >
                                 <input type="submit" value="OK" />
                             </form>
 
