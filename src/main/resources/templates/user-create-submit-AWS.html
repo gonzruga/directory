@@ -31,8 +31,9 @@
                         <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-4">
 
                         <!-- User Info -->
+<!--                        TODO: Enable edit during submission-->
 
-    <!--                    <img th:src="'Profile Pic: ' + ${user.profilePicUrl}" width="50" height="50" alt="">-->
+                        <img th:src="${user.profilePicUrl}" width="50" height="100" alt="">
 
                             <p th:text="'First Name: ' + ${user.firstName}" > <br>
                             <p th:text="'Last Name: ' + ${user.lastName}" > <br>
