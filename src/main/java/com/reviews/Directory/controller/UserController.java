@@ -3,7 +3,7 @@ package com.reviews.Directory.controller;
 
 import com.reviews.Directory.dto.UserDto;
 import com.reviews.Directory.entity_model.User;
-//import com.reviews.Directory.service.StorageService;
+import com.reviews.Directory.service.StorageService;
 import com.reviews.Directory.service.UserService;
 import com.reviews.Directory.utils.CdnUtils;
 import lombok.RequiredArgsConstructor;
@@ -26,8 +26,8 @@ public class UserController {
     @Autowired
     private UserService service;
 
-//    @Autowired
-//    private StorageService storageService;
+    @Autowired
+    private StorageService storageService;
 
     @GetMapping("/userFormCDN")
     public String userFormCDN(Model model) {
@@ -76,7 +76,7 @@ public class UserController {
     @PostMapping("/userSubmitAWS")
     public String saveUserAWS(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
         model.addAttribute("user", user);
-//        user.setProfilePicUrl(storageService.uploadFile(multipartFile));
+        user.setProfilePicUrl(storageService.uploadFile(multipartFile));
         service.saveUserAWS(user);
         return "user-create-submit-CDN";
     }
