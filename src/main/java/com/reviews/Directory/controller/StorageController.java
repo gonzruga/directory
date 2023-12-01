@@ -20,7 +20,7 @@ public class StorageController {
         return new ResponseEntity<>(service.uploadFile(file), HttpStatus.OK);
     }
 
-//    TODO: Implement download file in UI
+//    Not implemented in UI
     @GetMapping("/download/{fileName}")
     public ResponseEntity<ByteArrayResource> downloadFile(@PathVariable String fileName) {
         byte[] data = service.downloadFile(fileName);
@@ -33,6 +33,7 @@ public class StorageController {
                 .body(resource);
     }
 
+//    Not implemented in UI
     @DeleteMapping("/delete/{fileName}")
     public ResponseEntity<String> deleteFile(@PathVariable String fileName) {
         return new ResponseEntity<>(service.deleteFile(fileName), HttpStatus.OK);

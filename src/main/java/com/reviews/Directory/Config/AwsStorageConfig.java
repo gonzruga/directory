@@ -11,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
 
+
+
 @Configuration
 public class AwsStorageConfig {
 
@@ -24,8 +26,9 @@ public class AwsStorageConfig {
     private String region;
 
     //TODO: remove 'Primary' Bean to recheck error of S3Client having two Beans.
-    @Bean
+
     @Primary
+    @Bean
     public AmazonS3 createS3Client() {
         AWSCredentials credentials = new BasicAWSCredentials(accessKey, accessSecret);
         return AmazonS3ClientBuilder.standard()
