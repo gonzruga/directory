@@ -7,14 +7,7 @@ cloud:
 # TODO: Alternatives to root user access keys is create an IAM user with an access key and apply least privilege permissions for that user
 # TODO: Create a .env file to store keys.
 
-#      access-key: AKIARNAUGO7BREMGCHMK
-#      secret-key: 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
 
-#      access-key: AKIARNAUGO7BUC7F4G4P
-#      secret-key: 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
-
-#    access-key: AKIARNAUGO7BQLIKZVAK
-#    secret-key: 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
 
 #    access-key: process.env.AWS_Access_Key_ID
 #    secret-key: AWS_Secret_Access_Key
