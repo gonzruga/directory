@@ -30,7 +30,7 @@ public class User {
      private String userEmail;
      private String password;
 
-     // This variable is used when storing images to Railway MySql database
+     // This variable is used when storing images to MySql database
      @Lob
      @Column(columnDefinition = "MEDIUMBLOB")
      private String profilePicture;

@@ -25,6 +25,7 @@ import java.util.List;
 //@RestController // For returning data, not template
 @RequiredArgsConstructor
 public class BusinessController {
+
     private final BusinessService service;
     private final Environment env; //SpringFrameworkCore.env
 
@@ -33,7 +34,8 @@ public class BusinessController {
     // Form to Create Business
     @GetMapping("/businessForm")
     public String businessForm(Model model) {
-        BusinessDto business = new BusinessDto();  // Create BUSINESS object.
+        // Create BUSINESS object.
+        BusinessDto business = new BusinessDto();
 
         // Add BUSINESS object as a model attribute.
         model.addAttribute("business", business);  // Name & value of attribute.
@@ -42,9 +44,20 @@ public class BusinessController {
 
     // Form to display details of Business created.
     @PostMapping("/businessSubmit")
-    public String businessSubmit(@ModelAttribute BusinessDto business, Model model) {
+    public String businessSubmit(@ModelAttribute BusinessDto business, Model model, @RequestParam("imageFile") MultipartFile file) {
         model.addAttribute("business", business);  // Name & value of attribute.
-        service.saveBusiness(business);
+//        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+//        if(fileName.contains(".."))
+//        {
+//            System.out.println("not a a valid file");
+//        }
+//        try {
+//            business.setLogo(Base64.getEncoder().encodeToString(file.getBytes()));
+//        } catch (IOException e) {
+//            throw new RuntimeException();
+//        }
+
+        service.saveBusinessAndLogo(business, file);
         return "business-create-submit";
     }
 
@@ -69,7 +82,9 @@ public class BusinessController {
         return "business-edit";  //Directed to 'update/{id}'
     }
 
-    @PostMapping("/update/{id}")
+// UPDATE - PUT
+
+    @PostMapping("/businessUpdate/{id}")
     public String updateBusiness(@ModelAttribute BusinessDto business, @PathVariable long id) {
         service.updateBusiness(business);
         return "redirect:/businessPage/{id}";
@@ -79,7 +94,7 @@ public class BusinessController {
 //-------------------------------------------------------------------------------------------------
 
 
-//START OF STANDARD CRUD -----------------------------
+//START OF STANDARD CRUD
 
 // CREATE - POST
     
@@ -115,24 +130,22 @@ public class BusinessController {
     public Business findBusinessByBusinessName(@PathVariable String businessName){
         return service.getBusinessByBusinessName(businessName);  }
 
-// UPDATE - PUT
-
 
     
 // DELETE
 
-    @GetMapping("/delete/{id}")
+    @GetMapping("/businessDelete/{id}")
     public String deleteBusiness(@PathVariable long id){
         service.deleteBusiness(id);
         return "redirect:/businessList";
     }
 
 
+
 //-------------------------------------------------------------------------------------------------
 
-    //STORING DOCUMENTS LOCALLY
+    // STORING IMAGES LOCALLY
 
-    //ADD BUSINESS FORM WITH DOCUMENT UPLOAD TO STORE LOCALLY
     @GetMapping(value = "/businessFormLocal")
     public String businessFormLocalStore(BusinessDto _business, Model model, HttpServletRequest request) {
         try {
@@ -152,7 +165,6 @@ public class BusinessController {
         }
     }
 
-    //SUBMIT BUSINESS STORE DOCUMENT LOCALLY
     @RequestMapping(value = "/businessSubmitLocal",method=RequestMethod.POST,consumes = {MediaType.MULTIPART_FORM_DATA_VALUE})
     public String businessSubmitLocalStore(@ModelAttribute BusinessDto business, @RequestPart List<MultipartFile> businessLogo) throws Exception {
         businessLogo.forEach((file)->{
@@ -167,7 +179,7 @@ public class BusinessController {
         service.saveBusiness(business);
         return "redirect:/businessList";
     }
-// END OF STORING DOCUMENTS
+// END OF STORING IMAGES LOCALLY
 
 
 

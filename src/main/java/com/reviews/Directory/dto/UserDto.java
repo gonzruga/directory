@@ -22,11 +22,8 @@ public class UserDto {
     private String userEmail;
     private String password;
 
-    // Storing images to Railway MySql database
-    private String profilePictureDB;
-
+    private String profilePicture;
     private String profilePicUrl;
-    private MultipartFile profilePicFile;
 
     private Date createdAt  = new Date();
     private Date updatedAt = null;
@@ -34,6 +31,7 @@ public class UserDto {
     public User dtoToUser() {
 
         final User user = new User();
+
         user.setId(id);
 
         user.setFirstName(firstName);
@@ -43,13 +41,12 @@ public class UserDto {
         user.setUserEmail(userEmail);
         user.setPassword(password);
 
-        // Storing images to Railway MySql database
-        user.setProfilePicture(profilePictureDB);
+        // When storing images to MySql
+        user.setProfilePicture(profilePicture);
 
         // When storing images to Fasthub CDN.Utils & Amazon AWS
         user.setProfilePicUrl(profilePicUrl);
-//        Optional<String> optionalUrl = CdnUtils.uploadFile(profilePicFile);
-//        optionalUrl.ifPresent(user::setProfilePicUrl);
+
 
         return user;
 

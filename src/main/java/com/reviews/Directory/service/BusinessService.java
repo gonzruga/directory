@@ -6,8 +6,11 @@ import com.reviews.Directory.entity_model.Business;
 import com.reviews.Directory.repository.BusinessRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
+import org.springframework.web.multipart.MultipartFile;
 
-import java.util.Collections;
+import java.io.IOException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -18,10 +21,23 @@ public class BusinessService {
     private BusinessRepository repository;  // The service communicates with Repo. so Repo needs to be initialized.
 
 // CREATE - POST
-    public Business saveBusiness(BusinessDto business) {
+    public Business saveBusinessAndLogo(BusinessDto business, MultipartFile file) {
+
+        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
+        if(fileName.contains(".."))
+        {
+            System.out.println("not a a valid file");
+        }
+        try {
+            business.setLogo(Base64.getEncoder().encodeToString(file.getBytes()));
+        } catch (IOException e) {
+            throw new RuntimeException();
+        }
+
         return repository.save(business.dtoToBusiness());
     }
 
+    public Business saveBusiness(BusinessDto business) { return repository.save(business.dtoToBusiness()); }
     public List<Business> saveBusinesses(List<Business> businesses) {
         return repository.saveAll(businesses);
     }
@@ -43,9 +59,8 @@ public class BusinessService {
 
 // DELETE
     public String deleteBusiness(long id){
-        repository.deleteAllById(Collections.singleton(id));
-        // deleteAllById(id)
-        return "Business removed with ID number: "+ id;
+        repository.deleteById(id);
+        return "Business removed with ID number: " + id;
     }
 
 // UPDATE - PUT

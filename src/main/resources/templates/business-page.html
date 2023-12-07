@@ -23,13 +23,20 @@
 
                 <div class="card-body">
 
-                    <h5> <p th:text="'ID: ' + ${business.getId}" /> </h5>
+                    <p th:text="'ID: ' + ${business.id}" />
 
-                        <img th:src="${business.getLogoUrl()}" width="150" height="100" alt="">
+                    <!-- For images saved on MySql DB-->
+                    <img th:src="@{'data:logo/png;base64,'+${business.logo}}" width="150" height="100" alt="" >
 
-                    <p th:text="${business.businessName}" />
+
+                    <!--    For images saved to AWS or Fasthub CDN-->
+<!--                        <img th:src="${business.getLogoUrl()}" width="150" height="100" alt="">-->
+
+                    <br><br>
+
+                    <h6> <p th:text="${business.businessName}" /> </h6>
+
                     <p th:text="'Email: ' + ${business.email}" />
-
                     <p th:text="'Mobile: ' + ${business.mobile}" />
                     <p th:text="'Address: ' + ${business.physicalAddress}" />
                     <p th:text="'Location: ' + ${business.location}" />
@@ -37,7 +44,7 @@
                     <p th:text="'Tin Number: ' + ${business.tinNumber}" />
                     <p th:text="'Link: ' + ${business.link}" />
 
-                    <b>Reviews:</b>
+                    <b>Reviews:</b><br>
 
                     <dl th:each="rev : ${business.reviews}">
                         <dd> <i class="fa-solid fa-image-portrait"></i> <span th:text="${rev.getReviewWriterName()}" style="color:blue"></span> </dd>
@@ -48,7 +55,7 @@
                             <form method="GET"
                                   th:action="@{/reviewEdit/{revId}(revId=${rev.getId()})}"
                                   th:object="${review}">
-                                <input type="submit" value="Edit  Review"/>
+                                <input type="submit" value="Edit Review"/>
                             </form>
                         </dd>
                     </dl>
@@ -61,8 +68,12 @@
                         <input type="submit" value="Edit Profile" />
                     </form>
 
-                    <form>
-                        <input type="submit" value="*Delete Profile*" style="color:red" />
+                    <form th:action="@{/businessDelete/{id}(id=${business.id})}">
+                        <input type="submit" value="Delete Profile" style="color:red" />
+                    </form>
+
+                    <form th:action="@{/businessList}">
+                        <input type="submit" value="Back to Directory" style="color:blue" />
                     </form>
 
                 </div>

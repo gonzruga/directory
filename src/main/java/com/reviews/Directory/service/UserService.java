@@ -23,7 +23,6 @@ public class UserService {
     private UserRepository repository;
 
 
-
     //CREATE - POST
 
     // Zaaim: https://www.youtube.com/watch?v=oTJ89wcz5Ec&t=1138s
@@ -36,7 +35,7 @@ public class UserService {
             System.out.println("not a a valid file");
         }
         try {
-            user.setProfilePictureDB(Base64.getEncoder().encodeToString(file.getBytes()));
+            user.setProfilePicture(Base64.getEncoder().encodeToString(file.getBytes()));
         } catch (IOException e) {
             throw new RuntimeException();
         }
@@ -68,9 +67,12 @@ public class UserService {
     // DELETE
 
     public String deleteUser(long id){
-        repository.deleteAllById(Collections.singleton(id));
-        // deleteAllById(id)
-        return "User removed with ID number: "+ id;
+//        repository.deleteAllById(Collections.singleton(id));
+//        TODO: Revise/review logs
+        log.info("Removing user with ID number: " + id);
+        repository.deleteById(id);
+         log.info("User removed with ID number: " + id);
+        return "User removed with ID number: " + id;
     }
 
     // UPDATE - PUT

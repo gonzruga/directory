@@ -118,7 +118,7 @@ public class UserController {
     public String userPageDB(@PathVariable long id, Model model) {
         User userById = service.getUserById(id);
         model.addAttribute("user", userById);
-//        log.info("User : {}", userById.getProfilePicUrl());
+        log.info("User : {}");
         return "user-page-DB";
     }
 
@@ -132,10 +132,10 @@ public class UserController {
         return "user-edit";
     }
 
-    @PostMapping("/userUpdate/")
-    public String updateUser(@ModelAttribute UserDto user) {
+    @PostMapping("/userUpdate/{id}")
+    public String updateUser(@ModelAttribute UserDto user,@PathVariable long id) {
         service.updateUser(user);
-        return "redirect:/userPage/{id}";
+        return "redirect:/userPageDB/{id}"; // Todo: Revise for userPage AWS & FH CDN images i.e. 'userPage'
     }
 
 // DELETE

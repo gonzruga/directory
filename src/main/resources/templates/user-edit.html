@@ -32,22 +32,25 @@
 
                 <!--TODO: Update image-->
 
-<!--                <img th:src="${user.getProfilePicUrl}" width="150" height="100" alt="" >-->
-
-                <!--                    For images saved on MySql DB-->
-<!--                <img th:src="@{'data:image.png;base64,' + ${user.getProfilePicture}}" width="150" height="100" alt="">-->
 
                 <form th:action="@{/userUpdate/{id}(id=${user.id})}" th:object="${user}" method="post">
 
+                    <!-- For images saved on AWS & Fasthub CDN -->
+<!--                <img th:src="@{user.getProfilePicUrl}" width="150" height="100" alt="" >-->
+
+                    <!-- For images saved on MySql DB-->
+                    <img th:src="@{'data:profilePicture/png;base64,' + ${user.getProfilePicture}}" width="150" height="100" alt="">
+
+                <br><br>
                     <label class="form-label">First Name: </label>
                     <input type="text" th:field="*{firstName}" />
-
+                <br>
                     <label class="form-label">Last Name: </label>
                     <input type="text" th:field="*{lastName}" />
-
+                <br>
                     <label class="form-label">Mobile: </label>
                     <input type="text" th:field="*{mobile}" />
-
+                <br>
                     <label class="form-label">Email: (To be hidden) </label>
                 <!--                    TODO: hide email edit-->
                     <input type="email" th:field="*{userEmail}" />

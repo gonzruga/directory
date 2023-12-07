@@ -27,13 +27,14 @@
 
                 <div class="card-body">
 
-                    <h5 th:text="'ID: ' + ${user.id}"> </h5>
+                    <p th:text="'ID: ' + ${user.id}"> </p>
 
 <!--                    For images saved to AWS or Fasthub CDN-->
                     <img th:src="${user.profilePicUrl}" width="150" height="100" alt="" >
 
                     <!--                    For images saved on MySql DB-->
 <!--                    <img th:src="@{'data:profilePicture/png;base64,'+${user.getProfilePicture}}" width="150" height="100" alt="" >-->
+                    <br><br>
 
                     <p th:text="'First Name: ' + ${user.firstName}" >
                     <p th:text="'Last Name: ' + ${user.lastName}" >
@@ -46,9 +47,9 @@
                         <input type="submit" value="Edit" />
                     </form>
 
-                    <form>
+                    <form th:action="@{/userDelete/{id}(id=${user.id})}">
                         <!-- TODO: Implement DELETE function-->
-                        <input type="submit" value="Delete [Disabled]" style="color:red" />
+                        <input type="submit" value="Delete" style="color:red" />
                     </form>
 
                     <form th:action="@{/userList}">

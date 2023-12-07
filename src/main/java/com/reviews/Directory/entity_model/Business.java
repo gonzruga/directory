@@ -1,6 +1,5 @@
 package com.reviews.Directory.entity_model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -13,9 +12,7 @@ import java.util.Set;
 
 @Getter
 @Setter
-//@ToString
 @RequiredArgsConstructor
-@EqualsAndHashCode
 @Entity
 @Table(name = "business")
 public class Business {
@@ -35,8 +32,13 @@ public class Business {
     private String tinNumber;
     private String link;
 
-    private String logoUrl;
-//    private MultipartFile logo;  //Used for storing images locally. In BusinessDto
+    // This variable is used when storing images to MySql database
+    @Lob
+    @Column(columnDefinition = "MEDIUMBLOB")
+    private String logo;
+
+//    Used with AWS & Fasthub CDN
+//    private String logoUrl;
 
     @CreationTimestamp
     private Date createdAt = new Date();;
@@ -45,6 +47,6 @@ public class Business {
 
     @OneToMany(mappedBy = "reviewSubject", fetch = FetchType.EAGER)
     private Set<Review> reviews;
-    // Array is not good because fetching can cause errors.
+    // Array is not good because fetching can cause errors. Instead I use Set
 
 }

@@ -26,23 +26,24 @@
 
             <div class="card-body">
 
-                <!--    <img th:src="${theBusiness.getLogoUrl()}" width="50" height="50" alt="">-->
+                <img th:src="@{'data:logo/png;base64,'+${business.getLogo}}" width="50" height="50" alt="Business Logo">
+<!--                <img th:src="@{theBusiness.getLogoUrl}" width="50" height="50" alt="Business Logo">-->
 
-                <p th:text="'Business Name: ' + ${theBusiness.businessName}" />
-                <p th:text="'Email: ' + ${theBusiness.email}" />
-                <p th:text="'Mobile: ' + ${theBusiness.mobile}" />
-                <p th:text="'Address: ' + ${theBusiness.physicalAddress}" />
-                <p th:text="'Location: ' + ${theBusiness.location}" />
-                <p th:text="'Category: ' + ${theBusiness.category}" />
-                <p th:text="'Tin Number: ' + ${theBusiness.tinNumber}" />
-                <p th:text="'Link: ' + ${theBusiness.link}" />
+
+                <p th:text="'Business Name: ' + ${business.businessName}" />
+                <p th:text="'Email: ' + ${business.email}" />
+                <p th:text="'Mobile: ' + ${business.mobile}" />
+                <p th:text="'Address: ' + ${business.physicalAddress}" />
+                <p th:text="'Location: ' + ${business.location}" />
+                <p th:text="'Category: ' + ${business.category}" />
+                <p th:text="'Tin Number: ' + ${business.tinNumber}" />
+                <p th:text="'Link: ' + ${business.link}" />
 
                 <form th:action="@{/businessList}">
                 <div class="col-12 text-end">
                     <button type="submit" class="btn btn-primary mb-0">OK</button>
                 </div>
                 </form>
-
 
             </div>
 

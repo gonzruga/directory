@@ -26,14 +26,19 @@
 
                 <!-- TODO: Edit access to be restricted only to respective user who created the business. Spring Boot Security-->
 
-
                 <p th:text="${business.getId}" style="display:none" />
 
-                <form th:action="@{/update/{id}(id=${business.id})}" th:object="${business}" method="post">
+                <form th:action="@{/businessUpdate/{id}(id=${business.id})}" th:object="${business}" method="post">
 
-                    <img th:src="${business.getLogoUrl()}" width="150" height="100" alt="">
+                    <!-- For images saved on AWS & Fasthub CDN -->
+<!--                    <img th:src="@{business.getLogoUrl}" width="150" height="100" alt="Business Logo">-->
 
-                    <p th:text="'ID: (*To be hidden)' + *{id}"> <!-- TODO Hide ID -->
+                    <!-- For images saved on MySql DB-->
+                    <img th:src="@{'data:logo/png;base64,'+${business.getLogo}}" width="150" height="100" alt="Business Logo">
+
+                    <br><br>
+
+                    <p th:text="'ID: (*To be hidden) ' + *{id}"> <!-- TODO Hide ID -->
 
                     <p>Business Name: <input type="text" th:field="*{businessName}" /></p>
                     <p>Email: <input type="email" th:field="*{email}" /></p>
@@ -47,12 +52,11 @@
 
                     <br><br>
 
-                <!--    <form th:action="@{/businessPage/{id}(id=${business.id})}" th:object="${business}" method="GET">-->
-                <!--        <input type="submit" value="Submit" />-->
-                <!--    </form>-->
-
                     <button type="submit"> Submit </button>
-                <!--    <input type="submit" value="Cancel" style="color:red"/>-->
+
+                    <button type="button" style="color:red">
+                        <a th:href="@{/businessPage/{id}(id=${business.id})}">Cancel</a>
+                    </button>
 
                 </form>
             </div>
