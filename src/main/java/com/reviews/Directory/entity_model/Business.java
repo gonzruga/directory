@@ -41,7 +41,7 @@ public class Business {
 //    private String logoUrl;
 
     @CreationTimestamp
-    private Date createdAt = new Date();;
+    private Date createdAt = new Date();
     @UpdateTimestamp
     private Date updatedAt = null;
 

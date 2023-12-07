@@ -28,7 +28,7 @@ public class BusinessDto {
 
     //    private String logoUrl;
 
-    private Date createdAt = new Date();;
+    private Date createdAt = new Date();
     private Date updatedAt = null;
 
     public Business dtoToBusiness() {
