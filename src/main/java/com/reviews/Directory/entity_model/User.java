@@ -44,5 +44,4 @@ public class User {
      private Date updatedAt = null;
 
 
-
 }

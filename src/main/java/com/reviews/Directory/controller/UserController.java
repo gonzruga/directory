@@ -133,7 +133,7 @@ public class UserController {
     }
 
     @PostMapping("/userUpdate/{id}")
-    public String updateUser(@ModelAttribute UserDto user,@PathVariable long id) {
+    public String updateUser(@ModelAttribute UserDto user, @PathVariable long id) {
         service.updateUser(user);
         return "redirect:/userPageDB/{id}"; // Todo: Revise for userPage AWS & FH CDN images i.e. 'userPage'
     }

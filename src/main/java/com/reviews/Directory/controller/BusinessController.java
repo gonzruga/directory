@@ -42,7 +42,7 @@ public class BusinessController {
         return "business-create-form";
     }
 
-    // Form to display details of Business created.
+    // Form to display details of Business created. Saves BUSINESS & LOGO
     @PostMapping("/businessSubmit")
     public String businessSubmit(@ModelAttribute BusinessDto business, Model model, @RequestParam("imageFile") MultipartFile file) {
         model.addAttribute("business", business);  // Name & value of attribute.

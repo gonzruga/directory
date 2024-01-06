@@ -1,35 +1,64 @@
 <div th:replace="~{Fragments/head}"></div>
 
-<div class="gonza">
-<h3> WRITE A REVIEW</h3>
+<body>
 
-<p th:text="'Write an honest review for business # ' + ${businessId} + '(Should be replaced by Business Name): '"/>
+<div th:replace="~{Fragments/MainNavbar}"></div>
 
-<p th:text="${businessName}"></p>
-<!--    TODO Display Business Name. Currently not visible -->
+<main>
 
-<p th:text="'You may include: '"/>
-<p th:text="'* How you came accross the business.'" />
-<p th:text="'* What did you first buy'" />
-<p th:text="'* What were your first impressions and how was the service?'" />
+<!--    Container START-->
+<div class="container">
 
-<form th:action="@{/reviewSubmit}" th:object="${review}" method="POST">
-    <!--Hidden-->
-    <input type="number" th:value="${businessId}" name="id" style="display: none" label="businessId" />
-<!--    Displayed-->
-    <p th:text="'Business ID' + ${businessId}" />
+<!--    Row  START-->
+    <div class="row g-4">
 
-    <p> <input type="text" th:field="*{reviewContent}" placeholder="Insert your review here" label="reviewContent" /></p>
-    <p> <input type="text" th:field="*{reviewWriterName}" placeholder="Insert your name" label="writerName" /></p>
+        <div th:replace="~{Fragments/NavLeft}"></div>
 
-    <br>
-    <input type="submit" value="Submit" />
-
-    <input type="reset" value="Reset" />
+<!--        Main Content START-->
+        <div class="col-md-8 col-lg-6 vstack gap-4">
 
 
-</form>
+        <h3> WRITE A REVIEW</h3>
+
+            <p th:text="'Write an honest review for business # ' + ${businessId} + '[To be replaced by Business Name]: '"/>
+
+            <p th:text="${businessName}"></p>
+            <!--    TODO Display Business Name. Currently not visible -->
+
+            <p th:text="'You may include: '"/>
+            <p th:text="'* How you came accross the business.'" />
+            <p th:text="'* What did you first buy'" />
+            <p th:text="'* What were your first impressions and how was the service?'" />
+
+            <form th:action="@{/reviewSubmit}" th:object="${review}" method="POST">
+                <!--Hidden-->
+                <input type="number" th:value="${businessId}" name="id" style="display: none" label="businessId" />
+            <!--    Displayed-->
+                <p th:text="'Business ID: [to be hidden]' + ${businessId}" />
+
+                <p> <input type="text" th:field="*{reviewContent}" placeholder="Insert your review here" label="reviewContent" /></p>
+                <p> <input type="text" th:field="*{reviewWriterName}" placeholder="Insert your name" label="writerName" /></p>
+
+                <br>
+                <input type="submit" value="Submit" />
+
+                <input type="reset" value="Reset" />
+
+
+            </form>
+
+        </div>
+<!--        Main Content End-->
+
+        <div th:replace="~{Fragments/NavRight}"></div>
+
+    </div>
+<!--    Row END-->
 
 </div>
+<!--    Container END-->
+
+</main>
+</body>
 
 <div th:replace="~{Fragments/footer}"></div>

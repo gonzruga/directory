@@ -1,0 +1,79 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+<div class="container">
+
+<div class="row g-4">
+
+        <div th:replace="~{Fragments/NavLeft}"></div>
+
+<!--        Main Content Start-->
+        <div class="col-md-8 col-lg-6 vstack gap-4">
+
+            <div class="card">
+
+
+                <div class="card-header border-0 pb-0">
+                    <h1 class="h4 card-title mb-0">PRODUCT PAGE</h1>
+                    <h5>[Image from DB]</h5>
+                    <br>
+                    <p th:text="'[Editing will be restricted to user]'" >
+                </div>
+
+                <div class="card-body">
+
+<!--                    Product Id can't be null-->
+<!--                    <p th:text="'ID: ' + ${product.id}"> </p>-->
+
+                    <!--                    For images saved to AWS or Fasthub CDN-->
+<!--                    <img th:src="${product.profilePicUrl}" width="150" height="100" alt="Product Picture" >-->
+
+                    <!--                    For images saved on MySql DB-->
+                    <img th:src="@{'data:productImageOne/png;base64,' + ${product.productImageOne}}" width="150" height="100" alt="Product Picture One" >
+
+<!--                    <img th:src="@{'data:productImageTwo/png;base64,'+${product.productImageTwo}}" width="150" height="100" alt="Product Picture Two" >-->
+
+
+                    <br><br>
+
+                    <p th:text="'Product Name: ' + ${product.productName}" > <br>
+                    <p th:text="'Alternative Name: ' + ${product.alternativeNames}" > <br>
+                    <p th:text="'Tags: ' + ${product.tags}" > <br>
+                    <p th:text="'Brand: ' + ${product.brand}" > <br>
+                    <p th:text="'Price: ' + ${product.price}" > <br>
+                    <p th:text="'Description: ' + ${product.description}" > <br>
+
+                    <form th:action="@{/productEdit/{id}(id=${product.id})}" th:object="${product}" method="GET">
+                        <input type="submit" value="*Edit" />
+                    </form>
+
+                    <form th:action="@{/productDelete/{id}(id=${product.id})}">
+                        <input type="submit" value="Delete" style="color:red" />
+                    </form>
+
+                    <form th:action="@{/businessList}">
+                        <input type="submit" value="Back to Directory" style="color:blue" />
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+<!--        Main Content End-->
+
+        <div th:replace="~{Fragments/NavRight}"></div>
+
+</div>
+
+</div>
+
+</main>
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

@@ -45,8 +45,12 @@ public class Business {
     @UpdateTimestamp
     private Date updatedAt = null;
 
+    @OneToMany(mappedBy = "productSubject", fetch = FetchType.EAGER)
+    private Set<Product> products;
+
     @OneToMany(mappedBy = "reviewSubject", fetch = FetchType.EAGER)
     private Set<Review> reviews;
-    // Array is not good because fetching can cause errors. Instead I use Set
+    // Array is not good because fetching them can cause errors. Instead I use Set
+
 
 }

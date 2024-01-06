@@ -3,13 +3,12 @@ package com.reviews.Directory.dto;
 
 import com.reviews.Directory.entity_model.Business;
 import com.reviews.Directory.entity_model.Review;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@Data
+@Getter  //Data sometimes used for including objects
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ReviewDto {
@@ -19,8 +18,8 @@ public class ReviewDto {
     private String reviewContent;
     private String reviewWriterName;
 
-    private Business reviewSubject;
-    private Long reviewSubjectId;
+    private Business reviewSubject; //Used in Controller - review Submit
+    private Long reviewSubjectId;   //Todo Review & confirm usage of reviewSubjectId
 
     private Date createdAt = new Date();
     private Date updatedAt;
@@ -32,7 +31,6 @@ public class ReviewDto {
         review.setReviewWriterName(reviewWriterName);
         review.setReviewSubject(reviewSubject);
 
-//        review.setReviewSubject(reviewSubjectId);
 //        review.setReviewSubject(reviewSubjectId);
 
         return review;

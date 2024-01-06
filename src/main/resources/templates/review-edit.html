@@ -6,13 +6,16 @@
 
 <main>
 
-<div class="container">
+<!--    Container START -->
 
-<div class="row g-4">
+    <div class="container">
+
+        <!--    Row  START  -->
+        <div class="row g-4">
 
         <div th:replace="~{Fragments/NavLeft}"></div>
 
-<!--        Main Content Start-->
+<!--        Main Content START  -->
     <div class="col-md-8 col-lg-6 vstack gap-4">
 
         <div class="card">
@@ -26,21 +29,21 @@
 
                 <p th:text="'ID:' + ${review.getId}" style="display:none" />  <!-- Hidden -->
 
-                <p th:text="'Review ID(To be hidden):' + ${review.getId}"/>  <!-- TODO Hide ID -->
+                <p th:text="'Review ID [To be hidden]: ' + ${review.getId}"/>  <!-- TODO Hide ID -->
 
-<!--                <p th:text="'Business ID(To be hidden):' + ${bizId}"/>  &lt;!&ndash; TODO Hide ID &ndash;&gt;-->
+<!--                <form th:action="@{/updateReview/{bizId}(bizId=${business.getId})/{reviewId}(reviewId=${review.getId()})}" th:object="${review}" method="post">-->
 
-<!--                <form th:action="@{/updateReview/{bizId}(bizId=${business.getId})/{revId}(revId=${review.getId()})}" th:object="${review}" method="post">-->
+<!--                <form th:action="@{/updateReviewTemp}" th:object="${review}" method="post">-->
 
-                <form th:action="@{/updateReviewTemp}" th:object="${review}" method="post">
+                <form th:action="@{/reviewUpdate/{id}(id=${review.id})}" th:object="${review}" method="post">
 
-                    <p>Review: <input type="text" th:field="*{reviewContent}" /></p>
-                    <p>Name: <input type="text" th:field="*{reviewWriterName}" /></p>
+                    <input type="text" th:field="*{reviewContent}" />
+                    <input type="text" th:field="*{reviewWriterName}" />
 
-                    <br><br>
-                    <p th:text="'The below button is temporarily disabled, click it to go back to the Directory'" ></p>
-                    <button type="submit"> *Submit* </button>
+                    <br>
+                    <button type="submit"> Submit </button>
 
+<!--                    Todo: cancel button-->
                 <!--    <input type="submit" value="Cancel" style="color:red"/>-->
 
                 </form>
@@ -49,13 +52,15 @@
         </div>
 
     </div>
-<!--        Main Content End-->
+<!--        Main Content End    -->
 
     <div th:replace="~{Fragments/NavRight}"></div>
 
 </div>
+<!--    Row END -->
 
 </div>
+<!--    Container END   -->
 
 </main>
 </body>>

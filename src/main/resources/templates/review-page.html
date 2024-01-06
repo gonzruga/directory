@@ -1,0 +1,67 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+<div class="container">
+
+<div class="row g-4">
+
+        <div th:replace="~{Fragments/NavLeft}"></div>
+
+<!--        Main Content Start-->
+        <div class="col-md-8 col-lg-6 vstack gap-4">
+
+            <div class="card">
+
+                <div class="card-header border-0 pb-0">
+                    <h1 class="h4 card-title mb-0">REVIEW</h1>
+                    <br>
+                    <p th:text="'[Editing will be restricted to user]'" >
+                </div>
+
+                <div class="card-body">
+
+                    <p th:text="'ID: [to be hidden] ' + ${review.id}" />
+
+                    <p th:text="'Reviewers Name: ' + ${review.reviewWriterName}" >
+
+                    <p th:text="'Review: ' + ${review.reviewContent}"></p>
+
+                    <form method="GET"
+                          th:action="@{/reviewEdit/{reviewId}(reviewId=${review.getId()})}"
+                          th:object="${review}">
+                        <input type="submit" value="Edit Review"/>
+                    </form>
+
+                    <form th:action="@{/reviewDelete/{id}(id=${review.id})}">
+                        <input type="submit" value="Delete Review" style="color:red" />
+                    </form>
+
+                    <!-- TODO: Go back to business page i.e. implement Business Id parameter-->
+
+                    <form th:action="@{/businessList}">
+                        <p th:text="'[This below button will be changed to go to respective business  reviewed]'" ></p>
+                        <input type="submit" value="Directory" style="color:blue" />
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+<!--        Main Content End-->
+
+        <div th:replace="~{Fragments/NavRight}"></div>
+
+</div>
+
+</div>
+
+</main>
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

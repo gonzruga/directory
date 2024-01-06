@@ -8,7 +8,6 @@ import com.reviews.Directory.repository.ReviewRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -28,7 +27,7 @@ public class ReviewService {
         return repository.saveAll(reviews);
     }
 
-    //TO-DO: REVISE CODE
+    //TODO: Revise code of SaveReviewDto
     public Review saveReviewDto(ReviewDto review) {
         try {
             Business business = businessService.getBusinessById(review.getReviewSubjectId());
@@ -54,8 +53,9 @@ public class ReviewService {
         return repository.findAll();
     }
 
-    public List<Review> getReviews(Long person) {
-        return repository.findAllByReviewSubject_Id(person);
+    //Todo: Assess if 'getReviews' method works and if needed. Other classes also
+    public List<Review> getReviews(Long business) {
+        return repository.findAllByReviewSubject_Id(business);
     }
 
     public Review getReviewById(Long id) {
@@ -64,13 +64,14 @@ public class ReviewService {
 
     public Review getReviewByReviewWriterName(String reviewWriterName) {
         return repository.findByReviewWriterName(reviewWriterName);
-        // This is a custom method. It has to be made in repository.
+        // This is a custom method. It is made in the Review repository.
     }
 
 // DELETE
     public String deleteReview(long id){
-        repository.deleteAllById(Collections.singleton(id));
-        return "Review removed "+ id;
+//        repository.deleteAllById(Collections.singleton(id));
+        repository.deleteById(id);
+        return "Removed Review ID: " + id;
     }
 
 // UPDATE - PUT
@@ -79,10 +80,10 @@ public class ReviewService {
 
         existingReview.setReviewContent(review.getReviewContent());
         existingReview.setReviewWriterName(review.getReviewWriterName());
-        // You should not change Reviewer person being reviewed
-        // TODO Replace Writer name automatically with user name then remove Writer Name edit
+        // Reviewer should not be changed
+        // TODO Replace Writer Reviewer name automatically with user name then remove Writer Name edit
 
-        existingReview.setUpdatedAt( new Date() );
+        existingReview.setUpdatedAt(new Date());
 
         return repository.save(existingReview);
 

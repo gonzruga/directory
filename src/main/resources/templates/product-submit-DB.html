@@ -1,0 +1,75 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+    <!-- Container START -->
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div th:replace="~{Fragments/NavLeft}"></div>
+
+            <!-- Main content START : vstack -->
+
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+
+                <div class="card">
+
+                    <div class="card-header border-0 pb-0">
+                        <h3 class="mb-md-0">CONFIRM PRODUCT DETAILS </h3>
+                        <p th:text="'Below are the product details you submited.'" >
+                    </div>
+
+                    <div class="card-body">
+
+
+                        <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-4">
+
+                        <!-- User Info -->
+
+<!--                            TODO: Display product pic upon submission after creating user-->
+<!--                            <img th:src="@{'data:productImage1/png;base64, '+${user.getProductImage1}}" width="150" height="100" alt="">-->
+
+                            <p th:text="'Product Name: ' + ${product.productName}" > <br>
+                            <p th:text="'Alternative Name: ' + ${product.alternativeNames}" > <br>
+<!--                            TODO check error when Tags is more than one separated by comma -->
+<!--                            <p th:text="'Tags: ' + ${product.tags}" > <br>-->
+                            <p th:text="'Brand: ' + ${product.brand}" > <br>
+                            <p th:text="'Price: ' + ${product.price}" > <br>
+                            <p th:text="'Description: ' + ${product.description}" > <br>
+
+
+                            <form th:action="@{/businessList}" >
+                                <input type="submit" value="OK" />
+                            </form>
+
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- Main content END -->
+
+            <div th:replace="~{Fragments/NavRight}"></div>
+
+        </div>
+        <!-- Row g-4 END -->
+
+    </div>
+    <!-- Container END -->
+
+
+</main>
+
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

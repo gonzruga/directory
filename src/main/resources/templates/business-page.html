@@ -44,20 +44,46 @@
                     <p th:text="'Tin Number: ' + ${business.tinNumber}" />
                     <p th:text="'Link: ' + ${business.link}" />
 
+                    <b>Products:</b><br>
+                    <dl th:each="product : ${business.products}">
+                        <dd>
+                            <!--    <img th:src="" alt="Product pic thumbnail"> -->
+
+                            <a th:href="@{/productPage/{id}(id=${product.id})}">
+                                <span th:text="${product.getProductName()}" style="color:blue"></span>
+                            </a>
+                        </dd>
+                        <dd> <span th:text="${product.getBrand()}"> </span> </dd>
+                        <dd> <span th:text="${product.getPrice()}"> </span> </dd>
+
+                    </dl>
+
+                    <form action="#" th:action="@{/productForm/{businessId}(businessId=${business.id})}" method="get">
+                        <input type="submit" value="Add Product"  />
+                    </form>
+
+
                     <b>Reviews:</b><br>
 
-                    <dl th:each="rev : ${business.reviews}">
-                        <dd> <i class="fa-solid fa-image-portrait"></i> <span th:text="${rev.getReviewWriterName()}" style="color:blue"></span> </dd>
-                        <dd> <i class="fa-regular fa-comment-dots"></i> <span th:text="${rev.getReviewContent()}"> </span> </dd>
+                    <dl th:each="review : ${business.reviews}">
+                        <dd>
+                            <!-- TODO: Insert reviewer profile pic.-->
+<!--                            <img th:src="" alt="Profile pic thumbnail"> -->
+                            <a th:href="@{/reviewPage/{id}(id=${review.id})}">
+                                <span th:text="${review.getReviewWriterName()}" style="color:blue"></span>
+                            </a>
+                        </dd>
+                        <dd> <span th:text="${review.getReviewContent()}"> </span> </dd>
                         <dd>
                             <!-- th:action="@{/reviewEdit/{bizId}(bizId=${business.getId})/{revId}(revId=${rev.getId()})}"-->
 
-                            <form method="GET"
-                                  th:action="@{/reviewEdit/{revId}(revId=${rev.getId()})}"
-                                  th:object="${review}">
-                                <input type="submit" value="Edit Review"/>
-                            </form>
+<!--                            <form method="GET"-->
+<!--                                  th:action="@{/reviewEdit/{revId}(revId=${rev.getId()})}"-->
+<!--                                  th:object="${review}">-->
+<!--                                <input type="submit" value="Edit Review"/>-->
+<!--                            </form>-->
                         </dd>
+                        <hr>
                     </dl>
 
                     <form action="#" th:action="@{/reviewCreate/{businessId}(businessId=${business.id})}" method="get">

@@ -1,5 +1,25 @@
 <div th:replace="~{Fragments/head}"></div>
 
+<body>
+</main>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+    <!--    Container START -->
+
+    <div class="container">
+
+        <!--    Row  START  -->
+        <div class="row g-4">
+
+            <div th:replace="~{Fragments/NavLeft}"></div>
+
+            <!--        Main Content START  -->
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+
+
 <div>
 <h3>SUBMITED REVIEW</h3>
 <p th:text="'Welcome! Below are the review details you submited.'" />
@@ -9,10 +29,23 @@
 
 
 <form th:action="@{/businessList}" >
-    <input type="submit" value="OK" />
+    <input type="submit" value="DIRECTORY" />
 </form>
 
 
 </div>
+
+                </div>
+            <!--        Main Content End    -->
+
+            <div th:replace="~{Fragments/NavRight}"></div>
+
+        </div>
+        <!--    Row END -->
+
+    </div>
+    <!--    Container END   -->
+</main>
+</body>
 
 <div th:replace="~{Fragments/footer}"></div>
