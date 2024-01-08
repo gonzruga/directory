@@ -57,7 +57,7 @@ public class CdnUtils {
                     .addHeader("account", "directory")
 //                    .addHeader("account", "fasthub_cms")
                     .post(body)
-                    .url("http://cdn.fasthub.co.tz/api/user/files")
+                    .url("http://cdn.fasthub.co.tz/api/user/files")  //on nt
 //                    .url("http://192.168.66.12:9696/api/user/files")
                     .build();
 

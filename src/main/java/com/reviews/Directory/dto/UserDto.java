@@ -23,6 +23,7 @@ public class UserDto {
     private String password;
 
     private String profilePicture;
+
     private String profilePicUrl;
 
     private Date createdAt  = new Date();
