@@ -1,19 +1,12 @@
 package com.reviews.Directory.service;
 
 
-import com.reviews.Directory.dto.BusinessDto;
 import com.reviews.Directory.dto.ProductDto;
-import com.reviews.Directory.entity_model.Business;
 import com.reviews.Directory.entity_model.Product;
-import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 
@@ -22,7 +15,6 @@ import java.util.List;
 public class ProductService {
 
     private final ProductRepository repository;
-    private final BusinessService businessService; //Added in order to connect product to a business.
 
     // CREATE - POST
 
