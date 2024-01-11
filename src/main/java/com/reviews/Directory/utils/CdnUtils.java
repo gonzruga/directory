@@ -46,19 +46,23 @@ public class CdnUtils {
             if (!optionalFile.isPresent()) {
                 return Optional.empty();
             }
-
             File file = optionalFile.get();
+            log.info("saving imag : {}", file.isFile());
+
             RequestBody body = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
                     .addFormDataPart("files", multipartFile.getOriginalFilename(), RequestBody.create(file.getAbsoluteFile(), MediaType.parse("application/octet-stream"))).build();
+            log.info("saving body : {}", body.contentLength());
+
+
             Request request = new Request.Builder()
                     .addHeader("user", "richard.robert@fasthub.co.tz")
                     .addHeader("pass", "2WIHR3Q9")
                     .addHeader("account", "directory")
 //                    .addHeader("account", "fasthub_cms")
                     .post(body)
-                    .url("http://cdn.fasthub.co.tz/api/user/files")  //on nt
-//                    .url("http://192.168.66.12:9696/api/user/files")
+//                    .url("https://cdn.fasthub.co.tz/api/user/files")  // Own external network
+                    .url("http://192.168.66.12:9696/api/user/files")  // Fasthub internal network
                     .build();
 
             log.info("Started uploading image : {}", multipartFile.getOriginalFilename());

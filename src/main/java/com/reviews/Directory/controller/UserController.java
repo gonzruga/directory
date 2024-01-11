@@ -26,23 +26,20 @@ public class UserController {
     @Autowired
     private UserService service;
 
-//    @Autowired
-//    private StorageService storageService;
-
-    @GetMapping("/userFormCDN")
-    public String userFormCDN(Model model) {
+    @GetMapping("/userForm")
+    public String userForm(Model model) {
         UserDto user = new UserDto();
         model.addAttribute("user", user);
-        return "user-create-form-CDN";
+        return "user-create-form";
     }
 
-    @PostMapping("/userSubmitCDN")
-    public String saveUserCDN(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
+    @PostMapping("/userSubmit")
+    public String saveUser(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
         model.addAttribute("user", user);
         Optional<String> optionalUrl = CdnUtils.uploadFile(multipartFile);
         optionalUrl.ifPresent(user::setProfilePicUrl);
-        service.saveUserCDN(user);
-        return "user-create-submit-CDN";
+        service.saveUser(user);
+        return "user-create-submit";
     }
 
     @GetMapping("/userLogin")
@@ -52,58 +49,16 @@ public class UserController {
         return "user-login";
     }
 
-    @GetMapping("/userFormDB")
-    public String userForm(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "user-create-form-DB";
-    }
-
-    @PostMapping("/userSubmitDB")
-    public String saveUser(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile file)
-    {
-        model.addAttribute("user", user);
-        service.saveUserDB(user, file);
-        return "user-create-submit-DB";
-    }
-
-    @GetMapping("/userFormAWS")
-    public String userFormAWS(Model model) {
-        UserDto user = new UserDto();
-        model.addAttribute("user", user);
-        return "user-create-form-AWS";
-    }
-    @PostMapping("/userSubmitAWS")
-    public String saveUserAWS(@ModelAttribute UserDto user, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
-        model.addAttribute("user", user);
-//        user.setProfilePicUrl(storageService.uploadFile(multipartFile));
-        service.saveUserAWS(user);
-        return "user-create-submit-CDN";
-    }
 
 
 //READ - GET
 
-//    Get user profile pics from AWS or Fasthub CDN
     @GetMapping("/userList")
     public String findAllUsers(Model model) {
         model.addAttribute("user", service.getUsers());
         return "user-list";
     }
 
-    //    Get user profile pics from MySql DB
-    @GetMapping("/userListDB")
-    public String findAllUsersDB(Model model) {
-        model.addAttribute("user", service.getUsers());
-        return "user-list-DB";
-    }
-
-    @GetMapping("/user/{id}")
-    public User findUserById(@PathVariable long id) {
-        return service.getUserById(id);
-    }
-
-    //    Get user profile pics from AWS or Fasthub CDN
     @GetMapping("/userPage/{id}")
     public String userPage(@PathVariable long id, Model model) {
         User userById = service.getUserById(id);
@@ -112,14 +67,9 @@ public class UserController {
         return "user-page";
     }
 
-    //    Get user profile pics from MySql DB
-
-    @GetMapping("/userPageDB/{id}")
-    public String userPageDB(@PathVariable long id, Model model) {
-        User userById = service.getUserById(id);
-        model.addAttribute("user", userById);
-        log.info("User : {}");
-        return "user-page-DB";
+    @GetMapping("/user/{id}")
+    public User findUserById(@PathVariable long id) {
+        return service.getUserById(id);
     }
 
 // UPDATE - PUT

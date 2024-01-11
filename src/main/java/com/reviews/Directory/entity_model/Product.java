@@ -34,14 +34,9 @@ public class Product {
 
     private String description;
 
-    // This variable is used when storing images to MySql database
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String productImageOne;
+    private String imageOneUrl;
 
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String productImageTwo;
+    private String imageTwoUrl;
 
     @ManyToOne
     @JoinColumn(name = "product_business_id")

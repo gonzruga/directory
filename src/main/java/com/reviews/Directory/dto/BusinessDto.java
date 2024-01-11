@@ -24,9 +24,7 @@ public class BusinessDto {
     private String tinNumber;
     private String link;
 
-    private String logo;
-
-    //    private String logoUrl;
+    private String logoUrl;
 
     private Date createdAt = new Date();
     private Date updatedAt = null;
@@ -48,11 +46,7 @@ public class BusinessDto {
         business.setTinNumber(tinNumber);
         business.setLink(link);
 
-        // When storing images to MySql
-        business.setLogo(logo);
-
-        // When storing images to Fasthub CDN.Utils & Amazon AWS
-//        business.setLogoUrl(logUrl);
+        business.setLogoUrl(logoUrl);
 
 
         return business;

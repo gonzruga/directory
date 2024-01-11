@@ -33,25 +33,17 @@
                         <dd>
 <!--                            TODO: Review image classes-->
                             <div class="card-image">
-                                <img class="card-img-top" th:src="@{'data:logo/png;base64,'+${business.getLogo}}" alt="Business Logo">
-
-                                <!--  For displaying images from AWS or Fasthub CDN-->
-                                <!--  <img class="card-img-top" th:src="${business.getLogoUrl()}" alt="Business Logo">-->
-
+                                 <img class="card-img-top" th:src="${business.getLogoUrl()}" alt="Business Logo">
                             </div>
 
                         </dd>
 
-<!--                        <dd>-->
-<!--                           <img class="card-img-top" th:src="@{'data:logo/png;base64,'+${business.getLogo}}" alt="Business Logo">-->
-<!--                        </dd>-->
-
                         <dd><h3> <a class="stretched-link" th:href="@{/businessPage/{id}(id=${business.id})}"><span th:text="${business.businessName}"></span></a> </h3></dd>
 
-                        <dd> <span th:text="${business.getId}"></span> </dd>
+                        <dd> <span th:text="'ID: ' + ${business.getId}"></span> </dd>
 
-                        <dd> <span th:text="${business.getCategory}"></span> </dd>
-                        <dd> <span th:text="${business.getLocation}"></span> </dd>
+                        <dd> <span th:text="'Category: ' + ${business.getCategory}"></span> </dd>
+                        <dd> <span th:text="'Location: ' + ${business.getLocation}"></span> </dd>
 
                     </dl>
                 </div>

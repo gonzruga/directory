@@ -7,16 +7,16 @@
 <main>
 
     <!-- Container START -->
-
     <div class="container">
-
+        <!-- Row START -->
         <div class="row g-4">
 
             <div th:replace="~{Fragments/NavLeft}"></div>
 
-            <!-- MAIN CONTENT START : vstack -->
+            <!-- Main content START : vstack gap-4  -->
 
             <div class="col-md-8 col-lg-6 vstack gap-4">
+
                 <!-- Create a page START -->
                 <div class="card">
 
@@ -26,9 +26,10 @@
                     </div>
                     <!-- Title END -->
 
-                    <!-- Create a page form START -->
+                    <!-- Form START -->
                     <div class="card-body" >
                         <form class="row g-3" th:action="@{/businessSubmit}" th:object="${business}" method="POST" enctype="multipart/form-data">
+
                             <!-- Row 1 -->
                             <div class="col-12">
                                 <label class="form-label">Business name</label>
@@ -36,36 +37,36 @@
                                 <small>Name of the company or trading brand.</small>
                             </div>
 
-                            <!-- Row 2: -->
+                            <!-- Row 2: 6 + 6   -->
 
-                            <!-- Phone number -->
-                            <div class="col-lg-6">
+                            <div class="col-sm-12 col-lg-6">
                                 <label class="form-label">Mobile Number 1</label>
                                 <input type="text" class="form-control" placeholder="Phone number (Required)" th:field="*{mobile}">
                             </div>
+
 <!--                            <div class="col-lg-6">-->
 <!--                                <label class="form-label">Phone Number 2</label>-->
 <!--                                <input type="text" class="form-control" placeholder="Phone number (Optional)" th:field="*{mobile}">-->
 <!--                            </div>-->
 
-                            <!-- Row 3 -->
                             <div class="col-sm-12 col-lg-6">
                                 <label class="form-label">Email</label>
                                 <input type="text" class="form-control" placeholder="Email (Required)" th:field="*{email}">
                             </div>
+
+                            <!-- Row 3 -->
 
                             <div class="col-sm-12 col-lg-6">
                                 <label class="form-label">Location</label>
                                 <input type="text" class="form-control" placeholder="Location (Required)" th:field="*{location}">
                             </div>
 
-                            <!-- Row 4 -->
-
-
                             <div class="col-sm-12 col-lg-6">
                                 <label class="form-label">Physical Address</label>
                                 <input type="text" class="form-control" placeholder="Address (Required)" th:field="*{physicalAddress}">
                             </div>
+
+                            <!-- Row 4 -->
 
                             <div class="col-sm-12 col-lg-6">
                                 <label class="form-label">Business Category</label>
@@ -77,6 +78,7 @@
                                 <input type="text" class="form-control" placeholder="Tin Number (Required)" th:field="*{tinNumber}">
                             </div>
 
+                            <!-- Row 5 -->
                             <!-- Website URL -->
                             <div class="col-sm-12 col-lg-12">
                                 <label class="form-label">Website URL</label>
@@ -86,8 +88,8 @@
 
                             <!-- Logo Upload -->
                             <div class="col-sm-6 col-lg-6">
-                                <label class="form-label">Business Logo or Main Image (only .png files):</label>
-                                <input type="file" multiple="false" name="imageFile" accept="image/png"> <br>
+                                <label class="form-label">Business Logo or Main Image:</label>
+                                <input type="file" multiple="false" name="imageFile" > <br>
                             </div>
 
                             <!-- Divider -->
@@ -106,12 +108,12 @@
                             </div>
                         </form>
                     </div>
-                    <!-- Create a page form END -->
+                    <!-- Form END -->
                 </div>
                 <!-- Create a page END -->
             </div>
 
-            <!-- Main content END -->
+            <!-- Main content END : vstack gap-4 -->
 
             <div th:replace="~{Fragments/NavRight}"></div>
 
@@ -120,7 +122,6 @@
 
     </div>
     <!-- Container END -->
-
 
 </main>
 

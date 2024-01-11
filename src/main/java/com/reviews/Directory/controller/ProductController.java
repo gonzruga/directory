@@ -4,13 +4,18 @@ import com.reviews.Directory.dto.ProductDto;
 import com.reviews.Directory.entity_model.Product;
 import com.reviews.Directory.service.BusinessService;
 import com.reviews.Directory.service.ProductService;
+import com.reviews.Directory.utils.CdnUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Controller
@@ -32,14 +37,22 @@ public class ProductController {
         Product product = new Product();
         model.addAttribute("businessId", businessId);
         model.addAttribute("product", product);
-        return "product-form-DB";
+        return "product-form";
     }
 
     @PostMapping("/productSubmit")
-    public String productSubmit(@ModelAttribute ProductDto product, Model model, @RequestParam("imageFileOne") MultipartFile file) {
+    public String productSubmit(@ModelAttribute ProductDto product, Model model, long id,
+                                @RequestParam("imageFileOne") MultipartFile multipartFile) {
         model.addAttribute("product", product);
-        service.saveProduct(product, file);
-        return "product-submit-DB";
+        Optional<String> optionalUrl = CdnUtils.uploadFile(multipartFile);
+        optionalUrl.ifPresent(product::setImageOneUrl);
+
+        product.setProductSubject(businessService.getBusinessById(id));
+        log.info("{}",id);
+        product.setProductSubjectId(id);
+
+        service.saveProduct(product);
+        return "redirect:/businessList";
     }
 
     // READ - GET
@@ -53,7 +66,23 @@ public class ProductController {
     public String productPage(@PathVariable long id, Model model){
         Product productById = service.getProductById(id);
         model.addAttribute("product", productById);
-        return "product-page-DB";
+        return "product-page";
+    }
+
+    @RequestMapping("/productList1")
+    public String productListPage(Model model) {
+        String keyword = "";
+
+        List<Product> listProducts = service.listAll(keyword);
+        model.addAttribute("listProducts", listProducts);
+        return "product-list";
+    }
+
+    @GetMapping("/productList")
+    public String findAllProducts(Model model, @Param("keyword") String keyword){
+        model.addAttribute("product",service.listAll(keyword));
+        model.addAttribute("keyword", keyword);
+        return "product-list";
     }
 
     // UPDATE - PUT

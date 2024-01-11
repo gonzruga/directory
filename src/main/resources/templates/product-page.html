@@ -20,7 +20,6 @@
 
                 <div class="card-header border-0 pb-0">
                     <h1 class="h4 card-title mb-0">PRODUCT PAGE</h1>
-                    <h5>[Image from DB]</h5>
                     <br>
                     <p th:text="'[Editing will be restricted to user]'" >
                 </div>
@@ -30,14 +29,7 @@
 <!--                    Product Id can't be null-->
 <!--                    <p th:text="'ID: ' + ${product.id}"> </p>-->
 
-                    <!--                    For images saved to AWS or Fasthub CDN-->
-<!--                    <img th:src="${product.profilePicUrl}" width="150" height="100" alt="Product Picture" >-->
-
-                    <!--                    For images saved on MySql DB-->
-                    <img th:src="@{'data:productImageOne/png;base64,' + ${product.productImageOne}}" width="150" height="100" alt="Product Picture One" >
-
-<!--                    <img th:src="@{'data:productImageTwo/png;base64,'+${product.productImageTwo}}" width="150" height="100" alt="Product Picture Two" >-->
-
+                    <img th:src="${product.getImageOneUrl()}" width="150" height="100" alt="Product Picture" >
 
                     <br><br>
 

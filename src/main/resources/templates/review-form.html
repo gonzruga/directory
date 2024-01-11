@@ -34,7 +34,7 @@
                 <!--Hidden-->
                 <input type="number" th:value="${businessId}" name="id" style="display: none" label="businessId" />
             <!--    Displayed-->
-                <p th:text="'Business ID: [to be hidden]' + ${businessId}" />
+                <p th:text="'Business ID: [to be hidden]:  ' + ${businessId}" />
 
                 <p> <input type="text" th:field="*{reviewContent}" placeholder="Insert your review here" label="reviewContent" /></p>
                 <p> <input type="text" th:field="*{reviewWriterName}" placeholder="Insert your name" label="writerName" /></p>

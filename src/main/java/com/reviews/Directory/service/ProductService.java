@@ -5,6 +5,7 @@ import com.reviews.Directory.dto.BusinessDto;
 import com.reviews.Directory.dto.ProductDto;
 import com.reviews.Directory.entity_model.Business;
 import com.reviews.Directory.entity_model.Product;
+import com.reviews.Directory.entity_model.User;
 import com.reviews.Directory.repository.ProductRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -25,35 +26,24 @@ public class ProductService {
 
     // CREATE - POST
 
-    public Product saveProduct(ProductDto product, MultipartFile file) {
-
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        if(fileName.contains(".."))
-        {
-            System.out.println("not a a valid file");
-        }
-        try {
-            product.setProductImageOne(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
+    public Product saveProduct(ProductDto product) {
         return repository.save(product.dtoToProduct());
-    }
-
-    public Product saveProduct1(ProductDto product) { return repository.save(product.dtoToProduct());}
-
-    public List<Product> saveProducts(List<Product> products) {
-        return repository.saveAll(products);
     }
 
     // READ - GET
 
-    // List 'GetProducts' Method
-
     public Product getProductById(Long id) {
         return repository.findById(id).orElse(null);
     }
+
+    // List 'GetProducts' Method
+    public List<Product> listAll(String keyword) {
+        if (keyword != null) {
+            return repository.findAll(keyword);
+        }
+        return repository.findAll();
+    }
+
 
     // DELETE
 
@@ -63,7 +53,6 @@ public class ProductService {
     }
 
     // UPDATE - PUT
-
 
     public Product updateProduct(ProductDto product){
 

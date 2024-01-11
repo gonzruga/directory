@@ -29,9 +29,8 @@ public class ReviewDto {
         review.setId(id);
         review.setReviewContent(reviewContent);
         review.setReviewWriterName(reviewWriterName);
-        review.setReviewSubject(reviewSubject);
 
-//        review.setReviewSubject(reviewSubjectId);
+        review.setReviewSubject(reviewSubject);
 
         return review;
     }

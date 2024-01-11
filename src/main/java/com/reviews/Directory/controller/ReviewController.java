@@ -4,7 +4,6 @@ import com.reviews.Directory.dto.ReviewDto;
 import com.reviews.Directory.entity_model.Review;
 import com.reviews.Directory.service.BusinessService;
 import com.reviews.Directory.service.ReviewService;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;

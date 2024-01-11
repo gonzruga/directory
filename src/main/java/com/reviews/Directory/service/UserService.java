@@ -27,42 +27,23 @@ public class UserService {
 
     // Zaaim: https://www.youtube.com/watch?v=oTJ89wcz5Ec&t=1138s
 
-    public void  saveUserDB(UserDto user, MultipartFile file)
-    {
-        String fileName = StringUtils.cleanPath(file.getOriginalFilename());
-        if(fileName.contains(".."))
-        {
-            System.out.println("not a a valid file");
-        }
-        try {
-            user.setProfilePicture(Base64.getEncoder().encodeToString(file.getBytes()));
-        } catch (IOException e) {
-            throw new RuntimeException();
-        }
-
-        repository.save(user.dtoToUser());
-    }
-
-    // For saving user Fasthub CDN
-    public User saveUserCDN(UserDto user) {return repository.save(user.dtoToUser());}
-
-    public User saveUserAWS(UserDto user) {return repository.save(user.dtoToUser());}
+    public User saveUser(UserDto user) {return repository.save(user.dtoToUser());}
 
 
     // READ - GET
 
-    public Optional<User> findByEmail(String email){
-         try{
-             return repository.findFirstByUserEmail(email);
-         }catch (Exception e){
-            log.error("{} found while getting user by email : {}",e.getClass().getSimpleName(),e.getMessage());
-            return Optional.empty();
-         }
-    }
-
     public List<User> getUsers() {return repository.findAll();}
 
     public User getUserById(Long id) {return repository.findById(id).orElse(null);}
+
+    public Optional<User> findByEmail(String email){
+        try{
+            return repository.findFirstByUserEmail(email);
+        }catch (Exception e){
+            log.error("{} found while getting user by email : {}",e.getClass().getSimpleName(),e.getMessage());
+            return Optional.empty();
+        }
+    }
 
     // DELETE
 

@@ -32,13 +32,7 @@ public class Business {
     private String tinNumber;
     private String link;
 
-    // This variable is used when storing images to MySql database
-    @Lob
-    @Column(columnDefinition = "MEDIUMBLOB")
-    private String logo;
-
-//    Used with AWS & Fasthub CDN
-//    private String logoUrl;
+    private String logoUrl;
 
     @CreationTimestamp
     private Date createdAt = new Date();

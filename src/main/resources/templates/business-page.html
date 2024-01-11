@@ -25,12 +25,7 @@
 
                     <p th:text="'ID: ' + ${business.id}" />
 
-                    <!-- For images saved on MySql DB-->
-                    <img th:src="@{'data:logo/png;base64,'+${business.logo}}" width="150" height="100" alt="" >
-
-
-                    <!--    For images saved to AWS or Fasthub CDN-->
-<!--                        <img th:src="${business.getLogoUrl()}" width="150" height="100" alt="">-->
+                     <img th:src="${business.getLogoUrl()}" width="150" height="100" alt="">
 
                     <br><br>
 

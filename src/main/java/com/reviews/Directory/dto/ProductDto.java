@@ -19,15 +19,15 @@ public class ProductDto {
     private String productName;
     private String alternativeNames;
 //    private String alternativeName2;
+
     private String tag;  //Not to be comma separated
     private String brand;
     private Double price;
 
     private String description;
 
-    // This variable is used when storing images to MySql database
-    private String productImageOne;
-    private String productImageTwo;
+    private String imageOneUrl;
+    private String imageTwoUrl;
 
 
     private Business productSubject;
@@ -46,10 +46,10 @@ public class ProductDto {
         product.setPrice(price);
         product.setDescription(description);
 
-        // When storing images to MySql
-        product.setProductImageOne(productImageOne);
-        product.setProductImageTwo(productImageTwo);
+        product.setImageOneUrl(imageOneUrl);
+        product.setImageTwoUrl(imageTwoUrl);
 
+        product.setProductSubject(productSubject);
 
         return product;
     }
