@@ -18,44 +18,54 @@
         <div class="card">
 
             <div class="card-header border-0 pb-0">
-                <h1 class="h4 card-title mb-0">EDIT YOUR BUSINESS</h1>
-                <p th:text="'Edit your business details below:'" />
+                <h1 class="h4 card-title mb-0">EDIT THE PODUCT</h1>
+                <p th:text="'Edit product details below:'" />
             </div>
 
             <div class="card-body">
 
                 <!-- TODO: Edit access to be restricted only to respective user who created the business. Spring Boot Security-->
 
-                <p th:text="${business.getId}" style="display:none" />
+                <form th:action="@{/productUpdate/{id}(id=${product.id})}" th:object="${product}" method="post">
 
-                <form th:action="@{/businessUpdate/{id}(id=${business.id})}" th:object="${business}" method="post">
-
-                    <!-- For images saved on AWS & Fasthub CDN -->
-<!--                    <img th:src="@{business.getLogoUrl}" width="150" height="100" alt="Business Logo">-->
-
-                    <!-- For images saved on MySql DB-->
-                    <img th:src="@{'data:logo/png;base64,'+${business.getLogo}}" width="150" height="100" alt="Business Logo">
+                    <img th:src="@{product.getImageOneUrl}" width="150" height="100" alt="Product Image One">
 
                     <br><br>
+                    <!-- TODO Hide ID -->
+                    <p th:text="'ID: (*To be hidden) ' + *{id}"></p>
 
-                    <p th:text="'ID: (*To be hidden) ' + *{id}"> <!-- TODO Hide ID -->
+                    <label class="form-label">Product Name: </label>
+                    <input type="text" th:field="*{productName}" /> <br>
 
-                    <p>Business Name: <input type="text" th:field="*{businessName}" /></p>
-                    <p>Email: <input type="email" th:field="*{email}" /></p>
-                    <p>Mobile: <input type="text" th:field="*{mobile}" /></p>
-                    <p>Address: <input type="text" th:field="*{physicalAddress}" /></p>
-                    <p>Location (e.g. Mwenge): <input type="text" th:field="*{location}" /></p>
-                    <p>Category: <input type="text" th:field="*{category}" /></p>
-                    <p>Tin Number: <input type="text" th:field="*{tinNumber}" /></p>
-                    <p>Link - Website, Social Media, etc:</p>
-                    <input type="text" th:field="*{link}" />
+                    <label class="form-label">Alternative Names: </label>
+                    <input type="text" th:field="*{alternativeNames}" />  <br>
+
+                    <label class="form-label">Brand Name: </label>
+                    <input type="text" th:field="*{brand}" />  <br>
+
+                    <label class="form-label">Price: </label>
+                    <input type="number" th:field="*{price}" />  <br>
+
+                    <label class="form-label">Description: </label>
+                    <input type="text" th:field="*{description}" />  <br>
+
+                    <label class="form-label">Tags: (Can't be changed now) </label>
+
+                    <dl th:each="tag : ${product.tagList}">
+                        <dd> <span th:text="${tag.tagTitle}"> </span> </dd>
+                    </dl>
+
+<!--                    <select multiple th:field="*{tagList}">-->
+<!--                        <option th:each="tag : ${allTags}" th:value="${tag.getId()}" th:text="${tag.tagTitle}">-->
+<!--                        </option>-->
+<!--                    </select>-->
 
                     <br><br>
 
                     <button type="submit"> Submit </button>
 
                     <button type="button" style="color:red">
-                        <a th:href="@{/businessPage/{id}(id=${business.id})}">Cancel</a>
+                        <a th:href="@{/productPage/{id}(id=${product.id})}">Cancel</a>
                     </button>
 
                 </form>

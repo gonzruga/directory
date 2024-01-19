@@ -1,0 +1,60 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+<div class="container">
+
+<div class="row g-4">
+
+        <div th:replace="~{Fragments/NavLeft}"></div>
+
+<!--        Main Content Start-->
+        <div class="col-md-8 col-lg-6 vstack gap-4">
+
+            <div class="card">
+
+
+                <div class="card-header border-0 pb-0">
+                    <h1 class="h4 card-title mb-0">TAG PAGE</h1>
+                    <br>
+                    <p th:text="'[Will be restricted to user]'" >
+                </div>
+
+                <div class="card-body">
+
+                    <p th:text="'Tag Name: ' + ${tag.tagTitle}" > <br>
+                    <p th:text="'Tag Description: ' + ${tag.tagDescription}" > <br>
+
+                    <form th:action="@{/tagEdit/{id}(id=${tag.id})}" th:object="${tag}" method="GET">
+                        <input type="submit" value="Edit" />
+                    </form>
+
+                    <form th:action="@{/tagDelete/{id}(id=${tag.id})}">
+                        <input type="submit" value="Delete" style="color:red" />
+                    </form>
+
+                    <form th:action="@{/tagList}">
+                        <input type="submit" value="Back to List of Tags" style="color:blue" />
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+<!--        Main Content End-->
+
+        <div th:replace="~{Fragments/NavRight}"></div>
+
+</div>
+
+</div>
+
+</main>
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

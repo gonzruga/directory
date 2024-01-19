@@ -27,21 +27,32 @@
                 <div class="card-body">
 
 <!--                    Product Id can't be null-->
-<!--                    <p th:text="'ID: ' + ${product.id}"> </p>-->
+                    <p th:text="'ID: ' + ${product.id}"> </p>
 
                     <img th:src="${product.getImageOneUrl()}" width="150" height="100" alt="Product Picture" >
 
                     <br><br>
 
-                    <p th:text="'Product Name: ' + ${product.productName}" > <br>
+                    <p th:text="'Product Names: ' + ${product.productName}" > <br>
                     <p th:text="'Alternative Name: ' + ${product.alternativeNames}" > <br>
-                    <p th:text="'Tags: ' + ${product.tags}" > <br>
+                    <p th:text="'Tags: '" >
+
+                    <div>
+                         <a th:href="@{/productList/(keyword=${tag.tagTitle})}" th:each="tag : ${product.tagList}" th:text="${tag.tagTitle} + ', '"> </a>
+                    </div>
+                    <br>
+
                     <p th:text="'Brand: ' + ${product.brand}" > <br>
                     <p th:text="'Price: ' + ${product.price}" > <br>
                     <p th:text="'Description: ' + ${product.description}" > <br>
 
+                    <p th:text="'Business Name: '"></p>
+                    <a th:href="@{/businessPage/{id}(id=${product.getProductSubject().getId()})}" th:text="${product.getProductSubject().getBusinessName()}" > </a>
+
+                    <br><br>
+
                     <form th:action="@{/productEdit/{id}(id=${product.id})}" th:object="${product}" method="GET">
-                        <input type="submit" value="*Edit" />
+                        <input type="submit" value="Edit" />
                     </form>
 
                     <form th:action="@{/productDelete/{id}(id=${product.id})}">

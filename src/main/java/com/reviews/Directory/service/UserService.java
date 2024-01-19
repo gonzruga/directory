@@ -64,8 +64,8 @@ public class UserService {
         existingUser.setUserEmail(user.getUserEmail());
 
 //        existingUser.setPassword(user.getPassword());
-//        existingUser.setProfilePicUrl(user.getProfilePic());
-//        existingUser.setImage(user.getImage());
+
+//        existingUser.setProfilePicUrl(user.getProfilePicUrl());
 
         existingUser.setUpdatedAt(new Date());
 

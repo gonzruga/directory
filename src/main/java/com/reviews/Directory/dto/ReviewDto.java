@@ -18,8 +18,8 @@ public class ReviewDto {
     private String reviewContent;
     private String reviewWriterName;
 
-    private Business reviewSubject; //Used in Controller - review Submit
-    private Long reviewSubjectId;   //Todo Review & confirm usage of reviewSubjectId
+    private Business reviewSubject; //Used in ReviewController: 'reviewSubmit'
+    private Long reviewSubjectId;   //Todo state usage of reviewSubjectId
 
     private Date createdAt = new Date();
     private Date updatedAt;
@@ -35,18 +35,3 @@ public class ReviewDto {
         return review;
     }
 }
-
-/*
-
-{
-"id" : "1"
-"reviewContent" : "XXX Limited is a great company",
-"reviewWriterName" : "John"
-
-"review_subject_id" : "1"
-
- "created_at":"2023-07-24 10:10:20",
- "updated_at":"2023-07-27 10:10:20"
-        }
-
- */

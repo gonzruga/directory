@@ -3,9 +3,12 @@ package com.reviews.Directory.dto;
 
 import com.reviews.Directory.entity_model.Business;
 import com.reviews.Directory.entity_model.Product;
+import com.reviews.Directory.entity_model.Tag;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -20,7 +23,9 @@ public class ProductDto {
     private String alternativeNames;
 //    private String alternativeName2;
 
-    private String tag;  //Not to be comma separated
+//    private String tags;  //Not to be comma separated
+    private List<Tag> tagList;
+
     private String brand;
     private Double price;
 
@@ -41,7 +46,9 @@ public class ProductDto {
         product.setId(id);
         product.setProductName(productName);
         product.setAlternativeNames(alternativeNames);
-        product.setTags(tag);
+//        product.setTags(tags);
+        product.setTagList(tagList);
+
         product.setBrand(brand);
         product.setPrice(price);
         product.setDescription(description);

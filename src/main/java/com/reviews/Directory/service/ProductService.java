@@ -28,14 +28,14 @@ public class ProductService {
         return repository.findById(id).orElse(null);
     }
 
-    // List 'GetProducts' Method
+    // ProductList -> findAllProducts
     public List<Product> listAll(String keyword) {
         if (keyword != null) {
+
             return repository.findAll(keyword);
         }
         return repository.findAll();
     }
-
 
     // DELETE
 
@@ -52,9 +52,14 @@ public class ProductService {
 
         existingProduct.setProductName(product.getProductName());
         existingProduct.setAlternativeNames(product.getAlternativeNames());
-        existingProduct.setTags(product.getTag());
+//        existingProduct.setTags(product.getTags());
+//        existingProduct.setTagList(product.getTagList());
+
         existingProduct.setBrand(product.getBrand());
         existingProduct.setDescription(product.getDescription());
+
+//        existingProduct.setImageOneUrl(product.getImageOneUrl());
+//        existingProduct.setImageTwoUrl(product.getImageTwoUrl());
 
         existingProduct.setUpdatedAt(new Date());
 

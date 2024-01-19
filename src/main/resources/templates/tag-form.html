@@ -1,0 +1,53 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+<!--    Container START-->
+<div class="container">
+
+<!--    Row  START-->
+    <div class="row g-4">
+
+        <div th:replace="~{Fragments/NavLeft}"></div>
+
+<!--        Main Content START-->
+        <div class="col-md-8 col-lg-6 vstack gap-4">
+
+
+        <h3> CREATE A TAG</h3>
+
+            <p th:text="'Create a tag that does not exist. '"/>
+
+
+            <form th:action="@{/tagSubmit}" th:object="${tag}" method="POST">
+
+                <p> <input type="text" th:field="*{tagTitle}" placeholder="Tag Title" label="tagTitle" /></p>
+                <p> <input type="text" th:field="*{tagDescription}" placeholder="Describe the tag" label="tagDescription" /></p>
+
+                <br>
+                <input type="submit" value="Submit" />
+
+                <input type="reset" value="Reset" />
+
+
+            </form>
+
+        </div>
+<!--        Main Content End-->
+
+        <div th:replace="~{Fragments/NavRight}"></div>
+
+    </div>
+<!--    Row END-->
+
+</div>
+<!--    Container END-->
+
+</main>
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

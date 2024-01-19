@@ -8,7 +8,9 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -28,7 +30,12 @@ public class Product {
     // List
 //    private String alternativeName2;
 
-    private String tags;  //Not to be comma separated. Todo: Tags Class & table
+//    private String tags;  //Not to be comma separated. Todo: Tags Class & table
+
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "product_id")
+    private List<Tag> tagList;
+
     private String brand;
     private Double price;
 

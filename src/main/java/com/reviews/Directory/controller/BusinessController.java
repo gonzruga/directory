@@ -44,7 +44,7 @@ public class BusinessController {
     //Directory | Homepage
     @GetMapping("/businessList")
     public String findAllBusinesses(Model model){
-        model.addAttribute("business",service.getBusinesses());
+        model.addAttribute("business", service.getBusinesses());
         return "business-list";
     }
 

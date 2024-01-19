@@ -18,7 +18,7 @@ public class WebSecurity {
                 .cors().disable()
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/userCreateDB/**","/userSubmitDB/**", "/saveUser/**", "/file/**", "/css/**", "/js/**","/home/**", "/**")
+                .antMatchers("/userForm/**","/userSubmit/**", "/file/**", "/css/**", "/js/**","/home/**","/index/**", "/**")
                 .permitAll()
                 .and()
                 .authorizeRequests()

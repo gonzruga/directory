@@ -26,30 +26,29 @@
 
                     <!-- Form START -->
                     <div class="card-body">
-                        <form th:action="@{/productSubmit}" th:object="${product}" method="POST" enctype="multipart/form-data" class="row g-3" >
+                        <form id="productForm" th:action="@{/productSubmit}" th:object="${product}" method="POST" enctype="multipart/form-data" class="row g-3" >
+
 
                             <!-- Hidden Business ID -->
-                            <input type="number" th:value="${businessId}" name="id" style="display: none" label="businessId" />
+                            <input type="hidden" th:value="${businessId}" name="businessId"/>
 
                             <!-- Row 1:  -->
-                            <div class="col-12">
+                            <div class="col-6">
                                 <label for="productName" class="form-label">Product name</label>
                                 <input type="text" class="form-control" id="productName" th:field="*{productName}" placeholder="Product Name">
                             </div>
-
-                            <!-- Row 2:  -->
 
                             <div class="col-sm-12 col-lg-6">
                                 <label for="alternativeNames" class="form-label">Alternative names</label>
                                 <input type="text" class="form-control" id="alternativeNames" th:field="*{alternativeNames}" placeholder="">
                             </div>
 
-                            <div class="col-sm-12 col-lg-6">
-                                <label for="tags" class="form-label">Tags</label>
-                                <input type="text" class="form-control" id="tags" th:field="*{tags}" >
-                            </div>
+<!--                            <div class="col-sm-12 col-lg-6">-->
+<!--                                <label for="tags" class="form-label">Tags</label>-->
+<!--                                <input type="text" class="form-control" id="tags" th:field="*{tags}" >-->
+<!--                            </div>-->
 
-                            <!-- Row 3:  -->
+                            <!-- Row 2:  -->
 
                             <div class="col-sm-12 col-lg-6">
                                 <label for="brand" class="form-label">Brand</label>
@@ -60,12 +59,22 @@
                                 <input type="text" class="form-control" id="price" th:field="*{price}">
                             </div>
 
-                            <!-- Row 4:  -->
+                            <!-- Row 3:  -->
 
                             <div class="col-12">
                                 <label for="description" class="form-label">Product Description</label>
                                 <input type="text" class="form-control" id="description" th:field="*{description}">
                             </div>
+
+                            <!-- Row 4:  -->
+                            <p>Tags</p>
+                            <p>Press CTRL to select multiple options at once.</p>
+
+                            <select multiple th:field="*{tagList}">
+                                <option th:each="tag : ${allTags}" th:value="${tag.getId()}" th:text="${tag.tagTitle}">
+                                </option>
+                            </select>
+
 
                             <!-- Row 5: Pictures  -->
 

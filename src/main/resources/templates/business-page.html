@@ -25,7 +25,7 @@
 
                     <p th:text="'ID: ' + ${business.id}" />
 
-                     <img th:src="${business.getLogoUrl()}" width="150" height="100" alt="">
+                     <img th:src="${business.getLogoUrl}" width="150" height="100" alt="">
 
                     <br><br>
 
@@ -48,8 +48,8 @@
                                 <span th:text="${product.getProductName()}" style="color:blue"></span>
                             </a>
                         </dd>
-                        <dd> <span th:text="${product.getBrand()}"> </span> </dd>
-                        <dd> <span th:text="${product.getPrice()}"> </span> </dd>
+                        <dd> <span th:text="'Brand: ' + ${product.getBrand()}"> </span> </dd>
+                        <dd> <span th:text="'Price: ' + ${product.getPrice()}"> </span> </dd>
 
                     </dl>
 

@@ -36,6 +36,7 @@ public class Review {
     @UpdateTimestamp
     private Date updatedAt;
 
+    // TODO: review use of 'equals' method and 'hashCode' below
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -50,15 +51,3 @@ public class Review {
     }
 }
 
-/*
-
-{
-
-"reviewContent" : "Bob is a great guy",
- "reviewWriterName" : "John2",
-
-"review_subject_id" : "1"
-
-}
-
-*/

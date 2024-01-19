@@ -49,7 +49,7 @@ public class BusinessService {
 
         existingBusiness.setLink(business.getLink());
 
-        existingBusiness.setLogoUrl(business.getLogoUrl());
+//        existingBusiness.setLogoUrl(business.getLogoUrl());
 
         existingBusiness.setUpdatedAt( new Date() );
 

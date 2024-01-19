@@ -39,9 +39,13 @@
                             <p th:text="'Alternative Name: ' + ${product.alternativeNames}" > <br>
 <!--                            TODO check error when Tags is more than one separated by comma -->
 <!--                            <p th:text="'Tags: ' + ${product.tags}" > <br>-->
+                            <p th:text="'Tags: ' + ${product.tagList}" > <br>
+
+
                             <p th:text="'Brand: ' + ${product.brand}" > <br>
                             <p th:text="'Price: ' + ${product.price}" > <br>
                             <p th:text="'Description: ' + ${product.description}" > <br>
+
 
 
                             <form th:action="@{/businessList}" >

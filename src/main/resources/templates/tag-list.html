@@ -23,11 +23,11 @@
             <div class="row g-3 mb-4">
 
                 <div class="d-sm-flex justify-content-between align-items-center">
-                    <h5 class="mb-md-0">PRODUCT LIST</h5>
+                    <h5 class="mb-md-0"> LIST OF TAGS</h5>
                 </div>
 
                 <div>
-                    <form th:action="@{productList}">
+                    <form th:action="@{tagList}">
                         Filter:
                         <input type="text" name="keyword" th:value="${keyword}" required />
                         &nbsp;
@@ -35,35 +35,21 @@
                         &nbsp;
                         <input type="button" value="Clear" onclick="clearFilter()" />
 
+                        <a href="/tagForm">Add A Tag</a> <br><br>
+
+
                     </form>
                 </div>
 
                 <!-- START CARDS DIV -->
                 <div class="col-sm-6 col-md-4 col-xl-4 col-xxl-4">
 
-                    <dl th:each="product : ${product}" class="card position-relative">
-                        <dd>
-<!--                            TODO: Review images - add image two  -->
-                            <div class="card-image">
-                                <img class="card-img-top" th:src="${product.getImageOneUrl()}" alt="Product Picture One" >
-
-                            </div>
-
-                        </dd>
+                    <dl th:each="tag : ${tag}" class="card position-relative">
 
 <!--                    Removed class="stretched-link" because it applies to all products. TODO: Debbuging-->
-                        <dd><h5> <a th:href="@{/productPage/{id}(id=${product.id})}"><span th:text="${product.productName}"></span></a> </h5></dd>
+                        <dd><h5> <a th:href="@{/tagPage/{id}(id=${tag.id})}"><span th:text="${tag.tagTitle}"></span></a> </h5></dd>
 
-                        <dd> <span th:text="'ID: ' + ${product.id}"></span> </dd>
-                        <dd> <span th:text="'Brand: ' + ${product.getBrand}"></span> </dd>
-                        <dd> <span th:text="'Price: ' + ${product.getPrice}"></span> </dd>
-
-                        <dd> <span th:text="'Tags: '"></span> </dd>
-                        <dd>
-                            <dl th:each="tag : ${product.tagList}">
-                                <dd> <span th:text="${tag.tagTitle}"> </span> </dd>
-                            </dl>
-                        </dd>
+                        <dd> <span th:text="'ID: ' + ${tag.tagDescription}"></span> </dd>
 
                     </dl>
                 </div>
@@ -90,7 +76,7 @@
 <script>
     type="text/javascript">
         function clearFilter() {
-            window.location = '/productList';
+            window.location = '/tagList';
         }
 </script>
 
