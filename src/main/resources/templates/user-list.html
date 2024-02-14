@@ -41,9 +41,6 @@
 <!--                                    <img th:src="@{'data:profile_picture/png;base64, '+${user.profilePicture}}" width="50" height="50" alt="">-->
                                 </dd>
                                 <dd>
-                                    <span th:text="'ID: '+${user.getId}"></span>
-                                </dd>
-                                <dd>
                                     <a class="stretched-link" th:href="@{/userPage/{id}(id=${user.id})}"><span th:text="${user.firstName}+' '+${user.lastName}"></span></a>
                                 </dd>
 

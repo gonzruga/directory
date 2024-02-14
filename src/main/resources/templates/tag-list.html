@@ -49,7 +49,7 @@
 <!--                    Removed class="stretched-link" because it applies to all products. TODO: Debbuging-->
                         <dd><h5> <a th:href="@{/tagPage/{id}(id=${tag.id})}"><span th:text="${tag.tagTitle}"></span></a> </h5></dd>
 
-                        <dd> <span th:text="'ID: ' + ${tag.tagDescription}"></span> </dd>
+                        <dd> <span th:text="${tag.tagDescription}"></span> </dd>
 
                     </dl>
                 </div>

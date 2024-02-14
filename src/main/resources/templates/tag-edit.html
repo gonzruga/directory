@@ -28,7 +28,7 @@
 
                 <form th:action="@{/tagUpdate/{id}(id=${tag.id})}" th:object="${tag}" method="post">
 
-                    <p th:text="'ID: (*To be hidden) ' + *{id}"> <!-- TODO Hide ID -->
+<!--                    <p th:text="'ID: (*To be hidden) ' + *{id}">-->
 
                     <p>Tag Title: <input type="text" th:field="*{tagTitle}" /></p>
                     <p>Description: <input type="email" th:field="*{tagDescription}" /></p>

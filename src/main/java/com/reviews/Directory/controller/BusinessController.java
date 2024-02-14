@@ -6,6 +6,7 @@ import com.reviews.Directory.service.BusinessService;
 import com.reviews.Directory.utils.CdnUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +35,17 @@ public class BusinessController {
 
     @PostMapping("/businessSubmit")
     public String saveBusiness(@ModelAttribute BusinessDto business, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
+        log.info(multipartFile.getName());
+        log.info(multipartFile.getOriginalFilename());
+
+
         model.addAttribute("business", business);
-        Optional<String> optionalUrl = CdnUtils.uploadFile(multipartFile);
-        optionalUrl.ifPresent(business::setLogoUrl);
+        if (multipartFile != null) {
+            if (StringUtils.isNotBlank(multipartFile.getOriginalFilename())) {
+                Optional<String> optionalUrl = CdnUtils.uploadFile(multipartFile);
+                optionalUrl.ifPresent(business::setLogoUrl);
+            }
+        }
         service.saveBusiness(business);
         return "business-create-submit";
     }

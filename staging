@@ -1,6 +1,6 @@
 echo "Building package..."
 sleep 1
-#./mvnw clean package -Dmaven.test.skip=true
+./mvnw clean package -Dmaven.test.skip=true
 sleep 1
 echo "Pushing to staging server ..."
 sleep 1

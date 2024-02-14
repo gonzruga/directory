@@ -26,8 +26,8 @@
 
                 <div class="card-body">
 
-<!--                    Product Id can't be null-->
-                    <p th:text="'ID: ' + ${product.id}"> </p>
+<!--                    Product Id can't be null. ID is hidden  -->
+                    <p th:text="'ID: ' + ${product.id}" style="display:none"> </p>
 
                     <img th:src="${product.getImageOneUrl()}" width="150" height="100" alt="Product Picture" >
 
@@ -41,6 +41,7 @@
                          <a th:href="@{/productList/(keyword=${tag.tagTitle})}" th:each="tag : ${product.tagList}" th:text="${tag.tagTitle} + ', '"> </a>
                     </div>
                     <br>
+
 
                     <p th:text="'Brand: ' + ${product.brand}" > <br>
                     <p th:text="'Price: ' + ${product.price}" > <br>

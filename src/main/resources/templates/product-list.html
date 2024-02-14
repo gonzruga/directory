@@ -46,7 +46,6 @@
 <!--                            TODO: Review images - add image two  -->
                             <div class="card-image">
                                 <img class="card-img-top" th:src="${product.getImageOneUrl()}" alt="Product Picture One" >
-
                             </div>
 
                         </dd>
@@ -54,16 +53,19 @@
 <!--                    Removed class="stretched-link" because it applies to all products. TODO: Debbuging-->
                         <dd><h5> <a th:href="@{/productPage/{id}(id=${product.id})}"><span th:text="${product.productName}"></span></a> </h5></dd>
 
-                        <dd> <span th:text="'ID: ' + ${product.id}"></span> </dd>
                         <dd> <span th:text="'Brand: ' + ${product.getBrand}"></span> </dd>
                         <dd> <span th:text="'Price: ' + ${product.getPrice}"></span> </dd>
 
                         <dd> <span th:text="'Tags: '"></span> </dd>
-                        <dd>
-                            <dl th:each="tag : ${product.tagList}">
-                                <dd> <span th:text="${tag.tagTitle}"> </span> </dd>
-                            </dl>
-                        </dd>
+                        <div>
+                            <a th:href="@{/productList/(keyword=${tag.tagTitle})}" th:each="tag : ${product.tagList}" th:text="${tag.tagTitle} + ', '"> </a>
+                        </div>
+
+<!--                        <dd>-->
+<!--                            <dl th:each="tag : ${product.tagList}">-->
+<!--                                <dd> <span th:text="${tag.tagTitle}"> </span> </dd>-->
+<!--                            </dl>-->
+<!--                        </dd>-->
 
                     </dl>
                 </div>

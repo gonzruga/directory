@@ -53,9 +53,13 @@ public class ProductService {
         existingProduct.setProductName(product.getProductName());
         existingProduct.setAlternativeNames(product.getAlternativeNames());
 //        existingProduct.setTags(product.getTags());
-//        existingProduct.setTagList(product.getTagList());
+        existingProduct.setTagList(product.getTagList());
+
+
 
         existingProduct.setBrand(product.getBrand());
+        existingProduct.setPrice(product.getPrice());
+
         existingProduct.setDescription(product.getDescription());
 
 //        existingProduct.setImageOneUrl(product.getImageOneUrl());
