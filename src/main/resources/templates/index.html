@@ -1,35 +1,51 @@
 <div th:replace="~{Fragments/head}"></div>
 
-<div class="gonza">
+<body>
 
-    <h3>DIRECTORY OUTLINE</h3>
+<div th:replace="~{Fragments/MainNavbar}"></div>
 
-    <h5>USERS</h5>
+<main>
+<!--    Container START-->
+    <div class="container">
+        <!--    Row  START-->
+        <div class="row g-4">
+            <div th:replace="~{Fragments/NavLeft}"></div>
+            <!--        Main Content START-->
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+            <div class="gonza">
 
-    <a href="/userForm">Create User</a> <br><br>
+                <h3>DIRECTORY OUTLINE</h3>
 
-    <a href="/userList">All Users</a> <br><br>
+                <h5>BUSINESSES</h5>
+                <a href="/businessForm">Add Your Business</a> <br><br>
 
-
-
-    <h5>BUSINESSES</h5>
-    <a href="/businessForm">Add Your Business</a> <br><br>
-
-    <a href="/businessList">All Businesses (Directory)</a> <br><br>
-
-
-    <h5>PRODUCTS</h5>
-
-    <a href="/productList">All Products</a> <br><br>
-    <a href="https://buy.stripe.com/bIYfZAfbxdcN8pibIJ" target="_blank">Order Rims</a> <br><br>
-
-    <h5>TAGS</h5>
-    <a href="/tagForm">Add A Tag</a> <br><br>
-    <a href="/tagList">All Product Tags</a> <br><br>
+                <a href="/businessList">All Businesses (Directory)</a> <br><br>
 
 
-    <a href="/logout">Logout</a>
+                <h5>PRODUCTS</h5>
 
-</div>
+                <a href="/productList">All Products</a> <br><br>
 
+                <h5>TAGS</h5>
+                <a href="/tagForm">Add A Tag</a> <br><br>
+                <a href="/tagList">All Product Tags</a> <br><br>
+
+                <h5>USERS</h5>
+
+                <a href="/userForm">Create User</a> <br><br>
+
+                <a href="/userList">All Users</a> <br><br>
+
+                <a href="/logout">Logout</a>
+
+    </div>
+            </div>
+            <!--        Main Content End-->
+    <div th:replace="~{Fragments/NavRight}"></div>
+        </div>
+        <!--    Row END-->
+    </div>
+<!--    Container END-->
+</main>
+</body>
 <div th:replace="~{Fragments/footer}"></div>
