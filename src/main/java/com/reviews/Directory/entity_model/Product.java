@@ -30,8 +30,6 @@ public class Product {
     // List
 //    private String alternativeName2;
 
-//    private String tags;  //Not to be comma separated. Todo: Tags Class & table
-
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "product_id")
     private List<Tag> tagList;
@@ -40,6 +38,7 @@ public class Product {
     private Double price;
 
     private String description;
+    private String paymentLink;
 
     private String imageOneUrl;
 

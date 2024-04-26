@@ -84,25 +84,25 @@
                     <form action="#" th:action="@{/reviewCreate/{businessId}(businessId=${business.id})}" method="get">
                         <input type="submit" value="Add Review"  />
                     </form>
+                    <!--
+                                        <form th:action="@{/businessEdit/{id}(id=${business.id})}" th:object="${business}" method="GET">
+                                            <input type="submit" value="Edit Profile" />
+                                        </form>
 
-                    <form th:action="@{/businessEdit/{id}(id=${business.id})}" th:object="${business}" method="GET">
-                        <input type="submit" value="Edit Profile" />
-                    </form>
+                                        <form th:action="@{/businessDelete/{id}(id=${business.id})}">
+                                            <input type="submit" value="Delete Profile" style="color:red" />
+                                        </form>
+                    -->
+                                        <form th:action="@{/businessList}">
+                                            <input type="submit" value="Back to Directory" style="color:blue" />
+                                        </form>
 
-                    <form th:action="@{/businessDelete/{id}(id=${business.id})}">
-                        <input type="submit" value="Delete Profile" style="color:red" />
-                    </form>
+                                    </div>
 
-                    <form th:action="@{/businessList}">
-                        <input type="submit" value="Back to Directory" style="color:blue" />
-                    </form>
+                                </div>
 
-                </div>
-
-            </div>
-
-        </div>
-<!--        Main Content End-->
+                            </div>
+                    <!--        Main Content End-->
 
         <div th:replace="~{Fragments/NavRight}"></div>
 

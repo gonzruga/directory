@@ -21,7 +21,7 @@
                 <div class="card-header border-0 pb-0">
                     <h1 class="h4 card-title mb-0">PRODUCT PAGE</h1>
                     <br>
-                    <p th:text="'[Editing will be restricted to user]'" >
+<!--                    <p th:text="'[Editing will be restricted to user]'" >-->
                 </div>
 
                 <div class="card-body">
@@ -32,9 +32,12 @@
                     <img th:src="${product.getImageOneUrl()}" width="150" height="100" alt="Product Picture" >
 
                     <br><br>
+                    <b><a th:href="${product.paymentLink}" target="_blank" style="padding: 15px 25px; background-color: yellow; text-align: center">ORDER NOW</a></b> <br><br>
+                    <p th:text="'Product ID: ' + ${product.id}" style="display: inline"> </p>
 
-                    <p th:text="'Product Names: ' + ${product.productName}" > <br>
-                    <p th:text="'Alternative Name: ' + ${product.alternativeNames}" > <br>
+
+                    <p th:text="'Product Names: ' + ${product.productName}" >
+                    <p th:text="'Alternative Name: ' + ${product.alternativeNames}" >
                     <p th:text="'Tags: '" >
 
                     <div>
@@ -43,15 +46,16 @@
                     <br>
 
 
-                    <p th:text="'Brand: ' + ${product.brand}" > <br>
-                    <p th:text="'Price: ' + ${product.price}" > <br>
-                    <p th:text="'Description: ' + ${product.description}" > <br>
+                    <p th:text="'Brand: ' + ${product.brand}" >
+                    <p th:text="'Price: ' + ${product.price}" >
+                    <p th:text="'Description: ' + ${product.description}" >
 
                     <p th:text="'Business Name: '"></p>
                     <a th:href="@{/businessPage/{id}(id=${product.getProductSubject().getId()})}" th:text="${product.getProductSubject().getBusinessName()}" > </a>
 
                     <br><br>
 
+<!--
                     <form th:action="@{/productEdit/{id}(id=${product.id})}" th:object="${product}" method="GET">
                         <input type="submit" value="Edit" />
                     </form>
@@ -59,7 +63,7 @@
                     <form th:action="@{/productDelete/{id}(id=${product.id})}">
                         <input type="submit" value="Delete" style="color:red" />
                     </form>
-
+-->
                     <form th:action="@{/businessList}">
                         <input type="submit" value="Back to Directory" style="color:blue" />
                     </form>

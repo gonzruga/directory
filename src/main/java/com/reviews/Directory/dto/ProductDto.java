@@ -30,6 +30,7 @@ public class ProductDto {
     private Double price;
 
     private String description;
+    private String paymentLink;
 
     private String imageOneUrl;
     private String imageTwoUrl;
@@ -52,7 +53,7 @@ public class ProductDto {
         product.setBrand(brand);
         product.setPrice(price);
         product.setDescription(description);
-
+        product.setDescription(paymentLink);
         product.setImageOneUrl(imageOneUrl);
         product.setImageTwoUrl(imageTwoUrl);
 
