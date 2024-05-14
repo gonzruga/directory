@@ -72,11 +72,11 @@
                         <dd>
                             <!-- th:action="@{/reviewEdit/{bizId}(bizId=${business.getId})/{revId}(revId=${rev.getId()})}"-->
 
-<!--                            <form method="GET"-->
-<!--                                  th:action="@{/reviewEdit/{revId}(revId=${rev.getId()})}"-->
-<!--                                  th:object="${review}">-->
-<!--                                <input type="submit" value="Edit Review"/>-->
-<!--                            </form>-->
+                            <form method="GET"
+                                  th:action="@{/reviewEdit/{revId}(revId=${rev.getId()})}"
+                                  th:object="${review}">
+                                <input type="submit" value="Edit Review"/>
+                            </form>
                         </dd>
                         <hr>
                     </dl>
@@ -84,7 +84,7 @@
                     <form action="#" th:action="@{/reviewCreate/{businessId}(businessId=${business.id})}" method="get">
                         <input type="submit" value="Add Review"  />
                     </form>
-                    <!--
+
                                         <form th:action="@{/businessEdit/{id}(id=${business.id})}" th:object="${business}" method="GET">
                                             <input type="submit" value="Edit Profile" />
                                         </form>
@@ -92,7 +92,7 @@
                                         <form th:action="@{/businessDelete/{id}(id=${business.id})}">
                                             <input type="submit" value="Delete Profile" style="color:red" />
                                         </form>
-                    -->
+
                                         <form th:action="@{/businessList}">
                                             <input type="submit" value="Back to Directory" style="color:blue" />
                                         </form>

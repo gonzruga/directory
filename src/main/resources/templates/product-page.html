@@ -36,7 +36,7 @@
                     <p th:text="'Product ID: ' + ${product.id}" style="display: inline"> </p>
 
 
-                    <p th:text="'Product Name: ' + ${product.productName}" >
+                    <b><p th:text="'Product Name: ' + ${product.productName}" > </p></b>
                     <p th:text="'Alternative Names: ' + ${product.alternativeNames}" >
                     <p th:text="'Tags: '" >
 
@@ -55,7 +55,6 @@
 
                     <br><br>
 
-<!--
                     <form th:action="@{/productEdit/{id}(id=${product.id})}" th:object="${product}" method="GET">
                         <input type="submit" value="Edit" />
                     </form>
@@ -63,7 +62,7 @@
                     <form th:action="@{/productDelete/{id}(id=${product.id})}">
                         <input type="submit" value="Delete" style="color:red" />
                     </form>
--->
+
                     <form th:action="@{/businessList}">
                         <input type="submit" value="Back to Directory" style="color:blue" />
                     </form>
