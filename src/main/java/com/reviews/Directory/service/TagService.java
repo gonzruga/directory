@@ -55,7 +55,7 @@ public class TagService {
         Tag existingTag = repository.findById(tag.getId()).orElse(null);
 
         existingTag.setTagTitle(tag.getTagTitle());
-        existingTag.setTagDescription(tag.getTagDescription());        // Reviewer should not be changed
+        existingTag.setTagDescription(tag.getTagDescription());
 
         existingTag.setUpdatedAt(new Date());
 

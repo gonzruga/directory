@@ -70,15 +70,6 @@ public class ProductController {
         service.saveProduct(product);
         return "redirect:/businessList";
     }
-    @PostMapping("/productUpdate/{id}")
-    public String updateProduct(@ModelAttribute ProductDto product, @PathVariable long id){
-
-        List<Tag> savedTags = tagRepository.saveAll(product.getTagList());
-        product.setTagList(savedTags);
-
-        service.updateProduct(product);
-        return "redirect:/productPage/{id}";
-    }
 
     // READ - GET
 
@@ -90,6 +81,7 @@ public class ProductController {
     @GetMapping("/productPage/{id}")
     public String productPage(@PathVariable long id, Model model){
         Product productById = service.getProductById(id);
+        if(productById == null){return "redirect:/productList";}
         model.addAttribute("product", productById);
         return "product-page";
     }
@@ -104,9 +96,6 @@ public class ProductController {
 //     UPDATE - PUT
     @GetMapping("/productEdit/{id}")
     public String editProduct(@PathVariable long id, Model model) {
-
-//    model.addAttribute("allTags", tagService.listTags());
-
     Product product = new Product();
     product = service.getProductById(id);
     model.addAttribute("product", product);
@@ -115,12 +104,15 @@ public class ProductController {
         return "product-edit";
 }
 
-//    @PostMapping("/productUpdate/{id}")
-//    public String updateProduct2(@ModelAttribute ProductDto product, @PathVariable long id){
-//        service.updateProduct(product);
-//        return "redirect:/productPage/{id}";
-//    }
+    @PostMapping("/productUpdate/{id}")
+    public String updateProduct(@ModelAttribute ProductDto product, @PathVariable long id){
 
+        List<Tag> savedTags = tagRepository.saveAll(product.getTagList());
+        product.setTagList(savedTags);
+
+        service.updateProduct(product);
+        return "redirect:/productPage/{id}";
+    }
 
     // DELETE
     @GetMapping("/productDelete/{id}")

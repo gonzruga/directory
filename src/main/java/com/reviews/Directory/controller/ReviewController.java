@@ -25,6 +25,7 @@ public class ReviewController {
     @Autowired
     private ReviewService service;
 
+    @Autowired
     private final BusinessService businessService;
 
 // CREATE - POST

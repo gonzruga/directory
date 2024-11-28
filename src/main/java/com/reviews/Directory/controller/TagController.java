@@ -36,7 +36,7 @@ public class TagController {
     public String saveTag(@ModelAttribute TagDto tag, Model model) {
         model.addAttribute("tag", tag);
         service.saveTag(tag);
-        return "redirect:/tagList/";
+        return "redirect:/tagList";
     }
 
     // READ - GET

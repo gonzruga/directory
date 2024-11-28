@@ -1,0 +1,74 @@
+<div th:replace="~{Fragments/head}"></div>
+
+<body>
+
+<div th:replace="~{Fragments/MainNavbar}"></div>
+
+<main>
+
+    <!-- Container START -->
+    <div class="container">
+        <!-- Row START -->
+        <div class="row g-4">
+
+            <div th:replace="~{Fragments/NavLeft}"></div>
+
+            <!-- Main content START -->
+            <div class="col-md-8 col-lg-6 vstack gap-4">
+
+                <!-- Create a page START -->
+                <div class="card">
+                    <!-- Title START -->
+                    <div class="card-header border-0 pb-0">
+                        <h1 class="h4 card-title mb-0">Sponsor Product Form </h1>
+                    </div>
+                    <!-- Title END -->
+
+                    <!-- Form START -->
+                    <div class="card-body">
+                        <form id="sponsorForm" th:action="@{/sponsorSubmit}" th:object="${product}" method="POST" class="row g-3" >
+
+
+                            <!-- Hidden Business ID -->
+                            <input type="hidden" th:value="${productId}" name="productId"/>
+<!--                            <input type="hidden" th:value="${sponsorLevel}" name="sponsorLevel"/>-->
+
+                            <!-- Row 1:  -->
+                            <div class="col-6">
+                                <label for="sponsorLevel" class="form-label">Sponsor name</label>
+                                <input type="text" class="form-control" id="sponsorLevel" th:field="*{sponsorLevel}" placeholder="Sponsor Level">
+                            </div>
+
+
+                        <hr>
+
+
+                            <div class="col-12 text-end">
+                                <button type="submit" class="btn btn-primary mb-0">Submit Sponsor</button>
+                                <button type="reset" class="btn btn-primary mb-0">Reset</button>
+                            </div>
+
+                        </form>
+
+                </div>
+                    <!-- Form END -->
+
+                </div>
+                <!-- Create a page START -->
+
+            </div>
+            <!-- Main Content END-->
+
+            <div th:replace="~{Fragments/NavRight}"></div>
+
+        </div>
+        <!-- Row END -->
+
+    </div>
+    <!-- Container END -->
+
+</main>
+
+</body>
+
+<div th:replace="~{Fragments/footer}"></div>

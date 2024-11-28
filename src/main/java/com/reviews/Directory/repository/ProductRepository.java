@@ -15,14 +15,16 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "OR p.description LIKE %?1%" +
 
             "OR t.tagTitle LIKE %?1%" +
-            "OR t.tagDescription LIKE %?1%"
-
-            //   List< Tag > tagList;
-        //   tagTitle;
-        //   tagDescription;
-
+            "OR t.tagDescription LIKE %?1%" +
+            "ORDER BY p.sponsorLevel DESC, FUNCTION('RAND')"  // Randomize the order
+//            "ORDER BY RAND()",
+//            nativeQuery = true
 
     )
-    public List<Product> findAll(String keyword);
+    public List<Product> findAllRandomOrder(String keyword);
+//    List<Product> findAll(String keyword);
+
+    @Query("SELECT p FROM Product p ORDER BY p.sponsorLevel DESC, FUNCTION('RAND')")
+    List<Product> findAllRandomOrder();
 
 }

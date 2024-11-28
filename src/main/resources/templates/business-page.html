@@ -85,17 +85,17 @@
                         <input type="submit" value="Add Review"  />
                     </form>
 
-                                        <form th:action="@{/businessEdit/{id}(id=${business.id})}" th:object="${business}" method="GET">
-                                            <input type="submit" value="Edit Profile" />
-                                        </form>
+                    <form th:action="@{/businessEdit/{id}(id=${business.id})}" th:object="${business}" method="GET">
+                        <input type="submit" value="Edit Profile" />
+                    </form>
 
-                                        <form th:action="@{/businessDelete/{id}(id=${business.id})}">
-                                            <input type="submit" value="Delete Profile" style="color:red" />
-                                        </form>
+                    <form th:action="@{/businessDelete/{id}(id=${business.id})}">
+                        <input type="submit" value="Delete Profile" style="color:red" />
+                    </form>
 
-                                        <form th:action="@{/businessList}">
-                                            <input type="submit" value="Back to Directory" style="color:blue" />
-                                        </form>
+                    <form th:action="@{/businessList}">
+                        <input type="submit" value="Back to Directory" style="color:blue" />
+                    </form>
 
                                     </div>
 

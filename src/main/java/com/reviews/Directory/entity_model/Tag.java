@@ -10,6 +10,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -24,10 +25,12 @@ public class Tag {
     @Column(name = "id", nullable = false)
     private Long id;
 
-    // TODO: Make Tag Title unique
     @Column(unique = true)
     private String tagTitle;
     private String tagDescription;
+
+    @ManyToMany(mappedBy = "tagList")
+    private List<Product> products;
 
     @CreationTimestamp
     private Date createdAt = new Date();

@@ -67,6 +67,46 @@
                         <input type="submit" value="Back to Directory" style="color:blue" />
                     </form>
 
+                    <p th:text="'Choose a Sponsorship Level'"></p>
+                    <form th:action="@{/sponsorSubmit(productId=${product.id})}" method="post">
+                        <input type="hidden" name="productId" th:value="${productId}" />
+
+                        <!-- Options for selecting a level -->
+                        <div>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="1" data-fee="500" required /> Level 1 - Tsh 500
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="2" data-fee="600" /> Level 2 - Tsh 600
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="3" data-fee="700" /> Level 3 - Tsh 700
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="4" data-fee="800" /> Level 4 - Tsh 800
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="5" data-fee="900" /> Level 5 - Tsh 900
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="6" data-fee="1000" /> Level 6 - Tsh 1000
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="7" data-fee="1100" /> Level 7 - Tsh 1,100
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="8" data-fee="1200" /> Level 8 - Tsh 1,200
+                            </label><br/>
+                            <label>
+                                <input type="radio" name="sponsorLevel" value="9" data-fee="1300" /> Level 9 - Tsh 1,300
+                            </label><br/>
+                        </div>
+
+                        <!-- Submit button -->
+                        <input type="submit" value="Submit" />
+                    </form>
+
+
                 </div>
 
             </div>

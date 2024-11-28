@@ -18,14 +18,15 @@ public class ReviewDto {
     private String reviewContent;
     private String reviewWriterName;
 
+    private Long reviewSubjectId;   //Only here, used in reviewSubmit
     private Business reviewSubject; //Used in ReviewController: 'reviewSubmit'
-    private Long reviewSubjectId;   //Todo state usage of reviewSubjectId
 
     private Date createdAt = new Date();
     private Date updatedAt;
 
     public Review dtoToReview() {
         final Review review = new Review();
+
         review.setId(id);
         review.setReviewContent(reviewContent);
         review.setReviewWriterName(reviewWriterName);

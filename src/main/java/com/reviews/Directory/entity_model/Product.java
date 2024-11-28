@@ -11,6 +11,7 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -18,7 +19,6 @@ import java.util.List;
 @Table(name = "product")
 @RequiredArgsConstructor
 public class Product {
-
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -30,8 +30,10 @@ public class Product {
     // List
 //    private String alternativeName2;
 
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "product_id")
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "product_tag",
+    joinColumns = @JoinColumn(name = "product_id"),
+    inverseJoinColumns = @JoinColumn(name = "tag_id"))
     private List<Tag> tagList;
 
     private String brand;
@@ -44,6 +46,10 @@ public class Product {
 
     private String imageTwoUrl;
 
+//    private boolean sponsored;
+    private int sponsorLevel = 0;
+    private Date paymentDate  = new Date();
+
     @ManyToOne
     @JoinColumn(name = "product_business_id")
     private Business productSubject;
@@ -53,5 +59,9 @@ public class Product {
     @UpdateTimestamp
     private Date updatedAt = null;
 
+//    @PrePersist
+//    void preinsert(){
+//        this.reference = UUID.randomUUID().toString();
+//    }
 
 }

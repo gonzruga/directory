@@ -38,7 +38,7 @@ public class ReviewService {
                 review1.setReviewWriterName(review.getReviewWriterName());
                 return repository.save(review1);
             }else {
-                throw new RuntimeException("Person Does Not Exist");
+                throw new RuntimeException("Business Does Not Exist");
             }
         }catch (Exception e){
             e.printStackTrace();

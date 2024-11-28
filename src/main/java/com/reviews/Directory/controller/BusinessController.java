@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Optional;
 
-
 @Slf4j
 @Controller
 //@RestController // For returning data, not template
@@ -37,7 +36,6 @@ public class BusinessController {
     public String saveBusiness(@ModelAttribute BusinessDto business, Model model, @RequestParam("imageFile") MultipartFile multipartFile) {
         log.info(multipartFile.getName());
         log.info(multipartFile.getOriginalFilename());
-
 
         model.addAttribute("business", business);
         if (multipartFile != null) {
@@ -68,7 +66,6 @@ public class BusinessController {
         return service.getBusinessById(id);
     }
 
-
     // UPDATE - PUT
     @GetMapping("/businessEdit/{id}")
     public String editBusiness(@PathVariable long id, Model model){
@@ -84,7 +81,6 @@ public class BusinessController {
         return "redirect:/businessPage/{id}";
     }
 
-    
 // DELETE
 
     @GetMapping("/businessDelete/{id}")

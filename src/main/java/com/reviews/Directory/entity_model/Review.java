@@ -29,7 +29,7 @@ public class Review {
 
     @ManyToOne
     @JoinColumn(name = "review_subject_id")
-    private Business reviewSubject;
+    private Business reviewSubject;  //Used in ReviewController: 'reviewSubmit'
 
     @CreationTimestamp
     private Date createdAt  = new Date();
