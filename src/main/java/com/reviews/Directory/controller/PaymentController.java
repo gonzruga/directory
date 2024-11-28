@@ -29,11 +29,11 @@ public class PaymentController {
         if (isValid) {
             response.put("code", 200);
             response.put("status", "ok");
-            response.put("reference_id", request.getReferenceId());
+            response.put("reference_id", request.getOrderId());
         } else {
             response.put("code", 400);
             response.put("status", "failed");
-            response.put("reference_id", request.getReferenceId());
+            response.put("reference_id", request.getOrderId());
         }
 
         return ResponseEntity.ok(response);

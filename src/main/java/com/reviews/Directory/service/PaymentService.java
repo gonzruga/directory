@@ -30,8 +30,8 @@ public class PaymentService {
         String dataString = createDataString(request);
         String calculatedHash = generateHash(dataString);
 
-        String referenceId = request.getReferenceId();
-        Optional<Product> byId = productRepository.findById(Long.parseLong(referenceId));
+        String orderId = request.getOrderId();
+        Optional<Product> byId = productRepository.findById(Long.parseLong(orderId));
 
         return byId.isPresent();
 //        if(!byId.isPresent()) return false;
@@ -56,12 +56,17 @@ public class PaymentService {
      */
     private String createDataString(PaymentValidationRequest request) {
         return "amount=" + request.getAmount() +
-                "&country=" + request.getCountry() +
+//                "&country=" + request.getCountry() +
                 "&msisdn=" + request.getMsisdn() +
                 "&operator=" + request.getOperator() +
-                "&paybill_number=" + request.getPaybillNumber() +
-                "&reference_id=" + request.getReferenceId() +
-                "&trx_date=" + request.getTrxDate();
+//                "&paybill_number=" + request.getPaybillNumber() +
+//                "&reference_id=" + request.getReferenceId() +
+//                "&trx_date=" + request.getTrxDate();
+                "transaction_id=" + request.getTransactionId() +
+                "receipt" + request.getReceipt() +
+                "signature" + request.getSignature() +
+                "order_id" + request.getOrderId();
+
     }
 
     /**
