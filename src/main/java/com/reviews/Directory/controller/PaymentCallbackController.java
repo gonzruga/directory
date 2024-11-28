@@ -16,35 +16,36 @@ import java.util.Map;
 @RestController
 @RequestMapping("/api/payment")
 @RequiredArgsConstructor
-public class PaymentController {
+public class PaymentCallbackController {
 
     private final PaymentService paymentService;
 
     // Endpoint to handle validation requests
     @PostMapping("/validate")
     public ResponseEntity<Map<String, Object>> validatePayment(@RequestBody PaymentValidationRequest request) {
-        boolean isValid = paymentService.validateTransaction(request);
+        // Verify signature
+        boolean isValid = paymentService.verifyValidationSignature(request);
         Map<String, Object> response = new HashMap<>();
 
         if (isValid) {
             response.put("code", 200);
             response.put("status", "ok");
-            response.put("reference_id", request.getOrderId());
+            response.put("order_id", request.getOrderId());
         } else {
             response.put("code", 400);
             response.put("status", "failed");
-            response.put("reference_id", request.getOrderId());
+            response.put("order_id", request.getOrderId());
         }
 
         return ResponseEntity.ok(response);
     }
 
-    // Callback URL endpoint
-    @PostMapping("/callback")
-    public ResponseEntity<String> handleCallback(@RequestBody PaymentCallbackRequest request) {
-        paymentService.processCallback(request);
-        return ResponseEntity.ok("Callback received and processed successfully.");
-    }
+//    // Callback URL endpoint
+//    @PostMapping("/callback")
+//    public ResponseEntity<String> handleCallback(@RequestBody PaymentCallbackRequest request) {
+//        paymentService.processCallback(request);
+//        return ResponseEntity.ok("Callback received and processed successfully.");
+//    }
 
 
 }

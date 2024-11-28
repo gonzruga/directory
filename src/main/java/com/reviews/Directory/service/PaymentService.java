@@ -1,93 +1,69 @@
 package com.reviews.Directory.service;
 
-import com.reviews.Directory.dto.PaymentCallbackRequest;
-import com.reviews.Directory.dto.PaymentValidationRequest;
-import com.reviews.Directory.entity_model.Product;
-import com.reviews.Directory.repository.ProductRepository;
+import com.reviews.Directory.dto.PaymentCompletionRequest;
+import com.reviews.Directory.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
-    final ProductRepository productRepository;
+    private final String SIGNATURE_KEY = "yourSignatureKey"; // Replace with actual key provided by FastHub
 
-    private final String HASH_KEY = "yoursecuritykey"; // Replace with the actual key provided by FastHub
-
-    public void makePayment(){
-
-
-    }
-    /**
-     * Validates the transaction using the hash and provided data.
-     */
-    public boolean validateTransaction(PaymentValidationRequest request) {
-        // Generate hash from received data
-        String dataString = createDataString(request);
-        String calculatedHash = generateHash(dataString);
-
-        String orderId = request.getOrderId();
-        Optional<Product> byId = productRepository.findById(Long.parseLong(orderId));
-
-        return byId.isPresent();
-//        if(!byId.isPresent()) return false;
-//
-//        Product product = byId.get();
-//
-//        // Compare the calculated hash with the received hash
-//        return calculatedHash.equals(request.getHash());
+    // Verify signature for payment validation
+    public boolean verifyValidationSignature(PaymentValidationRequest request) {
+        String stringToHash = request.getAmount() + request.getMsisdn() +
+                request.getOperator() + request.getOrderId();
+        String calculatedSignature = generateSignature(stringToHash);
+        return calculatedSignature.equals(request.getSignature());
     }
 
-    /**
-     * Processes the callback from FastHub for payment completion.
-     */
-    public void processCallback(PaymentCallbackRequest request) {
-        // TODO: Add your business logic for handling the payment callback
-        // e.g., updating payment records, notifying the user, etc.
-        System.out.println("Callback received for transaction: " + request.getReferenceId());
+    // Verify signature for payment notification
+    public boolean verifyNotificationSignature(PaymentCompletionRequest request) {
+        String stringToHash = request.getAmount() + request.getMsisdn() +
+                request.getOperator() + request.getOrderId() +
+                request.getStatus();
+        String calculatedSignature = generateSignature(stringToHash);
+        return calculatedSignature.equals(request.getSignature());
     }
 
-    /**
-     * Creates the data string in alphabetical order of parameters.
-     */
-    private String createDataString(PaymentValidationRequest request) {
-        return "amount=" + request.getAmount() +
-//                "&country=" + request.getCountry() +
-                "&msisdn=" + request.getMsisdn() +
-                "&operator=" + request.getOperator() +
-//                "&paybill_number=" + request.getPaybillNumber() +
-//                "&reference_id=" + request.getReferenceId() +
-//                "&trx_date=" + request.getTrxDate();
-                "transaction_id=" + request.getTransactionId() +
-                "receipt" + request.getReceipt() +
-                "signature" + request.getSignature() +
-                "order_id" + request.getOrderId();
+    // Process transaction status update from notification
+    public void processTransactionStatus(PaymentCompletionRequest request) {
+        // TODO: Add logic to update the transaction status in your system
 
+        System.out.println("Processing transaction: " + request.getTransactionId());
+        System.out.println("Status: " + request.getStatus());
     }
 
-    /**
-     * Generates HMAC-SHA256 hash for the given data string and key.
-     */
-    private String generateHash(String dataString) {
+    // Generate signature using HMAC-SHA512
+    private String generateSignature(String stringToHash) {
         try {
-            Mac mac = Mac.getInstance("HmacSHA256");
-            SecretKeySpec secretKey = new SecretKeySpec(HASH_KEY.getBytes(), "HmacSHA256");
+            Mac mac = Mac.getInstance("HmacSHA512");
+            SecretKeySpec secretKey = new SecretKeySpec(SIGNATURE_KEY.getBytes(), "HmacSHA512");
             mac.init(secretKey);
-            byte[] hashBytes = mac.doFinal(dataString.getBytes());
+            byte[] hashBytes = mac.doFinal(stringToHash.getBytes());
             StringBuilder hash = new StringBuilder();
             for (byte b : hashBytes) {
                 hash.append(String.format("%02x", b));
             }
             return hash.toString();
         } catch (Exception e) {
-            throw new RuntimeException("Error generating hash", e);
+            throw new RuntimeException("Error generating signature", e);
         }
     }
 
+    // Verify client credentials (optional for status enquiry)
+    public boolean verifyClientCredentials(String clientId, String clientSecret) {
+        // TODO: Implement your own client verification logic
+        return "expectedClientId".equals(clientId) && "expectedClientSecret".equals(clientSecret);
+    }
 
-
+    // Fetch transaction status (mocked example)
+    public TransactionStatusResponse fetchTransactionStatus(String transactionId) {
+        // TODO: Replace with actual implementation to query transaction status
+        return new TransactionStatusResponse(transactionId, "Completed", "Transaction was successful.");
+    }
 }
