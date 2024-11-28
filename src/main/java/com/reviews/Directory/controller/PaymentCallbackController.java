@@ -24,28 +24,28 @@ public class PaymentCallbackController {
     @PostMapping("/validate")
     public ResponseEntity<Map<String, Object>> validatePayment(@RequestBody PaymentValidationRequest request) {
         // Verify signature
-        boolean isValid = paymentService.verifyValidationSignature(request);
+        boolean isValid = paymentService.validateTransaction(request);
         Map<String, Object> response = new HashMap<>();
 
         if (isValid) {
             response.put("code", 200);
             response.put("status", "ok");
-            response.put("order_id", request.getOrderId());
+            response.put("order_id", request.getReferenceId());
         } else {
             response.put("code", 400);
             response.put("status", "failed");
-            response.put("order_id", request.getOrderId());
+            response.put("order_id", request.getReferenceId());
         }
 
         return ResponseEntity.ok(response);
     }
 
-//    // Callback URL endpoint
-//    @PostMapping("/callback")
-//    public ResponseEntity<String> handleCallback(@RequestBody PaymentCallbackRequest request) {
-//        paymentService.processCallback(request);
-//        return ResponseEntity.ok("Callback received and processed successfully.");
-//    }
+    // Callback URL endpoint
+    @PostMapping("/callback")
+    public ResponseEntity<String> handleCallback(@RequestBody PaymentCallbackRequest request) {
+        paymentService.processCallback(request);
+        return ResponseEntity.ok("Callback received and processed successfully.");
+    }
 
 
 }
