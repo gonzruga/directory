@@ -42,6 +42,7 @@ public class PaymentCallbackController {
             response.put("status", "not found");
             response.put("reference_id", request.getReference_Id());
         }
+        log.info("The request is: {}", response);
         return (response);
     }
 
