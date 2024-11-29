@@ -11,15 +11,14 @@ public class PaymentCallbackRequest {
     private String paybillNumber;
     private String receipt;
 
-    @NotNull()
+//    @NotNull()
     private String referenceId;
-    @NotNull()
+//    @NotNull()
     private String status;
-    @NotNull()
+//    @NotNull()
     private Integer amount;
-    @NotNull()
+//    @NotNull()
     private String operator;
-    @NotNull()
+//    @NotNull()
     private String trxDate;
-
 }
