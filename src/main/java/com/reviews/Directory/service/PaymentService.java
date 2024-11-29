@@ -2,16 +2,20 @@ package com.reviews.Directory.service;
 
 import com.reviews.Directory.dto.PaymentCompletionRequest;
 import com.reviews.Directory.dto.*;
+import com.reviews.Directory.entity_model.Sponsor;
+import com.reviews.Directory.repository.SponsorRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PaymentService {
 
+    final SponsorRepository sponsorRepository;
     private final String HASH_KEY = "b5e688589a75bd8a62b1b6562e64aa20";
 
     /**
@@ -22,8 +26,14 @@ public class PaymentService {
         String dataString = createDataString(request);
         String calculatedHash = generateHash(dataString);
 
+        String referenceId = request.getReferenceId();
+
+
+        Optional<Sponsor> sponsor = sponsorRepository.findByReference(referenceId);
+
+        return sponsor.isPresent();
         // Compare the calculated hash with the received hash
-        return calculatedHash.equals(request.getHash());
+//        return calculatedHash.equals(request.getHash());
     }
 
     /**
@@ -32,6 +42,9 @@ public class PaymentService {
     public void processCallback(PaymentCallbackRequest request) {
         // TODO: Add your business logic for handling the payment callback
         // e.g., updating payment records, notifying the user, etc.
+//        updateSponsorPayment(request);
+//        processSponsorPayment(request);
+
         System.out.println("Callback received for transaction: " + request.getReferenceId());
     }
 

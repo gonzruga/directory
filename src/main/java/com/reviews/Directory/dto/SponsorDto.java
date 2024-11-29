@@ -11,7 +11,10 @@ public class SponsorDto {
     private Long id;
     private int sponsorLevel;
     private double fee;
-    private boolean paymentStatus;
+
+    private String reference;
+
+//    private boolean paymentStatus;
 
     private Long productId;
     private Product product;
@@ -25,7 +28,8 @@ public class SponsorDto {
         sponsor.setId(id);
         sponsor.setSponsorLevel(sponsorLevel);
         sponsor.setFee(fee);
-        sponsor.setPaymentStatus(paymentStatus);
+        sponsor.setReference(reference);
+//        sponsor.setPaymentStatus(paymentStatus);
 
         sponsor.setProduct(product);
 

@@ -24,7 +24,9 @@ public class Sponsor {
     private int sponsorLevel;
     private double fee;
 
-    private boolean paymentStatus = false;
+    private String reference = "GR5";
+
+//    private boolean paymentStatus = false;
 
     @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     @JoinColumn(name = "product_id")
