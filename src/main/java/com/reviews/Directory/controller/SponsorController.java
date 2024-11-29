@@ -90,7 +90,7 @@ public class SponsorController {
             @RequestParam("sponsorId") Long sponsorId,
             Model model) {
         // Retrieve the sponsor
-        Sponsor sponsor = service.getSponsorById(sponsorId);
+        Sponsor sponsor = service.updateSponsorPayment(sponsorId);
 //        Sponsor sponsor = service.getSponsorById(sponsorId);
         if (sponsor == null) {
             model.addAttribute("error", "Sponsor not found.");

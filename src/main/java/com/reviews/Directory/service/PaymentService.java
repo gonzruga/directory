@@ -1,7 +1,7 @@
 package com.reviews.Directory.service;
 
-import com.reviews.Directory.dto.PaymentCompletionRequest;
 import com.reviews.Directory.dto.*;
+import com.reviews.Directory.entity_model.PaymentValidationRequest;
 import com.reviews.Directory.entity_model.Sponsor;
 import com.reviews.Directory.repository.SponsorRepository;
 import lombok.RequiredArgsConstructor;
@@ -16,6 +16,7 @@ import java.util.Optional;
 public class PaymentService {
 
     final SponsorRepository sponsorRepository;
+    final SponsorService sponsorService;
     private final String HASH_KEY = "b5e688589a75bd8a62b1b6562e64aa20";
 
     /**
@@ -26,7 +27,7 @@ public class PaymentService {
         String dataString = createDataString(request);
         String calculatedHash = generateHash(dataString);
 
-        String referenceId = request.getReferenceId();
+        String referenceId = request.getReference_Id();
 
 
         Optional<Sponsor> sponsor = sponsorRepository.findByReference(referenceId);
@@ -42,7 +43,7 @@ public class PaymentService {
     public void processCallback(PaymentCallbackRequest request) {
         // TODO: Add your business logic for handling the payment callback
         // e.g., updating payment records, notifying the user, etc.
-//        updateSponsorPayment(request);
+//        sponsorService.updateSponsorPayment(request.);
 //        processSponsorPayment(request);
 
         System.out.println("Callback received for transaction: " + request.getReferenceId());
@@ -56,8 +57,8 @@ public class PaymentService {
                 "&country=" + request.getCountry() +
                 "&msisdn=" + request.getMsisdn() +
                 "&operator=" + request.getOperator() +
-                "&paybill_number=" + request.getPaybillNumber() +
-                "&reference_id=" + request.getReferenceId() +
+                "&paybill_number=" + request.getPaybill_number() +
+                "&reference_id=" + request.getReference_Id() +
                 "&trx_date=" + request.getTrxDate();
     }
 
