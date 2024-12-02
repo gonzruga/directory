@@ -2,12 +2,15 @@ package com.reviews.Directory.entity_model;
 
 import com.reviews.Directory.dto.PaymentValidationRequestDTO;
 import lombok.Data;
+import org.jetbrains.annotations.NotNull;
 
 @Data
 public class PaymentValidationRequest {
     private String hash;
+//    @NotNull
     private String trxDate;
     private String paybill_number;
+//    @NotNull
     private String reference_Id;
     private String msisdn;
     private int amount;
