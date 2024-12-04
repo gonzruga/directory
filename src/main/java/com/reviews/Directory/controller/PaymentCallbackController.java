@@ -6,7 +6,6 @@ import com.reviews.Directory.entity_model.PaymentValidationRequest;
 import com.reviews.Directory.service.PaymentService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,8 +13,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
 import java.util.Map;
-
-import static org.springframework.http.ResponseEntity.badRequest;
 
 @Slf4j
 @RestController
@@ -30,26 +27,22 @@ public class PaymentCallbackController {
     public Map<String, Object> validatePayment(@RequestBody PaymentValidationRequest request) {
         log.info("The request received is {}", request);
 
-        Map<String, Object> response = new HashMap<>();
         if (request.getTrxDate() == null || request.getReference_Id() == null) {
-            response.put("code", 400);
-            response.put("status", "bad request");
-            response.put("message", "Missing required fields: trxDate or reference_Id");
             log.warn("Validation failed: Missing fields in request");
-            return (response);
+
+            Map<String, Object> errorResponse = new HashMap<>();
+            errorResponse.put("code", 400);
+            errorResponse.put("status", "Bad request");
+            errorResponse.put("message", "Missing required fields: trxDate or reference_Id");
+            log.warn("Validation failed: Missing fields in request");
+            return (errorResponse);
         }
 
         // Verify signature
 
         boolean isValid = paymentService.validateTransaction(request);
-//        Map<String, Object> response = new HashMap<>();
-//        if (request.getTrxDate() == null || request.getReference_Id() == null) {
-//            response.put("code", 400);
-//            response.put("status", "bad request");
-//            response.put("message", "Missing required fields: trxDate or reference_Id");
-//            log.warn("Validation failed: Missing fields in request");
-//            return (response);
-//        }
+        Map<String, Object> response = new HashMap<>();
+
         if (isValid) {
             response.put("code", 200);
             response.put("status", "ok");
@@ -59,7 +52,7 @@ public class PaymentCallbackController {
             response.put("status", "not found");
             response.put("reference_id", request.getReference_Id());
         }
-        log.info("The response is: {}", response);
+        log.info("Validation response: {}", response);
         return (response);
     }
 
