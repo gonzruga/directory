@@ -57,14 +57,33 @@ public class PaymentCallbackController {
     }
 
     // Callback URL endpoint
-    @PostMapping("/callback")
-    public C2BCallbackResponseDto handleCallback(@RequestBody PaymentCallbackRequest request) {
-        paymentService.processCallback(request);
-//        return ("Callback received and processed successfully.");
-        C2BCallbackResponseDto responseDt = new C2BCallbackResponseDto();
-        responseDt.setStatus_code("200");
-        responseDt.setStatus_desc("ok");
-        return responseDt;
-    }
 
+//    @PostMapping("/callback")
+//    public C2BCallbackResponseDto handleCallback(@RequestBody PaymentCallbackRequest request) {
+//        paymentService.processCallback(request);
+////        return ("Callback received and processed successfully.");
+//        C2BCallbackResponseDto responseDt = new C2BCallbackResponseDto();
+//        responseDt.setStatus_code(200);
+//        responseDt.setStatus_desc("ok");
+//        return responseDt;
+//    }
+
+    @PostMapping("/callback")
+    public C2BCallbackResponseDto handleCallback(PaymentCallbackRequest request) {
+//        paymentService.processCallback(request);
+//        return ("Callback received and processed successfully.");
+        String referenceId = request.getReference();
+        String payBillNumber = request.getPaybill_number();
+//        String receipt = request.getReceipt();
+
+        if (referenceId == null || payBillNumber == null) {
+            log.info("Callback Validation failed for the request: {}", request);
+            return new C2BCallbackResponseDto(-1, "Incomplete request");
+
+        } else {
+            log.info("Callback validation passed for the request: {}", request);
+            return new C2BCallbackResponseDto(0,"ok");
+        }
+
+    }
 }

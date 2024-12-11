@@ -46,7 +46,7 @@ public class PaymentService {
 //        sponsorService.updateSponsorPayment(request.);
 //        processSponsorPayment(request);
 
-        System.out.println("Callback received for transaction: " + request.getReferenceId());
+        System.out.println("Callback received for transaction: " + request.getReference());
     }
 
     /**
