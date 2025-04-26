@@ -69,7 +69,7 @@
 
                     <p th:text="'Choose a Sponsorship Level to boost your product to appear higher in search results.'"></p>
                     <p th:text="'Press Submit then pay the fee via Airtel Money to paybill number 336688, reference product ID.'"></p>
-                    <a th:href="https://airtelmoney.tz/" th:text="Click here to learn more about Airtel Money" ></a>
+                    <a th:href="www.airtelmoney.tz" >Click here to learn more about Airtel Money</a>
 
                     <form th:action="@{/sponsorSubmit(productId=${product.id})}" method="post">
                         <input type="hidden" name="productId" th:value="${productId}" />
